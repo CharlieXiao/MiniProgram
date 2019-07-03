@@ -5,6 +5,7 @@
   align-items: center;
 }
 
+/* 设置用户头像圆形显示 */
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;

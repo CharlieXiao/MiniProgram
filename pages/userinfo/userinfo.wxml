@@ -1,0 +1,10 @@
+<!--pages/userinfo/userinfo.wxml-->
+<view class='info'>
+  <text wx:if="{{!hasUserInfo}}">未获取用户信息</text>
+  <view wx:else>
+    <image src='{{userInfo.avatarUrl}}' class='user-avatar'></image>
+    <view class='userInfo'>用户昵称：{{ userInfo.nickName }}</view>
+    <view class='userInfo'>用户性别：{{ userGender }}</view>
+    <view class='userInfo'>用户语言：{{ userLanguage }}</view>
+  </view>
+</view>

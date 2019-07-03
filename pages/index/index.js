@@ -11,8 +11,10 @@ Page({
   },
   //事件处理函数
   bindViewTap: function() {
+    //点击用户头像跳转页面
     wx.navigateTo({
-      url: '../logs/logs'
+      //跳转至userinfo页面
+      url: '../userinfo/userinfo'
     })
   },
   onLoad: function () {
