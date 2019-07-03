@@ -1,14 +1,19 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <!-- 点击用户头像可以跳转至logs页面 -->
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class="home-page">
+    <view class='header'>
+        <text class='title'>motto\n</text>
+        <text class='Date'>{{month}} {{day}} , {{week}}</text>
+    </view>
+    <view class='content'>
+        <image class='home-recommend' src='../../image/boat.jpg' mode='widthFix'></image>
+        <view class="rich-text-wrp">
+            <text>{{ style }}</text>
+            <rich-text nodes="<hr>" ></rich-text>
+        </view>
+        <view class='everyday-motto'>
+            <text class='motto'>{{ motto }}</text>
+            <text class='author'>{{ author }}</text>
+        </view>
+        <button class='learn'>{{ study }}</button>
+    </view>
 </view>

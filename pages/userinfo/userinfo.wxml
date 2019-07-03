@@ -1,10 +1,15 @@
 <!--pages/userinfo/userinfo.wxml-->
-<view class='info'>
-  <text wx:if="{{!hasUserInfo}}">未获取用户信息</text>
-  <view wx:else>
-    <image src='{{userInfo.avatarUrl}}' class='user-avatar'></image>
-    <view class='userInfo'>用户昵称：{{ userInfo.nickName }}</view>
-    <view class='userInfo'>用户性别：{{ userGender }}</view>
-    <view class='userInfo'>用户语言：{{ userLanguage }}</view>
+<view class='container'>
+  <view wx:if="{{ !hasUserInfo }}" class='info'>
+    <text class='userinfo'>登录后查看个人信息</text>
+    <button class='login'>点击登录</button>
+  </view>
+  <view wx:else class='info'>
+    <view class='display-pic'>
+      <image src='{{userInfo.avatarUrl}}' class='user-avatar'></image>
+    </view>
+    <text class='userInfo'>\n用户昵称：{{ userInfo.nickName }}\n</text>
+    <text class='userInfo'>用户性别：{{ userGender }}\n</text>
+    <text class='userInfo'>用户语言：{{ userLanguage }}\n</text>
   </view>
 </view>

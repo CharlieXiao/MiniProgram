@@ -4,7 +4,13 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: 'Life is like a boat.',
+    author: 'Rie fu',
+    month:'july',
+    week:'wed',
+    day:'3',
+    study:'start',
+    style:'mood',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')

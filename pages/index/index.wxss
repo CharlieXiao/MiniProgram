@@ -1,22 +1,70 @@
 /**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.home-page{
+    margin: 0 30rpx;
 }
 
-/* 设置用户头像圆形显示 */
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.header{
+    color:rgb(55,54,50);
+    text-transform: uppercase;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.Date{
+    font-size: 30rpx;
 }
 
-.usermotto {
-  margin-top: 200px;
+.title{
+    font-size:60rpx;
+}
+
+.content{
+    margin-top: 50rpx;
+    padding: 25rpx 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10rpx;
+    box-shadow: 0 0 5px 5px rgb(245,245,245);
+    color: rgb(34, 33, 31);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.home-recommend{
+    border-radius: 15rpx;
+    width: 640rpx;
+}
+
+.rich-text-wrp {
+    margin: 30rpx 0;
+    width: 640rpx;
+    text-transform: uppercase;
+    color: rgb(149,149,149);
+}
+
+.everyday-motto{
+    width:580rpx;
+    font-size: 40rpx;
+}
+
+.motto{
+    display: block;
+    text-align: left;
+}
+
+.author{
+    display: block;
+    text-align: right;
+}
+
+.learn{
+    margin: 60rpx 0 40rpx 0;
+    height: 90rpx;
+    width: 360rpx;
+    background-color: #1296db;
+    color: white;
+    font-size: 36rpx;
+    border-radius: 50rpx;
+}
+
+.learn.button-hover{
+    background-color:#3abcf0;
 }

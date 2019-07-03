@@ -1,5 +1,7 @@
 /* pages/userinfo/userinfo.wxss */
-.info{
+
+/* 实现图片居中而文本左对齐 */
+.display-pic{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,9 +11,13 @@
   height: 128rpx;
   width:128rpx;
   border-radius: 50%;
+  
 }
 
 .userInfo{
   color:rgb(201, 207, 212);
-  margin-top:20rpx;
+}
+
+.login{
+  margin-top: 20rpx;
 }
