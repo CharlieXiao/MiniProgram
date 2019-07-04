@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="home-page">
     <view class='header'>
-        <text class='title'>motto\n</text>
+        <text class='title'>today\n</text>
         <text class='Date'>{{month}} {{day}} , {{week}}</text>
     </view>
     <view class='content'>
@@ -14,6 +14,6 @@
             <text class='motto'>{{ motto }}</text>
             <text class='author'>{{ author }}</text>
         </view>
-        <button class='learn'>{{ study }}</button>
+        <button class='learn' bindtap='bindViewTap'>{{ study }}</button>
     </view>
 </view>
