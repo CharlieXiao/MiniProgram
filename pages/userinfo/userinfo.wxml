@@ -1,15 +1,14 @@
 <!--pages/userinfo/userinfo.wxml-->
 <view class='container'>
-  <view wx:if="{{ !hasUserInfo }}" class='info'>
-    <text class='userinfo'>登录后查看个人信息</text>
-    <button class='login'>点击登录</button>
-  </view>
-  <view wx:else class='info'>
-    <view class='display-pic'>
-      <image src='{{userInfo.avatarUrl}}' class='user-avatar'></image>
-    </view>
-    <text class='userInfo'>\n用户昵称：{{ userInfo.nickName }}\n</text>
-    <text class='userInfo'>用户性别：{{ userGender }}\n</text>
-    <text class='userInfo'>用户语言：{{ userLanguage }}\n</text>
-  </view>
+  <view class='userinfo'>
+		<button wx:if='{{!hasUserInfo && canIUse}}' open-type='getUserInfo' bindgetuserinfo='getUserInfo'>登录保存学习进度</button>
+		<block wx:else>
+			<!-- 点击头像可以弹出相关信息 -->
+			<!-- <image class='userinfo-avatar' src='{{userinfo.avatarUrl}}' mode='cover'></image>
+			<text class='userinfo-nickname'>{{userinfo.nickName}}</text> -->
+			<!-- 新方式获取用户信息 -->
+			<open-data type="userAvatarUrl"></open-data>
+			<open-data type="userGender" lang="zh_CN"></open-data>
+		</block>
+	</view>
 </view>

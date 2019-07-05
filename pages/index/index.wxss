@@ -4,7 +4,7 @@
 }
 
 .header{
-    color:rgb(55,54,50);
+    color:rgb(53,53,53);
     text-transform: uppercase;
 }
 
@@ -18,31 +18,32 @@
 
 .content{
     margin-top: 50rpx;
-    padding: 25rpx 0;
+    padding-top: 25rpx;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 10rpx;
     box-shadow: 0 0 5px 5px rgb(245,245,245);
-    color: rgb(34, 33, 31);
-    font-family: 'Times New Roman', Times, serif;
+    color: rgb(53, 53, 53);
 }
 
 .home-recommend{
     border-radius: 15rpx;
     width: 640rpx;
+	height: 450rpx;
 }
 
 .rich-text-wrp {
     margin: 30rpx 0;
     width: 640rpx;
     text-transform: uppercase;
-    color: rgb(149,149,149);
+	font-size: 30rpx;
 }
 
 .everyday-motto{
     width:580rpx;
-    font-size: 40rpx;
+    font-size: 50rpx;
+	font-family:'Times New Roman', Times, serif
 }
 
 .motto{
@@ -56,15 +57,16 @@
 }
 
 .learn{
-    margin: 60rpx 0 40rpx 0;
+    margin: 30rpx 0;
     height: 90rpx;
-    width: 360rpx;
-    background-color: #1296db;
+    width: 320rpx;
+    background-color: rgb(18, 150, 219);
     color: white;
-    font-size: 36rpx;
     border-radius: 50rpx;
+	font-size: 36rpx;
+    text-transform: uppercase;
 }
 
 .learn.button-hover{
-    background-color:#3abcf0;
+    background-color:rgba(18, 149, 219, 0.8);
 }

@@ -1,23 +1,2 @@
 /* pages/userinfo/userinfo.wxss */
 
-/* 实现图片居中而文本左对齐 */
-.display-pic{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.user-avatar{
-  height: 128rpx;
-  width:128rpx;
-  border-radius: 50%;
-  
-}
-
-.userInfo{
-  color:rgb(201, 207, 212);
-}
-
-.login{
-  margin-top: 20rpx;
-}

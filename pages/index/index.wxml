@@ -2,12 +2,12 @@
 <view class="home-page">
     <view class='header'>
         <text class='title'>today\n</text>
-        <text class='Date'>{{month}} {{day}} , {{week}}</text>
+        <text class='Date' space='nbsp'>{{week}}  |  {{month}} {{day}}</text>
     </view>
     <view class='content'>
-        <image class='home-recommend' src='../../image/boat.jpg' mode='widthFix'></image>
+        <image class='home-recommend' src='../../image/boat.jpg' mode='aspectFill'></image>
         <view class="rich-text-wrp">
-            <text>{{ style }}</text>
+            <text>motto</text>
             <rich-text nodes="<hr>" ></rich-text>
         </view>
         <view class='everyday-motto'>

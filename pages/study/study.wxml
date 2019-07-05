@@ -1,2 +1,5 @@
 <!--pages/study/study.wxml-->
-<text>pages/study/study.wxml</text>
+<view>
+	<text>老老实实跑去学习\n</text>
+	<text>搞快点！搞快点！</text>
+</view>
