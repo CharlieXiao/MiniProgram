@@ -1,0 +1,18 @@
+<!--components/AuthDialog.wxml-->
+<view class='Mask' hidden='{{ !ShouldShow }}'>
+	<view class='AuthDialogContainer'>
+		<view class='Header'>
+			<image class='AppPic' src='../../image/logo.png'></image>
+			<text class='AppName'space='nbsp'> KALDI 口语</text>
+			<text class='Title' space='nbsp'>申请获取以下权限</text>	
+		</view>
+
+		<view class='Contents'>
+			<text class='AuthContent'>{{ AuthContent }}</text>
+		</view>	
+		<view class='Buttons'>
+			<button class='cancel' bindtap='cancelEvent'>拒绝</button>
+			<button class='confirm' bindtap='confirmEvent'>允许</button>
+		</view>
+	</view>
+</view>

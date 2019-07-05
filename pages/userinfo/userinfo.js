@@ -16,10 +16,31 @@ Page({
 
 	//canIUse用于判断小程序API是否在当前版本可用
 
+	ShowAuthDialog: function(){
+		wx.hideTabBar({
+			aniamtion:true
+			}
+		);
+		this.AuthDialog.showDialog();
+	},
+
+	confirmEvent: function(){
+		console.log('你干嘛点确定？');
+	},
+
+	cancelEvent: function(){
+		this.AuthDialog.hideDialog();
+		wx.showTabBar({
+			aniamtion:false
+		});
+	},
+
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+		//如果app中已经保存了用户信息，直接将全局变量的userinfo赋值过来即可
 		if (app.globalData.userInfo) {
 			this.setData({
 				userInfo: app.globalData.userInfo,
@@ -47,6 +68,11 @@ Page({
 			})
 		}
   },
+
+	onReady:function(){
+		//选择数据授权对话框
+		this.AuthDialog = this.selectComponent('#AuthUserInfo');
+	},
 
 	getUserInfo: function (e) {
 		console.log(e)

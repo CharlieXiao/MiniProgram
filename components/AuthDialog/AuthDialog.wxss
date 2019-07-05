@@ -1,0 +1,75 @@
+/* components/AuthDialog.wxss */
+.Mask{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	/* background-color: black;
+	opacity: 0.7; */
+	z-index: 1;
+}
+
+.AuthDialogContainer{
+	width:100%;
+	height: 35%;
+	position: fixed;
+	top: 65%;
+	left: 0;
+	background-color: white;
+	z-index: 2;
+	color: black;
+	box-shadow: 0 0 5px 5px rgb(240,240,240);
+}
+
+.Header{
+	font-size: 30rpx;
+	margin: 30rpx;
+	display: flex;
+	flex-direction: row;
+}
+
+.AppPic{
+	height: 60rpx;
+	width: 60rpx;
+	border-radius: 50%;
+}
+
+.AppName{
+	font-weight: bold;
+	margin: 15rpx 0;
+}
+
+.Title{
+	margin: 15rpx 20rpx;
+}
+
+.Contents{
+	margin: 30rpx 50rpx;
+	font-weight: bold;
+	font-size: 40rpx;
+	display: flex;
+	flex-direction: column;
+}
+
+.Buttons{
+	margin: 80rpx 0;
+	display: flex;
+	flex-direction: row;
+}
+
+.cancel{
+	height: 80rpx;
+	width:300rpx;
+	margin-left: 50rpx;
+	background-color: rgb(136,136,136);
+	color:black;
+}
+
+.confirm{
+	height: 80rpx;
+	width:300rpx;
+	margin-right: 50rpx;
+	background-color: rgb(9,187,7);
+	color:white;
+}

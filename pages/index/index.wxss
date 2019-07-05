@@ -23,7 +23,7 @@
     flex-direction: column;
     align-items: center;
     border-radius: 10rpx;
-    box-shadow: 0 0 5px 5px rgb(245,245,245);
+    box-shadow: 0 0 5px 5px rgb(240,240,240);
     color: rgb(53, 53, 53);
 }
 
