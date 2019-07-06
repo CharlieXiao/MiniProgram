@@ -12,10 +12,22 @@ Component({
 
 	//对外属性，当外部wxml文件传入数据时，会将数据设置成properties的属性
 	properties: {
+		AuthTitle:{
+			type:String,
+			value:'权限标题'
+		},
 		AuthContent:{
 			type:String,
 			value:'权限内容'
-		}
+		},
+		ConfirmButton:{
+			type:String,
+			value:'确定'
+		},
+		CancelButton:{
+			type:String,
+			value:'取消'
+		},
 	},
 
 	/**

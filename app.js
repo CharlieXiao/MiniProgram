@@ -27,6 +27,7 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
+							//userInfoReadyCallback是在Page.Onload函数中定义的，这个函数可以确保userinfo和hasUserInfo被正确的复制
             }
           })
         }
@@ -34,6 +35,6 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
   }
 })

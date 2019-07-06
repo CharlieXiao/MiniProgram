@@ -1,2 +1,36 @@
 /* pages/userinfo/userinfo.wxss */
+.infoPage{
+	margin: 0 30rpx;
+}
 
+.userinfo{
+	margin: 30rpx 0;
+	padding: 20rpx 0;
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+	border-radius: 10rpx;
+	box-shadow: 0 0 5px 5px rgb(230, 230, 230);
+	background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562409732138&di=26fd56522263b8fd2dcdc756355f7ff3&imgtype=0&src=http%3A%2F%2Fwww.deyu.ln.cn%2Fimages%2Fobuwglrvhbygsyzomnxw2%2F58pic%2F16%2F68%2F91%2F93I58PICaxs_1024.jpg');
+	background-size: 690rpx 230rpx;
+}
+
+.loginButton{
+	height: 120rpx;
+	width: 120rpx;
+	border-radius: 50%;
+	background-image: url('https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3866833518,3419990024&fm=26&gp=0.jpg');
+	background-size: 120rpx 120rpx;
+}
+
+.userinfo-avatar{
+	height: 120rpx;
+	width: 120rpx;
+	border-radius: 50%;
+}
+
+.userinfo-nickname{
+	margin-top: 20rpx;
+	font-size: 40rpx;
+	color: white;
+}

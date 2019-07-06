@@ -1,20 +1,12 @@
 <!--pages/userinfo/userinfo.wxml-->
-<view class='container'>
-	<!-- 点击图片跳出授权对话框，获取授权信息 -->
-	<image src='../../image/default.png' bindtap='ShowAuthDialog'></image>
-	<AuthDialog id = 	'AuthUserInfo' AuthContent = '获得您的公开信息（昵称、头像等）'
-		bind:confirmEvent='confirmEvent' bind:cancelEvent='cancelEvent'>
-	</AuthDialog>
-  <!-- <view class='userinfo'>
-		<button wx:if='{{!hasUserInfo && canIUse}}' open-type='getUserInfo' bindgetuserinfo='getUserInfo'>登录保存学习进度</button>
-		<block wx:else>
-			点击头像可以弹出相关信息
-			<image class='userinfo-avatar' src='{{userinfo.avatarUrl}}' mode='cover'></image>
-			<text class='userinfo-nickname'>{{userinfo.nickName}}</text>
-			新方式获取用户信息
-			<open-data type="userAvatarUrl"></open-data>
-			<open-data type="userGender" lang="zh_CN"></open-data>
-			
-		</block>
-	</view> -->
+<view class='infoPage'>
+	<view class='userinfo' wx:if='{{!hasUserInfo && canIUse}}' >
+		<!-- <image class='userinfo-avatar' src='../../image/default.png' mode='cover'></image> -->
+		<button  open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='loginButton'></button>
+		<text class='userinfo-nickname'>点击头像登录</text>
+	</view>
+	<view class='userinfo' wx:else >
+		<image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
+		<text class='userinfo-nickname'>{{userInfo.nickName}}</text>
+	</view>	
 </view>

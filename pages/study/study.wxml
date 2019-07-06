@@ -2,4 +2,9 @@
 <view>
 	<text>老老实实跑去学习\n</text>
 	<text>搞快点！搞快点！</text>
+	<AuthDialog id = 	'AuthRecord' AuthTitle='检测到您未开启录音功能' AuthContent = '是否去设置中打开？'
+		bind:confirmEvent='confirmEvent' bind:cancelEvent='cancelEvent'>
+	</AuthDialog>
+	<!-- <image src='../../image/default.png' bindtap='OpenDialog'></image> -->
+	<button bindtouchstart='StartRecord' bindtouchend='EndRecord'>{{ MSG }}</button>
 </view>

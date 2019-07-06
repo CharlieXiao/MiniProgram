@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+		"AuthDialog": "/components/AuthDialog/AuthDialog"
+	}
 }
