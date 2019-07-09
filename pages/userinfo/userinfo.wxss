@@ -1,26 +1,48 @@
 /* pages/userinfo/userinfo.wxss */
 .infoPage{
-	margin: 0 30rpx;
+	background-color: rgb(245,245,245);
+	color: rgb(55,54,50);
 }
 
 .userinfo{
-	margin: 30rpx 0;
-	padding: 20rpx 0;
+	background-color: white;
+	padding: 50rpx 40rpx;
+}
+
+.noLogin{
 	display: flex;
-	flex-direction: column;
-	align-items:center;
-	border-radius: 10rpx;
-	box-shadow: 0 0 5px 5px rgb(230, 230, 230);
-	background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562409732138&di=26fd56522263b8fd2dcdc756355f7ff3&imgtype=0&src=http%3A%2F%2Fwww.deyu.ln.cn%2Fimages%2Fobuwglrvhbygsyzomnxw2%2F58pic%2F16%2F68%2F91%2F93I58PICaxs_1024.jpg');
-	background-size: 690rpx 230rpx;
+	flex-direction: row;
+}
+
+.defaultPic{
+	height: 120rpx;
+	width: 120rpx;
 }
 
 .loginButton{
 	height: 120rpx;
 	width: 120rpx;
 	border-radius: 50%;
-	background-image: url('https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3866833518,3419990024&fm=26&gp=0.jpg');
-	background-size: 120rpx 120rpx;
+	display: inline-block;
+	background-color: rgba(0, 0, 0, 0);
+	position: absolute;
+	top: 50rpx;
+	left: 40rpx;
+	z-index: 1;
+}
+
+.loginButton::after{
+	border: none;
+}
+
+.loginButton.button-hover{
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.textLogin{
+	color: rgb(55,54,50);
+	font-size: 40rpx;
+	margin: 42rpx 20rpx;
 }
 
 .userinfo-avatar{
@@ -29,8 +51,54 @@
 	border-radius: 50%;
 }
 
-.userinfo-nickname{
-	margin-top: 20rpx;
-	font-size: 40rpx;
-	color: white;
+.isLogin{
+	display: flex;
+	flex-direction: row;
+}
+
+.studyInfo{
+	display: flex;
+	flex-direction: column;
+	padding: 15rpx 20rpx;
+}
+
+.nickName{
+	font-size: 42rpx;
+}
+
+.learnDays{
+	font-size: 28rpx;
+}
+
+.Mine{
+	margin: 20rpx 0;
+
+}
+
+.options{
+	padding: 0 50rpx;
+	height: 110rpx;
+	display: flex;
+	flex-direction: row;
+	font-size: 30rpx;
+	background-color:white;
+	border-top: solid rgb(245,245,245) 3px;
+}
+
+.icon{
+	margin: 30rpx 0;
+	height: 50rpx;
+	width: 50rpx;
+}
+
+.option-title{
+	padding: 35rpx 0;
+	margin-left: 30rpx;
+	width: 530rpx;
+}
+
+.arrow{
+	height: 40rpx;
+	width: 40rpx;
+	margin: 35rpx 0;
 }

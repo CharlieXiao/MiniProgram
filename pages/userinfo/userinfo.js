@@ -31,10 +31,12 @@ Page({
 			// 所以此处加入 callback 以防止这种情况
 			//箭头函数 函数名 = 参数名 => 返回值;代码多余一条就要用大括号括起来
 			app.userInfoReadyCallback = res => {
-				this.setData({
-					userInfo: res.userInfo,
-					hasUserInfo: true
-				})
+				if(res.userInfo != undefined ){
+					this.setData({
+						userInfo: res.userInfo,
+						hasUserInfo: true
+					})
+				}
 			}
 		} else {
 			// 在没有 open-type=getUserInfo 版本的兼容处理
@@ -51,11 +53,13 @@ Page({
   },
 
 	getUserInfo: function (e) {
-		console.log(e);
-		app.globalData.userInfo = e.detail.userInfo
-		this.setData({
-			userInfo: e.detail.userInfo,
-			hasUserInfo: true
-		})
+		if(e.detail.userInfo != undefined){
+			console.log(e);
+			app.globalData.userInfo = e.detail.userInfo
+			this.setData({
+				userInfo: e.detail.userInfo,
+				hasUserInfo: true
+			});
+		}
 	}
 })

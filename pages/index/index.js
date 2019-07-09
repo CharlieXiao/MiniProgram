@@ -91,7 +91,7 @@ Page({
 	this.setData({
 		month:month,
 		week:week,
-		day:currDate.getDay()
+		day:currDate.getDate()
 	});
 
   }

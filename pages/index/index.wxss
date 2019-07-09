@@ -1,6 +1,7 @@
 /**index.wxss**/
 .home-page{
-    margin: 0 30rpx;
+    padding: 30rpx;
+		padding-bottom: 0;
 }
 
 .header{
@@ -9,21 +10,22 @@
 }
 
 .Date{
-    font-size: 30rpx;
+    font-size: 40rpx;
+		margin-left: 10rpx;
 }
 
 .title{
-    font-size:60rpx;
+    font-size:80rpx;
 }
 
 .content{
-    margin-top: 50rpx;
+    margin-top: 30rpx;
     padding-top: 25rpx;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 10rpx;
-    box-shadow: 0 0 5px 5px rgb(240,240,240);
+    box-shadow: 0 0 5px 5px rgb(245,245,245);
     color: rgb(53, 53, 53);
 }
 

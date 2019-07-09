@@ -1,12 +1,46 @@
 <!--pages/userinfo/userinfo.wxml-->
 <view class='infoPage'>
-	<view class='userinfo' wx:if='{{!hasUserInfo && canIUse}}' >
-		<!-- <image class='userinfo-avatar' src='../../image/default.png' mode='cover'></image> -->
-		<button  open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='loginButton'></button>
-		<text class='userinfo-nickname'>点击头像登录</text>
+	<view class='userinfo'  >
+		<view wx:if='{{!hasUserInfo && canIUse}}' class='noLogin'>
+			<image class='defaultPic' src='../../image/default.png'></image>
+			<button  open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='loginButton'></button>
+			<text class='textLogin'>点击头像登录</text>
+		</view>
+		<view wx:else class='isLogin'>
+			<image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
+			<view class='studyInfo'>
+				<text class='nickName'>{{userInfo.nickName}}</text>
+				<text class='learnDays'>已坚持学习 0 天</text>
+			</view>
+		</view>
 	</view>
-	<view class='userinfo' wx:else >
-		<image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
-		<text class='userinfo-nickname'>{{userInfo.nickName}}</text>
-	</view>	
+	<view class='Mine'>
+		<view class='options'>
+			<image class='icon' src='../../image/verb_list.png'></image>
+			<text class='option-title'>生词笔记</text>
+			<image class='arrow' bindtap='' src='../../image/arrow.png'></image>
+		</view>
+		<view class='options'>
+			<image class='icon' src='../../image/audio.png'></image>
+			<text class='option-title'>我的音频</text>
+			<image class='arrow' bindtap='' src='../../image/arrow.png'></image>
+		</view>
+	</view>		
+	<view class='Help'>
+		<view class='options'>
+			<image class='icon' src='../../image/alarm.png'></image>
+			<text class='option-title'>学习提醒</text>
+			<image class='arrow' bindtap='' src='../../image/arrow.png'></image>
+		</view>
+		<view class='options'>
+			<image class='icon' src='../../image/guide.png'></image>
+			<text class='option-title'>学习指导</text>
+			<image class='arrow' bindtap='' src='../../image/arrow.png'></image>
+		</view>
+		<view class='options'>
+			<image class='icon' src='../../image/problem.png'></image>
+			<text class='option-title'>常见问题</text>
+			<image class='arrow' bindtap='' src='../../image/arrow.png'></image>
+		</view>
+	</view>
 </view>
