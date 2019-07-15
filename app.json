@@ -6,7 +6,7 @@
     "pages/study/study"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "KALDI 口语",
     "navigationBarTextStyle": "black"

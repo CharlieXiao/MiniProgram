@@ -17,30 +17,43 @@
 	<view class='Mine'>
 		<view class='options'>
 			<image class='icon' src='../../image/verb_list.png'></image>
-			<text class='option-title'>生词笔记</text>
-			<image class='arrow' bindtap='' src='../../image/arrow.png'></image>
+			<view class='option-description'>
+				<text class='option-title'>生词笔记</text>
+			</view>
+			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
 		<view class='options'>
 			<image class='icon' src='../../image/audio.png'></image>
-			<text class='option-title'>我的音频</text>
-			<image class='arrow' bindtap='' src='../../image/arrow.png'></image>
+			<view class='option-description'>
+				<text class='option-title'>历史音频</text>
+			</view>
+			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
 	</view>		
 	<view class='Help'>
 		<view class='options'>
 			<image class='icon' src='../../image/alarm.png'></image>
-			<text class='option-title'>学习提醒</text>
-			<image class='arrow' bindtap='' src='../../image/arrow.png'></image>
+			<view class='option-description'>
+				<text class='option-title'>每日学习提醒</text>
+				<text class='option-more'>每天7:00</text>
+			</view>
+			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
 		<view class='options'>
 			<image class='icon' src='../../image/guide.png'></image>
-			<text class='option-title'>学习指导</text>
-			<image class='arrow' bindtap='' src='../../image/arrow.png'></image>
+			<view class='option-description'>
+				<text class='option-title'>学习指导</text>
+				<text class='option-more'>发音方法和建议</text>
+			</view>
+			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
 		<view class='options'>
 			<image class='icon' src='../../image/problem.png'></image>
-			<text class='option-title'>常见问题</text>
-			<image class='arrow' bindtap='' src='../../image/arrow.png'></image>
+			<view class='option-description'>
+				<text class='option-title'>常见问题</text>
+				<text class='option-more'>使用方法、问题反馈、关于Kaldi</text>
+			</view>
+			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
 	</view>
 </view>

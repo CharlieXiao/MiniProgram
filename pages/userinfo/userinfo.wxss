@@ -1,17 +1,24 @@
 /* pages/userinfo/userinfo.wxss */
+/* 设置页面大小 */
+page{
+	height: 100%;
+}
+/* 设置页面背景色 */
 .infoPage{
 	background-color: rgb(245,245,245);
 	color: rgb(55,54,50);
+	height: 100%;
 }
 
 .userinfo{
 	background-color: white;
-	padding: 50rpx 40rpx;
+	padding: 40rpx;
 }
 
 .noLogin{
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
 .defaultPic{
@@ -26,7 +33,7 @@
 	display: inline-block;
 	background-color: rgba(0, 0, 0, 0);
 	position: absolute;
-	top: 50rpx;
+	top: 40rpx;
 	left: 40rpx;
 	z-index: 1;
 }
@@ -40,9 +47,9 @@
 }
 
 .textLogin{
-	color: rgb(55,54,50);
-	font-size: 40rpx;
-	margin: 42rpx 20rpx;
+	color: #373632;
+	font-size:32rpx;
+	margin-left: 20rpx;
 }
 
 .userinfo-avatar{
@@ -54,12 +61,13 @@
 .isLogin{
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
 .studyInfo{
 	display: flex;
 	flex-direction: column;
-	padding: 15rpx 20rpx;
+	margin-left: 30rpx;
 }
 
 .nickName{
@@ -67,38 +75,51 @@
 }
 
 .learnDays{
+	margin-top: 10rpx;
 	font-size: 28rpx;
 }
 
 .Mine{
-	margin: 20rpx 0;
-
+	margin: 15rpx 0;
 }
 
 .options{
-	padding: 0 50rpx;
-	height: 110rpx;
+	height: 120rpx;
+
 	display: flex;
 	flex-direction: row;
-	font-size: 30rpx;
+	align-items: center;
+
+	font-size: 32rpx;
+
+	padding: 0 40rpx;
+
 	background-color:white;
-	border-top: solid rgb(245,245,245) 3px;
+
+	border-top: solid rgb(235,235,235) 1px;
+	border-bottom: solid rgb(235,235,235) 1px;
 }
 
 .icon{
-	margin: 30rpx 0;
 	height: 50rpx;
 	width: 50rpx;
 }
 
-.option-title{
-	padding: 35rpx 0;
-	margin-left: 30rpx;
-	width: 530rpx;
+.option-description{
+	margin: 0 20rpx;
+	display: flex;
+	flex-direction: column;
+}
+
+.option-more{
+	font-size: 24rpx;
+	color: #999999;
+	margin-top: 6rpx;
 }
 
 .arrow{
-	height: 40rpx;
-	width: 40rpx;
-	margin: 35rpx 0;
+	height: 32rpx;
+	width: 32rpx;
+	/* 元素默认右对齐 */
+	margin-left: auto;
 }
