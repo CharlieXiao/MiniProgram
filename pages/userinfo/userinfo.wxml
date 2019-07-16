@@ -10,19 +10,19 @@
 			<image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
 			<view class='studyInfo'>
 				<text class='nickName'>{{userInfo.nickName}}</text>
-				<text class='learnDays'>已坚持学习 0 天</text>
+				<text class='learnDays'>累计学习 0 天</text>
 			</view>
 		</view>
 	</view>
 	<view class='Mine'>
-		<view class='options'>
+		<view class='options' bindtap='verbList'>
 			<image class='icon' src='../../image/verb_list.png'></image>
 			<view class='option-description'>
 				<text class='option-title'>生词笔记</text>
 			</view>
 			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
-		<view class='options'>
+		<view class='options' bindtap='myAudio'>
 			<image class='icon' src='../../image/audio.png'></image>
 			<view class='option-description'>
 				<text class='option-title'>历史音频</text>
@@ -31,7 +31,7 @@
 		</view>
 	</view>		
 	<view class='Help'>
-		<view class='options'>
+		<view class='options' bindtap='studyAlarm'>
 			<image class='icon' src='../../image/alarm.png'></image>
 			<view class='option-description'>
 				<text class='option-title'>每日学习提醒</text>
@@ -39,7 +39,7 @@
 			</view>
 			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
-		<view class='options'>
+		<view class='options' bindtap='instructions'>
 			<image class='icon' src='../../image/guide.png'></image>
 			<view class='option-description'>
 				<text class='option-title'>学习指导</text>
@@ -47,7 +47,7 @@
 			</view>
 			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
-		<view class='options'>
+		<view class='options' bindtap='questions'>
 			<image class='icon' src='../../image/problem.png'></image>
 			<view class='option-description'>
 				<text class='option-title'>常见问题</text>

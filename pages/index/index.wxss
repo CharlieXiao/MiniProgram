@@ -1,25 +1,22 @@
 /**index.wxss**/
 .home-page{
-    padding: 30rpx;
+    padding: 0 30rpx;
 		padding-bottom: 0;
 }
 
 .header{
     color:rgb(53,53,53);
     text-transform: uppercase;
+		font-size: 50rpx;
 }
 
 .Date{
-    font-size: 40rpx;
-		margin-left: 10rpx;
-}
-
-.title{
-    font-size:80rpx;
+		margin-top: 20rpx;
+		font-size: 30rpx;
 }
 
 .content{
-    margin-top: 30rpx;
+    margin-top: 25rpx;
     padding-top: 25rpx;
     display: flex;
     flex-direction: column;
@@ -43,9 +40,10 @@
 }
 
 .everyday-motto{
+	font-family: Helvetica, sans-serif;
+		font-style: italic;
     width:580rpx;
-    font-size: 50rpx;
-	font-family:'Times New Roman', Times, serif
+    font-size: 40rpx;
 }
 
 .motto{
@@ -54,6 +52,7 @@
 }
 
 .author{
+	margin-top: 10rpx;
     display: block;
     text-align: right;
 }
@@ -65,8 +64,8 @@
     background-color: rgb(18, 150, 219);
     color: white;
     border-radius: 50rpx;
-	font-size: 36rpx;
-    text-transform: uppercase;
+		font-size: 36rpx;
+    /* text-transform: uppercase; */
 }
 
 .learn.button-hover{

@@ -1,38 +1,45 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/userinfo/userinfo",
-    "pages/study/study"
-  ],
-  "window": {
-    "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "KALDI 口语",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "color": "#000",
-    "selectedColor": "#1296db",
-    "backgroundColor": "#fff",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "image/home.png",
-        "selectedIconPath": "image/home_selected.png"
-      },{
-        "pagePath": "pages/study/study",
-        "text": "学习",
-        "iconPath": "image/study.png",
-        "selectedIconPath": "image/study_selected.png"
-      },{
-        "pagePath": "pages/userinfo/userinfo",
-        "text": "我的",
-        "iconPath": "image/mine.png",
-        "selectedIconPath": "image/mine_selected.png"
-      }
-    ]
-  },
-  "sitemapLocation": "sitemap.json"
+	"pages": [
+		"pages/index/index",
+		"pages/logs/logs",
+		"pages/userinfo/userinfo",
+		"pages/study/study",
+		"pages/verbList/verbList",
+		"pages/myAudio/myAudio",
+		"pages/studyAlarm/studyAlarm",
+		"pages/instructions/instructions",
+		"pages/questions/questions"
+	],
+	"window": {
+		"backgroundTextStyle": "dark",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "KALDI 口语",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"color": "#000",
+		"selectedColor": "#1296db",
+		"backgroundColor": "#fff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "image/home.png",
+				"selectedIconPath": "image/home_selected.png"
+			},
+			{
+				"pagePath": "pages/study/study",
+				"text": "学习",
+				"iconPath": "image/study.png",
+				"selectedIconPath": "image/study_selected.png"
+			},
+			{
+				"pagePath": "pages/userinfo/userinfo",
+				"text": "我的",
+				"iconPath": "image/mine.png",
+				"selectedIconPath": "image/mine_selected.png"
+			}
+		]
+	},
+	"sitemapLocation": "sitemap.json"
 }

@@ -1,8 +1,8 @@
 <!--index.wxml-->
 <view class="home-page">
     <view class='header'>
-        <text class='title'>today\n</text>
-        <text class='Date' space='nbsp'>{{week}}  |  {{month}} {{day}}</text>
+        <text class='Date' space='nbsp'>{{month}} {{day}} | {{week}}\n</text>
+				<text class='title'>day 0</text>
     </view>
     <view class='content'>
         <image class='home-recommend' src='../../image/boat.jpg' mode='aspectFill'></image>
@@ -12,7 +12,7 @@
         </view>
         <view class='everyday-motto'>
             <text class='motto'>{{ motto }}</text>
-            <text class='author'>{{ author }}</text>
+            <text class='author'>-- {{ author }}</text>
         </view>
         <button class='learn' bindtap='bindViewTap'>{{ study }}</button>
     </view>

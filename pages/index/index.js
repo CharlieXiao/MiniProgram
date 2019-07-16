@@ -2,8 +2,8 @@
 
 Page({
   data: {
-    motto: 'Life is like a boat.',
-    author: 'Rie fu',
+		motto: 'Even the darkest night will end and the sun will rise.',
+		author: 'Les Mserables',
     month:'',
     week:'',
     day:'',
