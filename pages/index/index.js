@@ -3,7 +3,7 @@
 Page({
   data: {
 		motto: 'Even the darkest night will end and the sun will rise.',
-		author: 'Les Mserables',
+		author: 'Les Miserables',
     month:'',
     week:'',
     day:'',
@@ -94,6 +94,13 @@ Page({
 		day:currDate.getDate()
 	});
 
+  },
+
+  onReady: function(){
+    //进入首页后直接跳转到想要预览的页面
+    // wx.navigateTo({
+    //   url: '../verbList/verbList',
+    // })
   }
 
 })

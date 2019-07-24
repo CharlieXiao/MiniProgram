@@ -1,1 +1,25 @@
 /* pages/verbList/verbList.wxss */
+page{
+  height: 100%;
+}
+
+.NoVerb{
+  position: absolute;
+  top:30%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.NoVerb_Image{
+  height: 200rpx;
+  width: 200rpx;
+}
+
+.NoVerb_Text{
+  margin-top: 20rpx;
+  color: rgb(105,73,77);
+  font-size: 30rpx;
+}
+

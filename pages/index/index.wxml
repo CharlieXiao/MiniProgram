@@ -1,19 +1,20 @@
 <!--index.wxml-->
-<view class="home-page">
-    <view class='header'>
-        <text class='Date' space='nbsp'>{{month}} {{day}} | {{week}}\n</text>
-				<text class='title'>day 0</text>
+<view class="pageWrap">
+  <view class='header'>
+    <text class='Date' space='nbsp'>{{month}} {{day}}  |  {{week}}</text>
+    <text class='Day'>day 0</text>
+  </view>
+  <view class='content'>
+    <image class='home-recommend' src='../../image/banner.jpg' mode='aspectFill'></image>
+    <view class="rich-text-wrp">
+      <text class="rich-text-title">motto</text>
+      <rich-text nodes="<hr>" ></rich-text>
     </view>
-    <view class='content'>
-        <image class='home-recommend' src='../../image/boat.jpg' mode='aspectFill'></image>
-        <view class="rich-text-wrp">
-            <text>motto</text>
-            <rich-text nodes="<hr>" ></rich-text>
-        </view>
-        <view class='everyday-motto'>
-            <text class='motto'>{{ motto }}</text>
-            <text class='author'>-- {{ author }}</text>
-        </view>
-        <button class='learn' bindtap='bindViewTap'>{{ study }}</button>
+    <view class='everyday-motto'>
+      <text class='motto'>{{ motto }}</text>
+      <text class='author'>— {{ author }}</text>
     </view>
+    <button class='learn' bindtap='bindViewTap'>{{ study }}</button>
+  </view>
 </view>
+

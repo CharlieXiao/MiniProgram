@@ -1,2 +1,8 @@
 <!--pages/verbList/verbList.wxml-->
-<text>pages/verbList/verbList.wxml</text>
+<view wx:if="{{ hasVerb }}" class="VerbList">
+  <text>这是你的单词</text>
+</view>
+<view wx:else class="NoVerb">
+  <image src="../../image/NoVerb.png" class="NoVerb_Image"></image>
+  <text class="NoVerb_Text">还没有生词哦~</text>
+</view>

@@ -1,2 +1,8 @@
 <!--pages/myAudio/myAudio.wxml-->
-<text>pages/myAudio/myAudio.wxml</text>
+<view wx:if="{{ hasAudio }}" class="AudioList">
+  <text>这是你的音频</text>
+</view>
+<view wx:else class="NoAudio">
+  <image src="../../image/NoAudio.png" class="NoAudio_Image"></image>
+  <text class="NoAudio_Text">还没有音频哦~</text>
+</view>
