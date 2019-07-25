@@ -15,9 +15,32 @@
 	font-size: 28rpx;
 }
 
-.Day{
+.header-title{
   margin-top: 10rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.Day{
   font-size: 60rpx;
+}
+
+.content-source{
+  height: 32rpx;
+  display: flex;
+  flex-direction: row;
+  margin: auto 0 auto auto;
+}
+
+.from-icon{
+  height: 32rpx;
+  width: 32rpx;
+}
+
+.course-name{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 26rpx;
+  text-transform: none;
 }
 
 .content{
@@ -39,7 +62,7 @@
 
 .title-wrap{
   width: 640rpx;
-  margin: 15rpx 0;
+  margin: 25rpx 0;
   border-bottom: 4rpx solid rgb(232,232,232);
 }
 
@@ -48,26 +71,18 @@
   font-size: 30rpx;
   color: rgb(148,148,148);
   margin-bottom: 10rpx;
-  text-transform: uppercase;
 }
 
 .everyday-motto{
-  height: 158rpx;
+  height: 138rpx;
   width: 580rpx;
 	font-family: Arial, Helvetica, sans-serif;
   font-size: 32rpx;
 }
 
 .motto{
-  height: 126rpx;
   display: block;
   text-align: left;
-}
-
-.author{
-  height: 32rpx;
-  display: block;
-  text-align: right;
 }
 
 .tap-area{
@@ -79,7 +94,7 @@
 
 .learn{
   height: 90rpx;
-  width: 500rpx;
+  width: 480rpx;
   background-color: rgb(18, 150, 219);
   color: white;
   border-radius: 50rpx;

@@ -3,7 +3,7 @@
 Page({
   data: {
 		motto: 'Even the darkest night will end and the sun will rise.',
-		author: 'Les Miserables',
+    author: 'Les Misérables',
     month:'',
     week:'',
     day:'',
