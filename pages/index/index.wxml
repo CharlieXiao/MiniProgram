@@ -1,20 +1,22 @@
 <!--index.wxml-->
 <view class="pageWrap">
   <view class='header'>
-    <text class='Date' space='nbsp'>{{month}} {{day}}  |  {{week}}</text>
+    <text class='Date' space='nbsp'>{{week}} , {{month}} {{day}}</text>
     <text class='Day'>day 0</text>
   </view>
   <view class='content'>
     <image class='home-recommend' src='../../image/banner.jpg' mode='aspectFill'></image>
-    <view class="rich-text-wrp">
-      <text class="rich-text-title">motto</text>
-      <rich-text nodes="<hr>" ></rich-text>
+    <view class="title-wrap">
+      <text class="content-title">motto</text>
     </view>
     <view class='everyday-motto'>
       <text class='motto'>{{ motto }}</text>
       <text class='author'>— {{ author }}</text>
     </view>
-    <button class='learn' bindtap='bindViewTap'>{{ study }}</button>
+    <view class="tap-area">
+      <button class='learn' bindtap='bindViewTap'>开始学习</button>
+      <text class="course-list" bindtap="gotoCourselist">课程列表></text>
+    </view>
   </view>
 </view>
 

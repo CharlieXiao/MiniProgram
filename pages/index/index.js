@@ -19,6 +19,12 @@ Page({
 		})
   },
 
+  gotoCourselist: function(){
+    wx.switchTab({
+      url: '../study/study',
+    })
+  },
+
   onLoad: function () {
     //设定当前时间
 	var currDate = new Date();
@@ -66,25 +72,25 @@ Page({
 	switch(currDate.getDay()){
 		//获取当前星期，0-6，0代表星期天
 		case 0:
-			week = 'Sun';
+			week = 'Sunday';
 			break;
 		case 1:
-			week = 'Mon';
+			week = 'Monday';
 			break;
 		case 2:
-			week = 'Tues';
+			week = 'Tuesday';
 			break;
 		case 3:
-			week = 'Wed';
+			week = 'Wednesday';
 			break;
 		case 4:
-			week = 'Thur';
+			week = 'Thursday';
 			break;
 		case 5:
-			week = 'Fri';
+			week = 'Friday';
 			break;
 		case 6:
-			week = 'Sat';
+			week = 'Saturday';
 			break;
 	};
 	

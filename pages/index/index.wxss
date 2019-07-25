@@ -1,28 +1,18 @@
 /**index.wxss**/
-page{
-  width: 100%;
-  height: 100%;
-  font-family: Helvetica;
-}
-
 .pageWrap{
-  width: 92%;
-  margin: 0 4%;
-  height: 100%;
-  position: fixed;
+  margin: 0 35rpx;
 }
 
 .header{
-  height: 10%;
-  position: absolute;
-  top: 3%;
+  font-family: 'Helvetica';
   text-transform: uppercase;
   display: flex;
   flex-direction: column;
+  margin: 5% 0;
 }
 
 .Date{
-	font-size: 40rpx;
+	font-size: 28rpx;
 }
 
 .Day{
@@ -32,56 +22,64 @@ page{
 
 .content{
   width: 100%;
-  height: 70%;
-  position: absolute;
-  top: 16%;
+  height: 850rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 15rpx;
   box-shadow: 0 0 3px 3px rgb(245,245,245);
-  color: rgb(53, 53, 53);
 }
 
 .home-recommend{
   border-radius: 20rpx;
-  height: 50%;
-  width: 94%;
-  margin: 3% 0;
+  width: 640rpx;
+  height: 370rpx;
+  margin-top: 20rpx;
 }
 
-.rich-text-wrp {
+.title-wrap{
+  width: 640rpx;
+  margin: 15rpx 0;
+  border-bottom: 4rpx solid rgb(232,232,232);
+}
+
+.content-title{
+  display: block;
+  font-size: 30rpx;
+  color: rgb(148,148,148);
+  margin-bottom: 10rpx;
   text-transform: uppercase;
-	font-size: 30rpx;
-  height: 7%;
-  width: 94%;
-  color: rgb(155,155,155);
 }
 
 .everyday-motto{
-	font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 40rpx;
-  width: 88%;
-  height: 24%;
+  height: 158rpx;
+  width: 580rpx;
+	font-family: Arial, Helvetica, sans-serif;
+  font-size: 32rpx;
 }
 
 .motto{
-  height: 65%;
+  height: 126rpx;
   display: block;
   text-align: left;
 }
 
 .author{
-  height: 35%;
+  height: 32rpx;
   display: block;
   text-align: right;
 }
 
+.tap-area{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin:30rpx 0;
+}
+
 .learn{
-  position: absolute;
-  height: 10%;
-  width: 50%;
-  bottom: 3%;
+  height: 90rpx;
+  width: 500rpx;
   background-color: rgb(18, 150, 219);
   color: white;
   border-radius: 50rpx;
@@ -90,4 +88,10 @@ page{
 
 .learn.button-hover{
   background-color:rgba(18, 149, 219, 0.8);
+}
+
+.course-list{
+  margin-top: 30rpx;
+  font-size: 30rpx;
+  color: rgb(148,148,148);
 }
