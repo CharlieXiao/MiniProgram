@@ -8,7 +8,9 @@
     "pages/myAudio/myAudio",
     "pages/studyAlarm/studyAlarm",
     "pages/questions/questions",
-    "pages/myCourse/myCourse"
+    "pages/myCourse/myCourse",
+    "pages/courseDetail/courseDetail",
+    "pages/record/record"
   ],
   "window": {
     "backgroundTextStyle": "dark",
