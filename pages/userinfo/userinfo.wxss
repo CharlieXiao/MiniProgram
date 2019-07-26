@@ -3,16 +3,17 @@
 page{
 	height: 100%;
 }
+
 /* 设置页面背景色 */
 .infoPage{
-	background-color: rgb(245,245,245);
+	background-color: rgb(237,237,237);
 	color: rgb(55,54,50);
 	height: 100%;
 }
 
 .userinfo{
 	background-color: white;
-	padding: 40rpx;
+	padding: 7% 40rpx 7% 40rpx;
 }
 
 .noLogin{
@@ -55,7 +56,7 @@ page{
 .userinfo-avatar{
 	height: 120rpx;
 	width: 120rpx;
-	border-radius: 50%;
+	border-radius: 15rpx;
 }
 
 .isLogin{
@@ -65,22 +66,33 @@ page{
 }
 
 .studyInfo{
+  height: 100rpx;
 	display: flex;
 	flex-direction: column;
-	margin-left: 30rpx;
+	margin-left: 40rpx;
 }
 
 .nickName{
-	font-size: 42rpx;
+	font-size: 40rpx;
 }
 
 .learnDays{
-	margin-top: 10rpx;
+  margin-top: auto;
 	font-size: 28rpx;
+  color: rgb(127,127,127);
 }
 
 .Mine{
 	margin: 15rpx 0;
+  background-color: white;
+}
+
+.Help{
+  margin:15rpx 0;
+}
+
+.About{
+  margin-top: 15rpx;
 }
 
 .options{
@@ -95,9 +107,6 @@ page{
 	padding: 0 40rpx;
 
 	background-color:white;
-
-	border-top: solid rgb(235,235,235) 1px;
-	border-bottom: solid rgb(235,235,235) 1px;
 }
 
 .icon{
@@ -106,7 +115,7 @@ page{
 }
 
 .option-description{
-	margin: 0 20rpx;
+	margin: 0 40rpx;
 	display: flex;
 	flex-direction: column;
 }
@@ -122,4 +131,13 @@ page{
 	width: 32rpx;
 	/* 元素默认右对齐 */
 	margin-left: auto;
+}
+
+.sep-line{
+  margin-left: 125rpx;
+  border-bottom: 1rpx solid rgb(217,217,217);
+}
+
+.options-hover{
+  background-color: rgb(240,240,240);
 }

@@ -1,0 +1,10 @@
+<!--pages/myCourse/myCourse.wxml-->
+<view class="CoursePage">
+  <view wx:if="{{ hasCourse }}" class="CourseList">
+    <text>这是你的课程</text>
+  </view>
+  <view wx:else class="NoCourse">
+    <image src="../../image/NoCourse.png" class="NoCourse_Image"></image>
+    <text class="NoCourse_Text">还没有添加课程哦~</text>
+  </view>
+</view>

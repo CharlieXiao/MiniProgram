@@ -13,7 +13,6 @@
   <view class='content'>
     <image class='home-recommend' src='../../image/banner.jpg' mode='aspectFill'></image>
     <view class="title-wrap">
-      <!-- <text class="content-title">motto</text> -->
       <text class='content-title'> {{ author }}</text>
     </view>
     <view class='everyday-motto'>

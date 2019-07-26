@@ -104,8 +104,8 @@ Page({
 
   onReady: function(){
     //进入首页后直接跳转到想要预览的页面
-    // wx.navigateTo({
-    //   url: '../verbList/verbList',
+    // wx.switchTab({
+    //   url: '../userinfo/userinfo',
     // })
   }
 

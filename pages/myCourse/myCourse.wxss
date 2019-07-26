@@ -1,10 +1,9 @@
-/* pages/myAudio/myAudio.wxss */
-
+/* pages/myCourse/myCourse.wxss */
 page{
   height: 100%;
 }
 
-.NoAudio{
+.NoCourse{
   position: fixed;
   top:35%;
   width: 100%;
@@ -13,13 +12,13 @@ page{
   align-items: center;
 }
 
-.NoAudio_Image{
-  height: 150rpx;
-  width: 150rpx;
+.NoCourse_Image{
+  height: 200rpx;
+  width: 200rpx;
 }
 
-.NoAudio_Text{
+.NoCourse_Text{
   margin-top: 20rpx;
-  color: rgb(61,61,61);
+  color: #515151;
   font-size: 36rpx;
 }

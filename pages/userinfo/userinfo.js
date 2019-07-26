@@ -64,35 +64,30 @@ Page({
 	},
 
 	verbList: function(){
-		console.log('用户进入【生词笔记】页面');
 		wx.navigateTo({
 			url: '../verbList/verbList',
 		});
 	},
 
-	myAudio: function () {
-		console.log('用户进入【历史音频】页面');
+	AudioList: function () {
 		wx.navigateTo({
 			url: '../myAudio/myAudio',
 		});
 	},
 
 	studyAlarm: function () {
-		console.log('用户进入【每日学习提醒】页面');
 		wx.navigateTo({
 			url: '../studyAlarm/studyAlarm',
 		});
 	},
 
-	instructions: function () {
-		console.log('用户进入【学习指导】页面');
+	courseList: function () {
 		wx.navigateTo({
-			url: '../instructions/instructions',
+			url: '../myCourse/myCourse',
 		});
 	},
 
 	questions: function(){
-		console.log('用户进入【常见问题】页面');
 		wx.navigateTo({
 			url: '../questions/questions',
 		});

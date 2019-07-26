@@ -14,15 +14,34 @@
 			</view>
 		</view>
 	</view>
+  <view class='Help'>
+		<view class='options' bindtap='studyAlarm' hover-class="options-hover">
+			<image class='icon' src='../../image/alarm.png'></image>
+			<view class='option-description'>
+				<text class='option-title'>学习提醒</text>
+				<text class='option-more'>每天7:00</text>
+			</view>
+			<image class='arrow' src='../../image/arrow.png'></image>
+		</view>
+	</view>
 	<view class='Mine'>
-		<view class='options' bindtap='verbList'>
+    <view class='options' bindtap='courseList' hover-class="options-hover">
+			<image class='icon' src='../../image/course.png'></image>
+			<view class='option-description'>
+				<text class='option-title'>我的课程</text>
+			</view>
+			<image class='arrow' src='../../image/arrow.png'></image>
+		</view>
+    <view class="sep-line"></view>
+		<view class='options' bindtap='verbList' hover-class="options-hover">
 			<image class='icon' src='../../image/verb_list.png'></image>
 			<view class='option-description'>
 				<text class='option-title'>生词笔记</text>
 			</view>
 			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
-		<view class='options' bindtap='myAudio'>
+    <view class="sep-line"></view>
+		<view class='options' bindtap='AudioList' hover-class="options-hover">
 			<image class='icon' src='../../image/audio.png'></image>
 			<view class='option-description'>
 				<text class='option-title'>历史音频</text>
@@ -30,30 +49,14 @@
 			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
 	</view>		
-	<view class='Help'>
-		<view class='options' bindtap='studyAlarm'>
-			<image class='icon' src='../../image/alarm.png'></image>
-			<view class='option-description'>
-				<text class='option-title'>每日学习提醒</text>
-				<text class='option-more'>每天7:00</text>
-			</view>
-			<image class='arrow' src='../../image/arrow.png'></image>
-		</view>
-		<view class='options' bindtap='instructions'>
-			<image class='icon' src='../../image/guide.png'></image>
-			<view class='option-description'>
-				<text class='option-title'>学习指导</text>
-				<text class='option-more'>发音方法和建议</text>
-			</view>
-			<image class='arrow' src='../../image/arrow.png'></image>
-		</view>
-		<view class='options' bindtap='questions'>
+  <view class="About">
+    <view class='options' bindtap='questions' hover-class="options-hover">
 			<image class='icon' src='../../image/problem.png'></image>
 			<view class='option-description'>
 				<text class='option-title'>常见问题</text>
-				<text class='option-more'>使用方法、问题反馈、关于Kaldi</text>
+				<text class='option-more'>关于Kaldi</text>
 			</view>
 			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
-	</view>
+  </view>
 </view>
