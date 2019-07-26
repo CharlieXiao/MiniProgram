@@ -13,7 +13,7 @@ page{
 
 .userinfo{
 	background-color: white;
-	padding: 7% 40rpx 7% 40rpx;
+	padding: 5vh 40rpx 5vh 40rpx;
 }
 
 .noLogin{
@@ -34,7 +34,7 @@ page{
 	display: inline-block;
 	background-color: rgba(0, 0, 0, 0);
 	position: absolute;
-	top: 40rpx;
+	top: 5vh;
 	left: 40rpx;
 	z-index: 1;
 }

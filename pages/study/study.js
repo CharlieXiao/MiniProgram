@@ -1,104 +1,34 @@
 // pages/study/study.js
 
-const app = getApp();
-const recorderManager = wx.getRecorderManager();
-const innerAudioContext = wx.createInnerAudioContext();
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-		isAuthRecord:true,
-		MSG:'开始录音'
+    courseArray:[
+      { name: '用英语聊垃圾分类', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318470&di=4746451e773f9d579c00014ee0031e4f&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F0f9b37ceab6be262a7bfdb7107935dc5b7b31471170f3-sckldc_fw658', length: '18 hours' ,id:1},
+      { name: '和同桌的日常', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318469&di=5e2808f1688bea9ac79f7b2d740bb2aa&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F6c9c4f15a369521f682394632f7e246ae004187e80847-uOtIza_fw658', length: '12 hours',id:2 },
+      { name: '常用数字表示法', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318469&di=c1d4a055f340e69d91f09e6641a48146&imgtype=0&src=http%3A%2F%2Fwww.tsf.edu.pl%2Fwp-content%2Fuploads%2F2015%2F03%2Fpokaz1-1420x5001-1420x500.jpg', length: '13 hours',id:3 },
+      { name: '暑假晨读小故事', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318468&di=184c7e1522cb1de2746e3af6dc0deacc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F88437179faa9750b72b02f028c14f6f9837e4db917778-JBHnBy_fw658', length: '11 hours',id:4 },
+      { name: '每日生活口语', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318467&di=2e06a11b9b046a09b489fba6f4abefda&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201409%2F18%2F20140918232022_heWCU.jpeg', length: '10 hours',id:5 },
+      { name: '用英语聊垃圾分类', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318470&di=4746451e773f9d579c00014ee0031e4f&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F0f9b37ceab6be262a7bfdb7107935dc5b7b31471170f3-sckldc_fw658', length: '18 hours',id:6 },
+      { name: '和同桌的日常', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318469&di=5e2808f1688bea9ac79f7b2d740bb2aa&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F6c9c4f15a369521f682394632f7e246ae004187e80847-uOtIza_fw658', length: '12 hours' ,id:7},
+      { name: '常用数字表示法', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318469&di=c1d4a055f340e69d91f09e6641a48146&imgtype=0&src=http%3A%2F%2Fwww.tsf.edu.pl%2Fwp-content%2Fuploads%2F2015%2F03%2Fpokaz1-1420x5001-1420x500.jpg', length: '13 hours' ,id:8 },
+      { name: '暑假晨读小故事', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318468&di=184c7e1522cb1de2746e3af6dc0deacc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F88437179faa9750b72b02f028c14f6f9837e4db917778-JBHnBy_fw658', length: '11 hours' , id:9},
+      { name: '每日生活口语', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318467&di=2e06a11b9b046a09b489fba6f4abefda&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201409%2F18%2F20140918232022_heWCU.jpeg', length: '10 hours' ,id:10 },
+    ],
   },
 
   onLoad: function (options) {
-		//用户授权使用录音功能
-		// 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
-		//this指针指向当前对象，再回调函数中无法使用，因此需要获取当前对象
-		this.AuthDialog = this.selectComponent('#AuthRecord');
-		var that = this;
-		wx.getSetting({
-			success: function (res) {
-				//保存用户授权记录
-				if (!res.authSetting['scope.record']) {
-					wx.authorize({
-						scope: 'scope.record',
-						success() {
-							// 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
-							//wx.startRecord()
-							that.setData({
-								isAuthRecord: true
-							});
-							console.log('用户授权了')
-						},
-						//用户已经拒绝的时候不会出现弹窗,而是直接进入接口fail回调,需要进入设置页面手动设置
-						fail() {
-							that.setData({
-								isAuthRecord: false
-							});
-							console.log('用户没授权')
-						},
-					})
-				}
-			}
-		});		
+		
   },
 
-	StartRecord: function(e) {
-		//检测录音时没有录音权限，提示用户开启权限
-		if(!this.data.isAuthRecord){
-			wx.hideTabBar();
-			this.AuthDialog.showDialog();
-		}else{
-			console.log('开始录音');
-			wx.showLoading({
-				title: '开始录音',
-			})
-			this.setData({
-				MSG:'结束录音'
-			});
-		}
-	},
-
-	EndRecord: function(e) {
-		//只对有录音权限时做出反应
-		if(this.data.isAuthRecord){
-			console.log('录音结束');
-			this.setData({
-				MSG: '开始录音'
-			});
-			wx.hideLoading();
-		}
-	},
-
-	confirmEvent: function () {
-		wx.openSetting({
-			//将返回的结果更新
-			//但是返回的结果会在onShow函数之后才更新
-			success: (res) => {
-				this.setData({
-					isAuthRecord: res.authSetting['scope.record']
-				});
-			}
-		});
-		this.AuthDialog.hideDialog();
-		wx.showTabBar({
-			aniamtion: true
-		});
-	},
-
-	cancelEvent: function () {
-		//由于onShow函数中将isAuthRecord设置为true，需要在取消时设置为false
-		this.setData({
-			isAuthRecord:false
-		});
-		this.AuthDialog.hideDialog();
-		wx.showTabBar({
-			aniamtion: true
-		});
-	},
+  gotoCourseDetail: function(event){
+    console.log(event.currentTarget.dataset.courseid);
+    wx.navigateTo({
+      url: '../courseDetail/courseDetail',
+    })
+  }
 
 })

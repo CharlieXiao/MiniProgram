@@ -1,1 +1,81 @@
 /* pages/study/study.wxss */
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar{
+width: 0;
+height: 0;
+color: transparent;
+}
+
+.page-header{
+  height: 5vh;
+  text-transform: uppercase;
+  margin: 0 40rpx 2vh 40rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.list-icon{
+  height: 40rpx;
+  width: 40rpx;
+  margin: auto 0;
+}
+
+.page-title{
+  display: block;
+  font-size: 40rpx;
+  margin: auto 0;
+}
+
+.courseList{
+  /*vh和vw获取当前屏幕高度，100vh代表100% */
+  height: 93vh;
+}
+
+.course-block{
+  width: 315rpx;
+  height: 315rpx;
+  margin: 20rpx 0 20rpx 40rpx;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  background-clip: content-box;
+  border-radius: 15rpx;
+  box-shadow: 0 0 5rpx 5rpx rgb(237,237,237);
+}
+
+.course-image{
+  border-radius: 15rpx;
+  height: 220rpx;
+  width: 315rpx;
+}
+
+.course-general{
+  margin: auto 15rpx;
+}
+
+.course-name{
+  display: block;
+  font-size: 30rpx;
+  margin-bottom: 6rpx;
+}
+
+.course-time{
+  display: flex;
+  flex-direction: row;
+}
+
+.time-icon{
+  height: 30rpx;
+  width: 30rpx;
+}
+
+.course-length{
+  font-size: 24rpx;
+  margin: auto 0;
+}
+
+.tap-style{
+  background-color: rgba(255, 255, 255, 0.9);
+}
+

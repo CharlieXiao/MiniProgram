@@ -1,10 +1,19 @@
 <!--pages/study/study.wxml-->
-<view>
-	<text>老老实实跑去学习\n</text>
-	<text>搞快点！搞快点！</text>
-	<AuthDialog id = 	'AuthRecord' AuthTitle='检测到您未开启录音功能' AuthContent = '是否去设置中打开？'
-		bind:confirmEvent='confirmEvent' bind:cancelEvent='cancelEvent'>
-	</AuthDialog>
-	<!-- <image src='../../image/default.png' bindtap='OpenDialog'></image> -->
-	<button bindtouchstart='StartRecord' bindtouchend='EndRecord'>{{ MSG }}</button>
+<view class="page-body">
+  <view class="page-header">
+    <image class="list-icon" src="../../image/List.png"></image>
+    <text class="page-title">popular</text>
+  </view>
+  <scroll-view class="courseList" scroll-y >
+    <view class="course-block" wx:for="{{ courseArray }}" wx:key="name" bindtap="gotoCourseDetail" data-courseid="{{item.id}}" hover-class="tap-style" >
+      <image class="course-image" src="{{ item.img }}" mode="aspectFill"></image>
+      <view class="course-general">
+        <text class="course-name">{{ item.name }}</text>
+        <view class="course-time">
+          <image src="../../image/time.png" class="time-icon"></image>
+          <text class="course-length">{{ item.length }}</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
 </view>

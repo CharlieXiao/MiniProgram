@@ -107,6 +107,9 @@ Page({
     // wx.switchTab({
     //   url: '../userinfo/userinfo',
     // })
+    // wx.navigateTo({
+    //   url: '../record/record',
+    // })
   }
 
 })
