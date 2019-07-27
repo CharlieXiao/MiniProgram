@@ -1,11 +1,34 @@
 <!--pages/study/study.wxml-->
 <view class="page-body">
   <view class="page-header">
-    <image class="list-icon" src="../../image/List.png"></image>
-    <text class="page-title">popular</text>
+    <view class="title">
+      <view class="title-set">
+        <image class="list-icon" src="../../image/List.png"></image>
+        <text class="page-title">精选课程</text>
+      </view>
+      <view class="title-set-right" hover-class="tap-style" bindtap="gotoMyCourse">
+        <image class="nav-icon" src="../../image/from.png"></image>
+        <text class="nav-title">我的课程</text>
+      </view>
+    </view>
+    <view class="options-set" wx:if="{{ choice == 1 }}">
+      <view class="options" bindtap="changeChoice" data-choice="1" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;" >全部</view>
+      <view class="options" bindtap="changeChoice" data-choice="2" hover-class="tap-style" >热门</view>
+      <view class="options" bindtap="changeChoice" data-choice="3" hover-class="tap-style" >最新</view>
+    </view>
+    <view class="options-set" wx:elif="{{ choice == 2 }}">
+      <view class="options" bindtap="changeChoice" data-choice="1" hover-class="tap-style" >全部</view>
+      <view class="options" bindtap="changeChoice" data-choice="2" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;">热门</view>
+      <view class="options" bindtap="changeChoice" data-choice="3" hover-class="tap-style">最新</view>
+    </view>
+    <view class="options-set" wx:else>
+      <view class="options" bindtap="changeChoice" data-choice="1" hover-class="tap-style">全部</view>
+      <view class="options" bindtap="changeChoice" data-choice="2" hover-class="tap-style">热门</view>
+      <view class="options" bindtap="changeChoice" data-choice="3" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;">最新</view>
+    </view>
   </view>
-  <scroll-view class="courseList" scroll-y >
-    <view class="course-block" wx:for="{{ courseArray }}" wx:key="name" bindtap="gotoCourseDetail" data-courseid="{{item.id}}" hover-class="tap-style" >
+  <scroll-view class="courseList" style="height:{{ height }}rpx" scroll-y >
+    <view class="course-block" wx:for="{{ courseArray }}" wx:key="id" bindtap="gotoCourseDetail" data-courseid="{{item.id}}" hover-class="tap-style" >
       <image class="course-image" src="{{ item.img }}" mode="aspectFill"></image>
       <view class="course-general">
         <text class="course-name">{{ item.name }}</text>

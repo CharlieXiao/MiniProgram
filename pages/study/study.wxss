@@ -1,81 +1,125 @@
 /* pages/study/study.wxss */
 
-/* 隐藏滚动条 */
-::-webkit-scrollbar{
-width: 0;
-height: 0;
-color: transparent;
+.page-header{
+  height: 180rpx;
+  margin: 0 30rpx 30rpx 20rpx;
+  display: flex;
+  flex-direction: column;
 }
 
-.page-header{
-  height: 5vh;
-  text-transform: uppercase;
-  margin: 0 40rpx 2vh 40rpx;
+.title{
+  height: 60rpx;
   display: flex;
   flex-direction: row;
+  margin-bottom: 20rpx;
+}
+
+.title-set{
+  display: flex;
+  flex-direction: row;
+  margin-top: auto;
+}
+
+.title-set-right{
+  display: flex;
+  margin-left: auto;
+  flex-direction: row;
+  margin-top: auto;
 }
 
 .list-icon{
   height: 40rpx;
   width: 40rpx;
-  margin: auto 0;
 }
 
 .page-title{
   display: block;
-  font-size: 40rpx;
+  font-size: 32rpx;
+}
+
+.nav-icon{
+  height: 32rpx;
+  width: 32rpx;
+}
+
+.nav-title{
+  font-size: 26rpx;
+  display: block;
+}
+
+.options-set{
   margin: auto 0;
 }
 
-.courseList{
-  /*vh和vw获取当前屏幕高度，100vh代表100% */
-  height: 93vh;
+.options{
+  display: inline-block;
+  line-height: 2em;
+  padding: 0 36rpx;
+  border-radius: 40rpx;
+  background-color: white;
+  font-size: 36rpx;
+  margin-right: 30rpx;
+  color: rgb(179,179,179);
 }
 
 .course-block{
-  width: 315rpx;
-  height: 315rpx;
-  margin: 20rpx 0 20rpx 40rpx;
-  float: left;
+  width: 330rpx;
+  height: 350rpx;
+  margin: 0 0 30rpx 30rpx;
   display: flex;
   flex-direction: column;
-  background-clip: content-box;
   border-radius: 15rpx;
-  box-shadow: 0 0 5rpx 5rpx rgb(237,237,237);
+  float: left;
+  background-color: rgb(249,249,249);
 }
 
 .course-image{
   border-radius: 15rpx;
-  height: 220rpx;
-  width: 315rpx;
+  width: 100%;
+  height: 230rpx;
 }
 
 .course-general{
-  margin: auto 15rpx;
+  box-sizing: border-box;
+  width: 100%;
+  height: 120rpx;
+  padding: 15rpx;
 }
 
 .course-name{
+  height: 50%;
   display: block;
-  font-size: 30rpx;
-  margin-bottom: 6rpx;
+  font-size: 28rpx;
+}
+
+.course-description{
+  margin: 2% 0;
+  height: 40%;
+  display: block;
+  font-size: 24rpx;
+  color: rgb(117,117,117);
 }
 
 .course-time{
+  height: 20%;
   display: flex;
   flex-direction: row;
 }
 
 .time-icon{
-  height: 30rpx;
-  width: 30rpx;
+  height: 32rpx;
+  width: 32rpx;
+  margin: auto 0;
 }
 
 .course-length{
   font-size: 24rpx;
   margin: auto 0;
+  margin-left: 10rpx;
+  color: rgb(231,109,26);
 }
 
 .tap-style{
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgb(240,240,240);
 }
 

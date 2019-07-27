@@ -108,7 +108,7 @@ Page({
     //   url: '../userinfo/userinfo',
     // })
     // wx.navigateTo({
-    //   url: '../record/record',
+    //   url: '../myCourse/myCourse',
     // })
   }
 

@@ -97,16 +97,14 @@ page{
 
 .options{
 	height: 120rpx;
-
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-
 	font-size: 32rpx;
-
 	padding: 0 40rpx;
-
 	background-color:white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 .icon{

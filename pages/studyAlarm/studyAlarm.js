@@ -13,7 +13,7 @@ Page({
 	 */
 	onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '每日学习提醒',
+      title: '学习提醒',
     })
 	},
 

@@ -1,12 +1,124 @@
 /* pages/myCourse/myCourse.wxss */
-page{
-  height: 100%;
+.page-header{
+  height: 180rpx;
+  margin: 0 30rpx 30rpx 20rpx;
+  display: flex;
+  flex-direction: column;
 }
+
+.title{
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20rpx;
+}
+
+.title-set{
+  display: flex;
+  flex-direction: row;
+  margin-top: auto;
+}
+
+.title-set-right{
+  display: flex;
+  margin-left: auto;
+  flex-direction: row;
+  margin-top: auto;
+}
+
+.list-icon{
+  height: 40rpx;
+  width: 40rpx;
+}
+
+.page-title{
+  display: block;
+  font-size: 32rpx;
+}
+
+.nav-icon{
+  height: 32rpx;
+  width: 32rpx;
+}
+
+.nav-title{
+  font-size: 26rpx;
+  display: block;
+}
+
+.options-set{
+  margin: auto 0;
+}
+
+.options{
+  display: inline-block;
+  line-height: 2em;
+  padding: 0 36rpx;
+  border-radius: 40rpx;
+  background-color: white;
+  font-size: 36rpx;
+  margin-right: 30rpx;
+  color: rgb(179,179,179);
+}
+
+.course-block{
+  width: 330rpx;
+  height: 350rpx;
+  margin: 0 0 30rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15rpx;
+  float: left;
+  background-color: rgb(249,249,249);
+}
+
+.course-image{
+  border-radius: 15rpx;
+  width: 100%;
+  height: 230rpx;
+}
+
+.course-general{
+  box-sizing: border-box;
+  width: 100%;
+  height: 120rpx;
+  padding: 15rpx;
+}
+
+.course-name{
+  height: 50%;
+  display: block;
+  font-size: 28rpx;
+}
+
+.course-status{
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+}
+
+/* 圆角进度条在手机上可以看见，版本至少未2.3.1可见 */
+.course-progress{
+  width: 70%;
+  margin: auto 0;
+  margin-right: 20rpx;
+}
+
+.progress-text{
+  font-size: 24rpx;
+  margin: auto 0 auto auto;
+}
+
+.tap-style{
+  background-color: rgb(240,240,240);
+}
+
+/* 滚动条设置 */
 
 .NoCourse{
   position: fixed;
-  top:35%;
-  width: 100%;
+  top:35vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;

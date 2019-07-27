@@ -1,7 +1,47 @@
 <!--pages/myCourse/myCourse.wxml-->
 <view class="CoursePage">
-  <view wx:if="{{ hasCourse }}" class="CourseList">
-    <text>这是你的课程</text>
+  <view class="page-header">
+    <view class="title">
+      <view class="title-set">
+        <image class="list-icon" src="../../image/List.png"></image>
+        <text class="page-title">我的课程</text>
+      </view>
+      <view class="title-set-right" hover-class="tap-style" bindtap="gotoCourseList">
+        <image class="nav-icon" src="../../image/from.png"></image>
+        <text class="nav-title">精选课程</text>
+      </view>
+    </view>
+    <view class="options-set" wx:if="{{ choice == 1 }}">
+      <view class="options" bindtap="changeChoice" data-choice="1" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;" >全部</view>
+      <view class="options" bindtap="changeChoice" data-choice="2" hover-class="tap-style" >进行中</view>
+      <view class="options" bindtap="changeChoice" data-choice="3" hover-class="tap-style" >已完成</view>
+    </view>
+    <view class="options-set" wx:elif="{{ choice == 2 }}">
+      <view class="options" bindtap="changeChoice" data-choice="1" hover-class="tap-style" >全部</view>
+      <view class="options" bindtap="changeChoice" data-choice="2" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;">进行中</view>
+      <view class="options" bindtap="changeChoice" data-choice="3" hover-class="tap-style">已完成</view>
+    </view>
+    <view class="options-set" wx:else>
+      <view class="options" bindtap="changeChoice" data-choice="1" hover-class="tap-style">全部</view>
+      <view class="options" bindtap="changeChoice" data-choice="2" hover-class="tap-style">进行中</view>
+      <view class="options" bindtap="changeChoice" data-choice="3" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;">已完成</view>
+    </view>
+  </view>
+  <view wx:if="{{ hasCourse }}" class="ExCourse">
+    <scroll-view class="courseList" style="height:{{ height }}rpx" scroll-y >
+      <view class="course-block" wx:for="{{ courseArray }}" wx:key="id" bindtap="gotoCourseDetail" data-courseid="{{item.id}}" hover-class="tap-style" >
+        <image class="course-image" src="{{ item.img }}" mode="aspectFill"></image>
+        <view class="course-general">
+          <text class="course-name">{{ item.name }}</text>
+          <view class="course-status">
+            <view class="course-progress">
+              <progress percent="{{ 100*item.curr/item.total }}" backgroundColor="#DCFBCD" stroke-width="8" border-radius="10" ></progress>
+            </view>
+            <text class="progress-text">{{item.curr}}/{{item.total}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
   </view>
   <view wx:else class="NoCourse">
     <image src="../../image/NoCourse.png" class="NoCourse_Image"></image>
