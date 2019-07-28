@@ -29,7 +29,6 @@ Page({
         let cyClient = res.windowWidth;
         let ratio = cyClient / cxClient;
         let height = 750 / ratio;
-        console.log(height);
         that.setData({
           height: height - 210,
         })

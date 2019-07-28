@@ -1,1 +1,135 @@
 /* pages/courseDetail/courseDetail.wxss */
+
+.page-body{
+  box-sizing: border-box;
+  width: 750rpx;
+  background-color: rgb(250,250,250);
+}
+
+.page-header{
+  box-sizing: border-box;
+  height: 350rpx;
+  margin: 0 0 20rpx 0;
+  padding: 30rpx 40rpx 80rpx 40rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgb(220,220,220);
+  color: rgb(51,51,51);
+}
+
+.course-general{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 72%;
+  box-sizing: border-box;
+  padding: 10rpx 0 10rpx 40rpx;
+}
+
+.course-name{
+  font-size: larger;
+  font-weight: bold;
+}
+
+.course-intro{
+  font-size: medium;
+  margin: auto 0;
+}
+
+.course-image{
+  height: 100%;
+  width: 28%;
+  border-radius: 15rpx;
+  box-shadow: 5px 5px 30px 0px rgb(198,209,203);
+}
+
+.course-sections{
+  box-sizing: border-box;
+  padding: 0 40rpx;
+}
+
+.sec-info{
+  margin: 15rpx 0;
+  color: rgb(117,117,117);
+}
+
+.sec-num{
+  font-size: larger;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.sec-text{
+  font-size: medium;
+  margin-top: auto;
+}
+
+.section{
+  height: 200rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  box-shadow: 0 3px 20px 0px rgb(240,240,240);
+  margin-bottom: 40rpx;
+}
+
+.curr-section{
+  height: 100rpx;
+  width: 10rpx;
+  margin: auto 30rpx auto 0;
+  border-top-right-radius: 5rpx;
+  border-bottom-right-radius: 5rpx;
+}
+
+.section-general{
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+}
+
+.sec-title{
+  font-size: medium;
+  font-weight: 700;
+  color: rgb(51,51,51);
+}
+
+.sec-subtitle{
+  font-size: small;
+  color: rgb(117,117,117);
+  margin-top: 10rpx;
+  text-transform: capitalize;
+}
+
+.sec-icon{
+  height: 48rpx;
+  width: 48rpx;
+  margin: auto 30rpx auto auto;
+}
+
+.page-footer{
+  background-color: white;
+  width: 750rpx;
+  box-sizing: border-box;
+  padding: 15rpx 40rpx;
+  border-top: 1px solid rgb(220,220,220);
+}
+
+.btn-learn{
+  height: 90rpx;
+  width: 100%;
+  background-color: rgb(18, 150, 219);
+  color: white;
+}
+
+.btn-learn::after{
+  border: none;
+}
+
+.btn-learn.button-hover{
+  background-color:rgba(18, 149, 219, 0.8);
+}
+
+.tap-style{
+  background-color: rgb(240,240,240);
+}

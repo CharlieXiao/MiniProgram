@@ -34,7 +34,7 @@
         <text class="course-name">{{ item.name }}</text>
         <view class="course-time">
           <image src="../../image/time.png" class="time-icon"></image>
-          <text class="course-length">{{ item.length }}</text>
+          <text class="course-length">{{ item.length }} sections </text>
         </view>
       </view>
     </view>

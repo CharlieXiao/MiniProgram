@@ -13,9 +13,8 @@ Page({
 
   //点击开始按钮跳转到学习页面
   bindViewTap: function() {
-		//跳转到另一个tabBar页面
-    wx.switchTab({
-		url: '../study/study'
+    wx.navigateTo({
+		url: '../courseDetail/courseDetail'
 		})
   },
 
@@ -107,9 +106,9 @@ Page({
     // wx.switchTab({
     //   url: '../userinfo/userinfo',
     // })
-    // wx.navigateTo({
-    //   url: '../myCourse/myCourse',
-    // })
+    wx.navigateTo({
+      url: '../courseDetail/courseDetail',
+    });
   }
 
 })

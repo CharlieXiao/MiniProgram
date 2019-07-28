@@ -28,7 +28,8 @@
 
 .list-icon{
   height: 40rpx;
-  width: 40rpx;
+  width: 30rpx;
+  margin: auto 0;
 }
 
 .page-title{

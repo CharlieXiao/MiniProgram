@@ -29,7 +29,8 @@
 
 .list-icon{
   height: 40rpx;
-  width: 40rpx;
+  width: 30rpx;
+  margin: auto 0;
 }
 
 .page-title{
@@ -92,16 +93,8 @@
   font-size: 28rpx;
 }
 
-.course-description{
-  margin: 2% 0;
-  height: 40%;
-  display: block;
-  font-size: 24rpx;
-  color: rgb(117,117,117);
-}
-
 .course-time{
-  height: 20%;
+  height: 50%;
   display: flex;
   flex-direction: row;
 }
