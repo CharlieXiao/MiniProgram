@@ -1,1 +1,162 @@
 /* pages/record/record.wxss */
+
+.body{
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  background-color: rgb(237,237,237);
+}
+
+
+.curr-sentence{
+  box-sizing: border-box;
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx 60rpx;
+}
+
+.course-image{
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+  box-shadow: 5px 5px 30px 0 rgb(150,150,150);
+}
+
+.curr-text-holder{
+  margin: 20rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sentence-verb{
+  /* 设置弹性盒子换行且垂直居中 justify- 用于水平 align- 用于竖直方向*/
+  font-size: 50rpx;
+  display: inline-flex;
+  flex-direction: row;
+  justify-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.verb{
+  display: inline-block;
+  margin-right: 15rpx;
+}
+
+.text-ch{
+  margin-top: 10rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: rgb(117,117,117);
+}
+
+.curr-footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addtion-text{
+  color: rgb(190,190,190);
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.btn-set{
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-icon{
+  height: 90rpx;
+  width: 90rpx;
+  margin: auto 70rpx;
+}
+
+.btn-icon-center{
+  height: 120rpx;
+  width: 120rpx;
+}
+
+.progress{
+  margin-top: 20rpx;
+}
+
+.curr-sentence-num{
+  color: rgb(18, 150, 219);
+}
+
+.total-sentence-num{
+  color: rgb(204,204,204);
+}
+
+.other-sentence{
+  width: 100%;
+  height: 260rpx;
+  border-bottom: 1px solid rgb(220,220,220);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 60rpx;
+}
+
+.text-holder{
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.other-text-en{
+  font-size: 50rpx;
+  line-height: 1.2em;
+  text-align: center;
+  color: rgb(137,137,137);
+  margin-bottom: 20rpx;
+}
+
+.other-text-ch{
+  font-size: 32rpx;
+  text-align: center;
+  color: rgb(177,177,177);
+}
+
+.back-holder{
+  height: 260rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.finish{
+  height: 90rpx;
+  width: 400rpx;
+  background-color: rgb(18, 150, 219);
+  color: white;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  margin: auto;
+}
+
+.finish::after{
+  border: none;
+}
+
+.finish.button-hover{
+  background-color:rgba(18, 149, 219, 0.8);
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+

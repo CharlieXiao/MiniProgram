@@ -106,7 +106,14 @@
 }
 
 .course-list{
-  margin-top: 30rpx;
+  margin-top: 20rpx;
   font-size: 30rpx;
   color: rgb(148,148,148);
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+}
+
+.tap-style{
+  background-color: rgb(240,240,240);
+  color: rgb(51,51,51);
 }

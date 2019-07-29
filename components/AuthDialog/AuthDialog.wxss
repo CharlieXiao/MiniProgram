@@ -1,75 +1,85 @@
 /* components/AuthDialog.wxss */
 .Mask{
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 1;
+  background-color: rgba(0,0,0,0.68);
 }
 
 @keyframes dia-ani {
   from {height: 0}
-  to {height: 444rpx}
+  to {height: 410rpx}
 }
 
 .AuthDialogContainer{
-	height: 444rpx;
-	width:100%;
-	position: fixed;
+  box-sizing: border-box;
+	height: 440rpx;
+	width: 100vw;
+  padding: 30rpx 40rpx 96rpx 40rpx;
+	position: absolute;
 	bottom: 0;
 	left: 0;
 	background-color: white;
 	z-index: 2;
 	color: black;
-	box-shadow: 0 0 5px 5px rgb(240,240,240);
+	box-shadow: 5px 0 5px 0 rgb(0,0,0);
 	animation: dia-ani 200ms ease; 
+  opacity: 1;
 }
 
 .Header{
+  box-sizing: border-box;
+  width: 100%;
+  height: 60rpx;
 	font-size: 30rpx;
-	margin: 30rpx;
 	display: flex;
 	flex-direction: row;
 }
 
 .AppPic{
-	height: 60rpx;
-	width: 60rpx;
+	height: 48rpx;
+	width: 48rpx;
 	border-radius: 50%;
+  margin: auto 0;
 }
 
 .AppName{
 	font-weight: bold;
-	margin: 15rpx 0;
+	margin: auto 0;
 }
 
 .Title{
-	margin: 15rpx 20rpx;
+	margin: auto 20rpx;
 }
 
-.AuthContent{
-	margin: 0 50rpx;
+.Contents{
+  box-sizing: border-box;
+  height: 174rpx;
+  padding: 30rpx 0;
 	font-weight: bold;
 	font-size: 40rpx;
 }
 
 .Buttons{
-	margin: 96rpx 0;
 	width: 100%;
+  height: 80rpx;
 	display: flex;
 	flex-direction: row;
-	position: fixed;
 	/* 底部导航栏高度为96rpx */
 	/* bottom: 96rpx; */
 }
 
  .cancel{
 	height: 80rpx;
-	width:300rpx;
-	margin-left: 50rpx;
+	width:315rpx;
 	background-color: rgb(237,237,237);
 	color:black;
+  line-height: 80rpx;
+  font-weight: bold;
+  margin: 0 auto 0 0;
 }
 
 /* 去除button的默认边框 */
@@ -79,10 +89,11 @@
 
 .confirm{
 	height: 80rpx;
-	width:300rpx;
-	margin-right: 50rpx;
+	width:315rpx;
 	background-color: rgb(9,193,96);
 	color:white;
+  line-height: 80rpx;
+  margin: 0 0 auto 0;
 }
 
 .confirm::after{

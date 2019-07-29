@@ -20,7 +20,7 @@
     </view>
     <view class="tap-area">
       <button class='learn' bindtap='bindViewTap'>开始学习</button>
-      <text class="course-list" bindtap="gotoCourselist">课程列表></text>
+      <view class="course-list" bindtap="gotoCourselist" hover-class="tap-style">课程列表></view>
     </view>
   </view>
 </view>

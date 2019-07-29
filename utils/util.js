@@ -14,7 +14,9 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+//模块是独立的文件，该文件内部的所有遍历和函数外部都无法获取
 module.exports = {
   formatTime: formatTime
 }
+
 
