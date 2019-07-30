@@ -9,6 +9,7 @@
 
 
 .curr-sentence{
+  height: 700rpx;
   box-sizing: border-box;
   background-color: white;
   width: 100%;
@@ -26,7 +27,8 @@
 }
 
 .curr-text-holder{
-  margin: 20rpx 0;
+  height: 240rpx;
+  margin: 30rpx 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,6 +42,7 @@
   justify-items: center;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 30rpx 0;
 }
 
 .verb{
@@ -48,21 +51,15 @@
 }
 
 .text-ch{
-  margin-top: 10rpx;
+  margin-bottom: 30rpx;
   text-align: center;
   font-size: 32rpx;
   color: rgb(117,117,117);
 }
 
-.curr-footer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .addtion-text{
   color: rgb(190,190,190);
-  font-size: 24rpx;
+  font-size: 30rpx;
   margin-bottom: 20rpx;
 }
 
@@ -76,6 +73,18 @@
   height: 90rpx;
   width: 90rpx;
   margin: auto 70rpx;
+}
+
+.result{
+  height: 90rpx;
+  width: 90rpx;
+  margin: auto 70rpx;
+  border-radius: 50%;
+  background-color: rgb(3,169,244);
+  color: white;
+  text-align: center;
+  line-height: 90rpx;
+  font-size: 50rpx;
 }
 
 .btn-icon-center{
@@ -128,7 +137,6 @@
 }
 
 .back-holder{
-  height: 260rpx;
   width: 100%;
   display: flex;
   flex-direction: column;

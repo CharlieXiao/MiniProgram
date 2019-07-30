@@ -29,9 +29,9 @@ Page({
         let cxClient = res.windowHeight;
         //由于微信小程序宽度都是750rpx,可以计算出高度
         let cyClient = res.windowWidth;
+        //计算宽高比
         let ratio = cyClient/cxClient;
         let height = 750/ratio;
-        console.log(height);
         that.setData({
           height:height-210,
         })

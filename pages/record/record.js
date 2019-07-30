@@ -6,7 +6,10 @@ const pattern = /\w+'\w+|\w+-\w+|[.,;?!-:()'"]+|\w+/g;
 const util = require('../../utils/util.js');
 const app = getApp();
 const recorderManager = wx.getRecorderManager();
-const innerAudioContext = wx.createInnerAudioContext();
+
+//分两个对象，一个播放教学语音，一个播放用户录音
+let TutorialAudio = wx.createInnerAudioContext();
+let UserAudio = wx.createInnerAudioContext();
 
 Page({
 
@@ -23,13 +26,29 @@ Page({
     isRecord:false,
     isJudged:false,
     result:90,
+    footer_height:260,
+    height:0,
   },
 
   onLoad: function (options) {
     //设置标题名称
     wx.setNavigationBarTitle({
       title: this.data.sectionInfo.title,
-    })
+    });
+    
+    //获取当前显示区域高度
+    let that = this;
+    wx.getSystemInfo({
+      success: (result) => {
+        let cxClient = result.windowWidth;
+        let cyClient = result.windowHeight;
+        let ratio = cyClient/cxClient;
+        that.setData({
+          height:750*ratio
+        });
+      },
+    });
+      
 
     //从后端获取句子信息，将其拆分成单词数组，
     let sentence_en = ['You know - one loves the sunset,','when one is so sad.','The stars are beautiful,','because of a flower that cannot be seen.','It is the time you have wasted for your rose','that makes your rose so important.'];
@@ -51,7 +70,6 @@ Page({
     // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
     //this指针指向当前对象，再回调函数中无法使用，因此需要获取当前对象
     this.AuthDialog = this.selectComponent('#AuthRecord');
-    var that = this;
     wx.getSetting({
       success: function (res) {
         //保存用户授权记录
@@ -80,8 +98,20 @@ Page({
   },
 
   onReady:function(){
+    TutorialAudio.autoplay = true
+    TutorialAudio.src = 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E061FF02C31F716658E5C81F5594D561F2E88B854E81CAAB7806D5E4F103E55D33C16F3FAC506D1AB172DE8600B37E43FAD&fromtag=46';
+
+    //播放结束的回调函数
+    TutorialAudio.onEnded(()=>{
+      console.log('播放结束');
+      that.setData({
+        isPlay:false,
+      });
+    });
+
     this.setData({
-      toIndex:'sentence-'+this.data.sectionInfo.curr_sentence
+      toIndex:'sentence-'+this.data.sectionInfo.curr_sentence,
+      isPlay:true,
     });
   },
 
@@ -91,7 +121,25 @@ Page({
       wx.hideTabBar();
       this.AuthDialog.showDialog();
     } else {
-      console.log('开始录音');
+      //录音之前先暂停
+      TutorialAudio.stop();
+      const options = {
+        duration: 10000,//指定录音的时长，单位 ms
+        sampleRate: 16000,//采样率
+        numberOfChannels: 1,//录音通道数
+        encodeBitRate: 96000,//编码码率
+        format: 'mp3',//音频格式，有效值 aac/mp3
+        frameSize: 50,//指定帧大小，单位 KB
+      }
+      //开始录音
+      recorderManager.start(options);
+      recorderManager.onStart(() => {
+        console.log('开始录音');
+      });
+      //错误回调
+      recorderManager.onError((res) => {
+        console.log(res);
+      })
       this.setData({
         MSG: '结束录音',
         isRecord:true,
@@ -102,7 +150,12 @@ Page({
   EndRecord: function (e) {
     //只对有录音权限时做出反应
     if (this.data.isAuthRecord) {
-      console.log('录音结束');
+      recorderManager.stop();
+      recorderManager.onStop((res) => {
+      this.tempFilePath = res.tempFilePath;
+      console.log('停止录音', res.tempFilePath)
+      // const { tempFilePath } = res
+    })
       this.setData({
         MSG: '开始录音',
         isRecord:false,
@@ -110,6 +163,7 @@ Page({
     }
   },
 
+  //权限选择对话框
   confirmEvent: function () {
     wx.openSetting({
       //将返回的结果更新
@@ -137,13 +191,109 @@ Page({
     });
   },
 
+  //跳转下一句
   gotoSentence:function(event){
     let sentence_id = event.currentTarget.dataset.sentenceid;
     let new_sectionInfo = this.data.sectionInfo;
+
+    let total_height = (this.data.sectionInfo.num_sentences-sentence_id)*260;
+
+    let new_footer_height = 260;
+    //判断是否需要修改底部按钮栏的高度
+    if(total_height + 960 < this.data.height){
+      new_footer_height = this.data.height-total_height-700;
+    }
+
     new_sectionInfo.curr_sentence = sentence_id;
     this.setData({
       sectionInfo:new_sectionInfo,
-      toIndex: 'sentence-' + sentence_id
+      toIndex: 'sentence-' + sentence_id,
+      footer_height:new_footer_height,
+      isPlay:true,
+    });
+
+    //进入页面就开始播放
+
+    //更换地址需要销毁上一个对象
+    TutorialAudio.destroy();
+    TutorialAudio = wx.createInnerAudioContext();
+    TutorialAudio.autoplay = true;
+    TutorialAudio.src = this.tempFilePath;
+
+    //播放结束的回调函数
+    TutorialAudio.onEnded(()=>{
+      console.log('播放结束');
+      this.setData({
+        isPlay:false,
+      });
+    });
+
+  },
+
+  //返回课程信息页，必须是navigateBack,返回上一个页面
+  backToCourse:function(){
+    //退出页面的同时要销毁发音对象，防止在后台继续播放
+    TutorialAudio.destroy();
+    wx.navigateBack({
+      url: '../courseDetail/courseDetail',
+    });
+  },
+
+  //开始播放音频
+  StartPlay:function(){
+    TutorialAudio.play();
+    
+    TutorialAudio.onPlay(() => {
+      console.log('开始播放')
+    });
+
+    TutorialAudio.onError((res) => {
+      console.log(res.errMsg)
+      console.log(res.errCode)
+    });
+
+    let that = this;
+
+    //在录音播放结束后重新变回播放状态
+    TutorialAudio.onEnded(()=>{
+      console.log('播放结束');
+      that.setData({
+        isPlay:false,
+      });
+    });
+
+    this.setData({
+      isPlay:true
+    });
+  },
+
+  //结束播放音频 
+  EndPlay:function(){
+    console.log('暂停播放音频');
+    this.setData({
+      isPlay:false
+    });
+    TutorialAudio.pause();
+  },
+
+  //上传服务器评分
+  JudgeRecord:function(){
+    console.log('播放个人录音');
+    //还未实现，暂时仅播放个人录音
+    //由于需要更新地址，先暂停播放教学音频
+    TutorialAudio.pause();
+    //清除上一次的录音
+    if(UserAudio != undefined){
+      UserAudio.destroy();
+    }
+    UserAudio = wx.createInnerAudioContext();
+    UserAudio.autoplay = true;
+    UserAudio.src = this.tempFilePath;
+
+    this.setData({
+      isJudged:true,
+      result:99,
+      isPlay:false,
     });
   }
 

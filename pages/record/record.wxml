@@ -1,32 +1,26 @@
 <!--pages/record/record.wxml-->
-<scroll-view class="body" scroll-y scroll-into-view="{{ toIndex }}" >
+<scroll-view class="body" scroll-y scroll-into-view="{{ toIndex }}">
   <block wx:for="{{sentences}}" wx:key="id">
-    <view wx:if="{{ item.id == sectionInfo.curr_sentence }}" class="curr-sentence" id="sentence-{{item.id}}" >
+    <view wx:if="{{ item.id == sectionInfo.curr_sentence }}" class="curr-sentence" id="sentence-{{item.id}}">
       <image class="course-image" src="{{ courseInfo.img }}" mode="aspectFill"></image>
-      <view class="curr-text-holder">
-        <view class="sentence-verb" >
-          <block wx:for="{{ item.en_sep }}" wx:for-item="verb" >
-            <text class="verb" bindtap="getTrans" hover-class="verb-tap-style" data-verb="{{verb}}">{{ verb }}</text>
-          </block>
-        </view>
-        <text class="text-ch">{{item.ch}}</text>
+      <view class="sentence-verb">
+        <block wx:for="{{ item.en_sep }}" wx:for-item="verb">
+          <text class="verb" bindtap="getTrans" hover-class="verb-tap-style" data-verb="{{verb}}">{{ verb }}</text>
+        </block>
       </view>
-      <view class="curr-footer">
-        <text class="addtion-text">点击按钮 {{ MSG }}</text>
-        <view class="btn-set">
-          <image wx:if="{{ !isPlay }}" class="btn-icon" src="../../image/play.png" bindtap="" hover-class="tap-style" ></image>
-          <image wx:else class="btn-icon" src="../../image/pause.img" bindtap="" hover-class="tap-style" ></image>
-          <image wx:if="{{ !isRecord }}" class="btn-icon-center" src="../../image/record.png" bindtap="StartRecord" hover-class="tap-style" ></image>
-          <image wx:else class="btn-icon-center" src="../../image/recording.png" bindtap="EndRecord" hover-class="tap-style" ></image>
-          <image wx:if="{{ !isJudged }}" class="btn-icon" src="../../image/judge.png" bindtap="" hover-class="tap-style" ></image>
-          <view wx:else class="result">
-            <text>{{result}}</text>
-          </view>
-        </view>
-        <view class="progress">
-          <text class="curr-sentence-num">{{ item.id }}</text>
-          <text class="total-sentence-num" >/{{sectionInfo.num_sentences}}</text>
-        </view>
+      <text class="text-ch">{{item.ch}}</text>
+      <text class="addtion-text">点击按钮 {{ MSG }}</text>
+      <view class="btn-set">
+        <image wx:if="{{ !isPlay }}" class="btn-icon" src="../../image/play.png" bindtap="StartPlay" hover-class="tap-style"></image>
+        <image wx:else class="btn-icon" src="../../image/pause.png" bindtap="EndPlay" hover-class="tap-style"></image>
+        <image wx:if="{{ !isRecord }}" class="btn-icon-center" src="../../image/record.png" bindtap="StartRecord" hover-class="tap-style"></image>
+        <image wx:else class="btn-icon-center" src="../../image/recording.png" bindtap="EndRecord" hover-class="tap-style"></image>
+        <image wx:if="{{ !isJudged }}" class="btn-icon" src="../../image/judge.png" bindtap="JudgeRecord" hover-class="tap-style"></image>
+        <view wx:else class="result">{{result}}</view>
+      </view>
+      <view class="progress">
+        <text class="curr-sentence-num">{{ item.id }}</text>
+        <text class="total-sentence-num">/{{sectionInfo.num_sentences}}</text>
       </view>
     </view>
     <view wx:else class="other-sentence" bindtap="gotoSentence" data-sentenceid="{{ item.id }}" hover-class="tap-style">
@@ -36,11 +30,10 @@
       </view>
     </view>
   </block>
-  <view class="back-holder">
+  <view class="back-holder" style="height:{{ footer_height }}rpx">
     <button class="finish" bindtap="backToCourse" data-courseid="{{ courseInfo.id }}">返回</button>
   </view>
 </scroll-view>
 
-<AuthDialog id = 	'AuthRecord' AuthTitle='检测到您未开启录音功能' AuthContent = '是否去设置中打开？'
-		bind:confirmEvent='confirmEvent' bind:cancelEvent='cancelEvent'>
+<AuthDialog id='AuthRecord' AuthTitle='检测到您未开启录音功能' AuthContent='是否去设置中打开？' bind:confirmEvent='confirmEvent' bind:cancelEvent='cancelEvent'>
 </AuthDialog>

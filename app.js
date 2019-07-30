@@ -5,7 +5,8 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    //获取当前高度
+    
     // 登录
     wx.login({
       success: res => {
