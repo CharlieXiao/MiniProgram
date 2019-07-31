@@ -26,8 +26,9 @@ Page({
     isRecord:false,
     isJudged:false,
     result:90,
-    footer_height:260,
-    height:0,
+    footer_height:'260rpx',
+    cxClient:0,
+    cyClient:0,
   },
 
   onLoad: function (options) {
@@ -42,9 +43,10 @@ Page({
       success: (result) => {
         let cxClient = result.windowWidth;
         let cyClient = result.windowHeight;
-        let ratio = cyClient/cxClient;
+        //对计算的高度进行向上取整
         that.setData({
-          height:750*ratio
+          cxClient:cxClient,
+          cyClient:cyClient,
         });
       },
     });
@@ -104,7 +106,7 @@ Page({
     //播放结束的回调函数
     TutorialAudio.onEnded(()=>{
       console.log('播放结束');
-      that.setData({
+      this.setData({
         isPlay:false,
       });
     });
@@ -113,6 +115,11 @@ Page({
       toIndex:'sentence-'+this.data.sectionInfo.curr_sentence,
       isPlay:true,
     });
+  },
+
+  onUnload:()=>{
+    //退出页面的同时要销毁发音对象，防止在后台继续播放
+    TutorialAudio.destroy();
   },
 
   StartRecord: function (e) {
@@ -196,12 +203,30 @@ Page({
     let sentence_id = event.currentTarget.dataset.sentenceid;
     let new_sectionInfo = this.data.sectionInfo;
 
-    let total_height = (this.data.sectionInfo.num_sentences-sentence_id)*260;
+    //此时单位为rpx
+    let num_others = this.data.sectionInfo.num_sentences-sentence_id;
 
-    let new_footer_height = 260;
+    //最好不要使用rpx计算，直接计算px值，减小误差
+
+    //计算px与rpx的转换关系
+    //1rpx = cxClient/750 px
+
+    //当前录音栏的实际高度
+
+    let new_footer_height = '260rpx';
     //判断是否需要修改底部按钮栏的高度
-    if(total_height + 960 < this.data.height){
-      new_footer_height = this.data.height-total_height-700;
+
+    let rpx2px = this.data.cxClient/750;
+
+    let currSentenceHeight = parseInt(650 * rpx2px);
+
+    let otherSentenceHeight = parseInt(260 * rpx2px);
+
+    //直接取整计算px值
+    let actualHeight = num_others * otherSentenceHeight + currSentenceHeight;
+    
+    if(actualHeight + otherSentenceHeight < this.data.cyClient){
+      new_footer_height = this.data.cyClient - actualHeight +'px';
     }
 
     new_sectionInfo.curr_sentence = sentence_id;
@@ -227,13 +252,10 @@ Page({
         isPlay:false,
       });
     });
-
   },
 
   //返回课程信息页，必须是navigateBack,返回上一个页面
   backToCourse:function(){
-    //退出页面的同时要销毁发音对象，防止在后台继续播放
-    TutorialAudio.destroy();
     wx.navigateBack({
       url: '../courseDetail/courseDetail',
     });
@@ -295,6 +317,10 @@ Page({
       result:99,
       isPlay:false,
     });
+  },
+
+  getTrans: (event)=>{
+    console.log('verb = '+event.currentTarget.dataset.verb);
   }
 
 })

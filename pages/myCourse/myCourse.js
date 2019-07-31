@@ -24,14 +24,14 @@ Page({
     let that = this;
     wx.getSystemInfo({
       success: function (res) {
-        let cxClient = res.windowHeight;
+        let cyClient = res.windowHeight;
         //由于微信小程序宽度都是750rpx,可以计算出高度
-        let cyClient = res.windowWidth;
-        let ratio = cyClient / cxClient;
-        let height = 750 / ratio;
+        let cxClient = res.windowWidth;
+
+        let headerHeight = parseInt(210*cxClient/750);
         that.setData({
-          height: height - 210,
-        })
+          height: cyClient - headerHeight,
+        });
       },
     })
   },

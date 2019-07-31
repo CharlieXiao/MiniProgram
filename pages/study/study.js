@@ -26,14 +26,15 @@ Page({
     let that = this;
     wx.getSystemInfo({
       success: function(res) {
-        let cxClient = res.windowHeight;
+        let cyClient = res.windowHeight;
         //由于微信小程序宽度都是750rpx,可以计算出高度
-        let cyClient = res.windowWidth;
-        //计算宽高比
-        let ratio = cyClient/cxClient;
-        let height = 750/ratio;
+        let cxClient = res.windowWidth;
+        //顶部高度,计算时还需要减去下导航栏高度
+
+        let headerHeight = parseInt(210*cxClient/750);
+
         that.setData({
-          height:height-210,
+          height:cyClient-headerHeight,
         })
       },
     })

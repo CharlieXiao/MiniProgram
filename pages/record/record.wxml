@@ -5,7 +5,7 @@
       <image class="course-image" src="{{ courseInfo.img }}" mode="aspectFill"></image>
       <view class="sentence-verb">
         <block wx:for="{{ item.en_sep }}" wx:for-item="verb">
-          <text class="verb" bindtap="getTrans" hover-class="verb-tap-style" data-verb="{{verb}}">{{ verb }}</text>
+          <view class="verb" bindtap="getTrans" hover-class="verb-tap-style" data-verb="{{verb}}">{{ verb }}</view>
         </block>
       </view>
       <text class="text-ch">{{item.ch}}</text>
@@ -30,10 +30,12 @@
       </view>
     </view>
   </block>
-  <view class="back-holder" style="height:{{ footer_height }}rpx">
+  <view class="back-holder" style="height:{{ footer_height }}">
     <button class="finish" bindtap="backToCourse" data-courseid="{{ courseInfo.id }}">返回</button>
   </view>
 </scroll-view>
 
 <AuthDialog id='AuthRecord' AuthTitle='检测到您未开启录音功能' AuthContent='是否去设置中打开？' bind:confirmEvent='confirmEvent' bind:cancelEvent='cancelEvent'>
 </AuthDialog>
+
+<VerbDialog id='VerbDialog'></VerbDialog>
