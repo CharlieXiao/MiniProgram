@@ -38,4 +38,4 @@
 <AuthDialog id='AuthRecord' AuthTitle='检测到您未开启录音功能' AuthContent='是否去设置中打开？' bind:confirmEvent='confirmEvent' bind:cancelEvent='cancelEvent'>
 </AuthDialog>
 
-<VerbDialog id='VerbDialog'></VerbDialog>
+<VerbDialog id='VerbTrans' bind:DealFav="VerbEvent"></VerbDialog>

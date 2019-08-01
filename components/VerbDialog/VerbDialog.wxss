@@ -1,1 +1,117 @@
 /* components/VerbDialog/VerbDialog.wxss */
+
+.Mask{
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 2;
+    background-color: rgba(0,0,0,0.68);
+}
+
+@keyframes dia-ani{
+    from{height: 0;}
+    to{height: 500rpx;}
+}
+
+.VerbDialogContainer{
+    box-sizing: border-box;
+    height: 500rpx;
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    z-index: 3;
+    color: black;
+    opacity: 1;
+    padding: 30rpx 30rpx 60rpx 30rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: dia-ani 100ms ease;
+}
+
+.verb-title{
+    width: 100%;
+    height: 70rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.verb{
+    font-weight: bold;
+    font-size: 50rpx;
+}
+
+.Fav{
+    display: flex;
+    flex-direction: row;
+    margin: auto 0 auto auto;
+    height: 70rpx;
+    box-sizing: border-box;
+    padding: 10rpx 20rpx;
+    border-radius: 30rpx;
+    background-color: rgb(240,240,240);
+}
+
+.Fav-text{
+    margin: auto 0;
+    font-size: 36rpx;
+    line-height: 50rpx;
+    color:rgb(130,130,130);
+}
+
+.Fav-icon{
+    height: 50rpx;
+    width: 50rpx;
+    margin: auto 0;
+}
+
+.verb-pron{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 20rpx 0;
+}
+
+.pron-us , .pron-uk{
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-start;
+    height: 50rpx;
+    width: 50%;
+}
+
+.pron-icon{
+    height: 40rpx;
+    width: 40rpx;
+    margin:auto 20rpx auto 0;
+}
+
+.pron-phonetic{
+    font-size: 32rpx;
+    margin: auto 0;
+    color: rgb(150,150,150);
+}
+
+.verb-trans{
+    height: 240rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    margin: auto 0;
+}
+
+.verb-explains{
+    box-sizing: border-box;
+    font-size: 36rpx;
+    height: 60rpx;
+    padding: 10rpx 0;
+}
+
+.btn-tap-style{
+    background-color: rgb(220,220,220);
+}

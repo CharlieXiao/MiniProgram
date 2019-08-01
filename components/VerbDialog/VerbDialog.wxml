@@ -1,2 +1,32 @@
-<!--components/VerbDialog/VerbDialog.wxml-->
-<text>components/VerbDialog/VerbDialog.wxml</text>
+<!-- components/VerbDialog/VerbDialog.wxml -->
+<view class="Mask" bind:tap="hideDialog" hidden="{{ !ShouldShow }}"></view>
+<view class="VerbDialogContainer" hidden="{{ !ShouldShow }}">
+  <view class="verb-title">
+    <text class="verb">{{ verbInfo.verb }}</text>
+    <view class="Fav" hover-class="btn-tap-style" bind:tap="onFav">
+      <block wx:if="{{isAddFav}}">
+        <image wx:if="{{isAddFav}}" class="Fav-icon" src="../../image/AddFav.png"></image>
+        <text class="Fav-text" style="color:#e57373;">已收藏</text>
+      </block>
+      <block wx:else>
+        <image class="Fav" class="Fav-icon" src="../../image/NotFav.png"></image>
+        <text class="Fav-text" >收藏</text>
+      </block>
+    </view>
+  </view>
+  <view class="verb-pron">
+    <view class="pron-us" bind:tap="VerbPron" data-id="us">
+      <image class="pron-icon" src="../../image/speaker.png"></image>
+      <text class="pron-phonetic">美 [{{ verbInfo.us_phonetic }}]</text>
+    </view>
+    <view class="pron-uk" bind:tap="VerbPron" data-id="uk">
+      <image class="pron-icon" src="../../image/speaker.png"></image>
+      <text class="pron-phonetic">英 [{{ verbInfo.uk_phonetic }}]</text>
+    </view>
+  </view>
+  <view class="verb-trans">
+    <block wx:for="{{verbInfo.explains}}">
+      <text class="verb-explains" selectable="false" space="false" decode="false">{{item}}</text>
+    </block>
+  </view>
+</view>

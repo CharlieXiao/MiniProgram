@@ -20,15 +20,15 @@ Page({
     isAuthRecord: true,
     MSG: '开始录音',
     courseInfo: { id: 1, name: '用英语聊聊垃圾分类', intro: '全国人民都在里聊垃圾分类，快戳get相关的英文表达！', curr_section: 2, sections: 4, img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318469&di=c1d4a055f340e69d91f09e6641a48146&imgtype=0&src=http%3A%2F%2Fwww.tsf.edu.pl%2Fwp-content%2Fuploads%2F2015%2F03%2Fpokaz1-1420x5001-1420x500.jpg' },
-    sectionInfo: { id: 1, title: '自我评价', subtitle: 'about yourself' ,num_sentences:6,curr_sentence:4},
-    sentences:[],
-    isPlay:false,
-    isRecord:false,
-    isJudged:false,
-    result:90,
-    footer_height:'260rpx',
-    cxClient:0,
-    cyClient:0,
+    sectionInfo: { id: 1, title: '自我评价', subtitle: 'about yourself', num_sentences: 6, curr_sentence: 4 },
+    sentences: [],
+    isPlay: false,
+    isRecord: false,
+    isJudged: false,
+    result: 90,
+    footer_height: '260rpx',
+    cxClient: 0,
+    cyClient: 0,
   },
 
   onLoad: function (options) {
@@ -36,42 +36,46 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.sectionInfo.title,
     });
-    
+
     //获取当前显示区域高度
-    let that = this;
     wx.getSystemInfo({
       success: (result) => {
         let cxClient = result.windowWidth;
         let cyClient = result.windowHeight;
         //对计算的高度进行向上取整
-        that.setData({
-          cxClient:cxClient,
-          cyClient:cyClient,
+        this.setData({
+          cxClient: cxClient,
+          cyClient: cyClient,
         });
       },
     });
-      
 
     //从后端获取句子信息，将其拆分成单词数组，
-    let sentence_en = ['You know - one loves the sunset,','when one is so sad.','The stars are beautiful,','because of a flower that cannot be seen.','It is the time you have wasted for your rose','that makes your rose so important.'];
-    let sentence_ch = ['你知道的--当一个人情绪低落的时候，','他会格外喜欢看日落，','星星真美，','因为有一朵看不见的花。','你在你的玫瑰花身上耗费的时间','使得你的玫瑰变得如此重要'];
+    let sentence_en = ['You know - one loves the sunset,', 'when one is so sad.', 'The stars are beautiful,', 'because of a flower that cannot be seen.', 'It is the time you have wasted for your rose', 'that makes your rose so important.'];
+    let sentence_ch = ['你知道的--当一个人情绪低落的时候，', '他会格外喜欢看日落，', '星星真美，', '因为有一朵看不见的花。', '你在你的玫瑰花身上耗费的时间', '使得你的玫瑰变得如此重要'];
     let Sentences = [];
-    for(var i = 0;i< sentence_en.length ;i++){
+    for (var i = 0; i < sentence_en.length; i++) {
       Sentences.push({
-        en:sentence_en[i],
-        en_sep:sentence_en[i].match(pattern),
-        ch:sentence_ch[i],
-        id:i+1
+        en: sentence_en[i],
+        en_sep: sentence_en[i].match(pattern),
+        ch: sentence_ch[i],
+        id: i + 1
       });
     }
+
     this.setData({
-      sentences:Sentences
+      sentences: Sentences
     });
 
     //用户授权使用录音功能
     // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
     //this指针指向当前对象，再回调函数中无法使用，因此需要获取当前对象
     this.AuthDialog = this.selectComponent('#AuthRecord');
+
+    this.VerbDialog = this.selectComponent('#VerbTrans');
+
+    let that = this;
+
     wx.getSetting({
       success: function (res) {
         //保存用户授权记录
@@ -99,25 +103,25 @@ Page({
     });
   },
 
-  onReady:function(){
+  onReady: function () {
     TutorialAudio.autoplay = true
     TutorialAudio.src = 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E061FF02C31F716658E5C81F5594D561F2E88B854E81CAAB7806D5E4F103E55D33C16F3FAC506D1AB172DE8600B37E43FAD&fromtag=46';
 
     //播放结束的回调函数
-    TutorialAudio.onEnded(()=>{
+    TutorialAudio.onEnded(() => {
       console.log('播放结束');
       this.setData({
-        isPlay:false,
+        isPlay: false,
       });
     });
 
     this.setData({
-      toIndex:'sentence-'+this.data.sectionInfo.curr_sentence,
-      isPlay:true,
+      toIndex: 'sentence-' + this.data.sectionInfo.curr_sentence,
+      isPlay: true,
     });
   },
 
-  onUnload:()=>{
+  onUnload: () => {
     //退出页面的同时要销毁发音对象，防止在后台继续播放
     TutorialAudio.destroy();
   },
@@ -149,7 +153,7 @@ Page({
       })
       this.setData({
         MSG: '结束录音',
-        isRecord:true,
+        isRecord: true,
       });
     }
   },
@@ -157,15 +161,19 @@ Page({
   EndRecord: function (e) {
     //只对有录音权限时做出反应
     if (this.data.isAuthRecord) {
+
       recorderManager.stop();
+
       recorderManager.onStop((res) => {
-      this.tempFilePath = res.tempFilePath;
-      console.log('停止录音', res.tempFilePath)
-      // const { tempFilePath } = res
-    })
+
+        this.tempFilePath = res.tempFilePath;
+
+        console.log('停止录音', res.tempFilePath)
+
+      })
       this.setData({
         MSG: '开始录音',
-        isRecord:false,
+        isRecord: false,
       });
     }
   },
@@ -199,12 +207,12 @@ Page({
   },
 
   //跳转下一句
-  gotoSentence:function(event){
+  gotoSentence: function (event) {
     let sentence_id = event.currentTarget.dataset.sentenceid;
     let new_sectionInfo = this.data.sectionInfo;
 
     //此时单位为rpx
-    let num_others = this.data.sectionInfo.num_sentences-sentence_id;
+    let num_others = this.data.sectionInfo.num_sentences - sentence_id;
 
     //最好不要使用rpx计算，直接计算px值，减小误差
 
@@ -216,7 +224,7 @@ Page({
     let new_footer_height = '260rpx';
     //判断是否需要修改底部按钮栏的高度
 
-    let rpx2px = this.data.cxClient/750;
+    let rpx2px = this.data.cxClient / 750;
 
     let currSentenceHeight = parseInt(650 * rpx2px);
 
@@ -224,17 +232,17 @@ Page({
 
     //直接取整计算px值
     let actualHeight = num_others * otherSentenceHeight + currSentenceHeight;
-    
-    if(actualHeight + otherSentenceHeight < this.data.cyClient){
-      new_footer_height = this.data.cyClient - actualHeight +'px';
+
+    if (actualHeight + otherSentenceHeight < this.data.cyClient) {
+      new_footer_height = this.data.cyClient - actualHeight + 'px';
     }
 
     new_sectionInfo.curr_sentence = sentence_id;
     this.setData({
-      sectionInfo:new_sectionInfo,
+      sectionInfo: new_sectionInfo,
       toIndex: 'sentence-' + sentence_id,
-      footer_height:new_footer_height,
-      isPlay:true,
+      footer_height: new_footer_height,
+      isPlay: true,
     });
 
     //进入页面就开始播放
@@ -246,25 +254,25 @@ Page({
     TutorialAudio.src = this.tempFilePath;
 
     //播放结束的回调函数
-    TutorialAudio.onEnded(()=>{
+    TutorialAudio.onEnded(() => {
       console.log('播放结束');
       this.setData({
-        isPlay:false,
+        isPlay: false,
       });
     });
   },
 
   //返回课程信息页，必须是navigateBack,返回上一个页面
-  backToCourse:function(){
+  backToCourse: function () {
     wx.navigateBack({
       url: '../courseDetail/courseDetail',
     });
   },
 
   //开始播放音频
-  StartPlay:function(){
+  StartPlay: function () {
     TutorialAudio.play();
-    
+
     TutorialAudio.onPlay(() => {
       console.log('开始播放')
     });
@@ -274,38 +282,36 @@ Page({
       console.log(res.errCode)
     });
 
-    let that = this;
-
     //在录音播放结束后重新变回播放状态
-    TutorialAudio.onEnded(()=>{
+    TutorialAudio.onEnded(() => {
       console.log('播放结束');
-      that.setData({
-        isPlay:false,
+      this.setData({
+        isPlay: false,
       });
     });
 
     this.setData({
-      isPlay:true
+      isPlay: true
     });
   },
 
   //结束播放音频 
-  EndPlay:function(){
+  EndPlay: function () {
     console.log('暂停播放音频');
     this.setData({
-      isPlay:false
+      isPlay: false
     });
     TutorialAudio.pause();
   },
 
   //上传服务器评分
-  JudgeRecord:function(){
+  JudgeRecord: function () {
     console.log('播放个人录音');
     //还未实现，暂时仅播放个人录音
     //由于需要更新地址，先暂停播放教学音频
     TutorialAudio.pause();
     //清除上一次的录音
-    if(UserAudio != undefined){
+    if (UserAudio != undefined) {
       UserAudio.destroy();
     }
     UserAudio = wx.createInnerAudioContext();
@@ -313,14 +319,25 @@ Page({
     UserAudio.src = this.tempFilePath;
 
     this.setData({
-      isJudged:true,
-      result:99,
-      isPlay:false,
+      isJudged: true,
+      result: 99,
+      isPlay: false,
     });
   },
 
-  getTrans: (event)=>{
-    console.log('verb = '+event.currentTarget.dataset.verb);
+  getTrans: function (event) {
+    let verbInfo = event.currentTarget.dataset.verb;
+    const verbPattern = /\w+'\w+|\w+-\w+|\w+/g;
+    if (verbInfo.match(verbPattern)) {
+      this.VerbDialog.showDialog(verbInfo);
+    } else {
+      console.log('不是单词嗷');
+    }
+  },
+
+  VerbEvent: function(event){
+    console.log(event.detail.isFav);
+    console.log(event.detail.verb);
   }
 
 })
