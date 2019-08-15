@@ -7,7 +7,7 @@
 	top: 0;
 	left: 0;
 	z-index: 2;
-    background-color: rgba(0,0,0,0.68);
+    background-color: rgba(0,0,0,0.6);
 }
 
 @keyframes dia-ani{
@@ -18,10 +18,10 @@
 .VerbDialogContainer{
     box-sizing: border-box;
     height: 500rpx;
-    width: 100vw;
+    width: 690rpx;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 30rpx;
+    left: 30rpx;
     background-color: white;
     z-index: 3;
     color: black;
@@ -29,6 +29,7 @@
     padding: 30rpx 30rpx 60rpx 30rpx;
     display: flex;
     flex-direction: column;
+    border-radius: 30rpx;
     align-items: center;
     animation: dia-ani 100ms ease;
 }
@@ -57,15 +58,15 @@
 }
 
 .Fav-text{
-    margin: auto 0;
+    margin: auto 0 auto 10rpx;
     font-size: 36rpx;
     line-height: 50rpx;
     color:rgb(130,130,130);
 }
 
 .Fav-icon{
-    height: 50rpx;
-    width: 50rpx;
+    height: 40rpx;
+    width: 40rpx;
     margin: auto 0;
 }
 
@@ -108,7 +109,6 @@
 .verb-explains{
     box-sizing: border-box;
     font-size: 36rpx;
-    height: 60rpx;
     padding: 10rpx 0;
 }
 
