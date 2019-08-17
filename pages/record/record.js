@@ -1,9 +1,8 @@
 // pages/record/record.js
 
 //导入util外部文件
-
+const md5 = require('../../utils/md5.js') 
 const pattern = /\w+'\w+|\w+-\w+|[.,;?!-:()'"]+|\w+/g;
-const util = require('../../utils/util.js');
 const app = getApp();
 const recorderManager = wx.getRecorderManager();
 
@@ -329,7 +328,44 @@ Page({
     let verbInfo = event.currentTarget.dataset.verb;
     const verbPattern = /\w+'\w+|\w+-\w+|\w+/g;
     if (verbInfo.match(verbPattern)) {
-      this.VerbDialog.showDialog(verbInfo);
+      let that = this;
+
+      var appKey = '4f938f684c09931e';
+      var key = 'dkzAd8YOi8pg77V7j7a3QTcJ0vOv6VWk';//注意：暴露appSecret，有被盗用造成损失的风险
+      var salt = (new Date).getTime();
+      var query = verbInfo;
+      // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
+      var from = 'en';
+      var to = 'zh-CHS';
+      var str1 = appKey + query + salt +key;
+      var sign = md5(str1);
+
+      //发起request请求
+      wx.request({
+        url: 'https://openapi.youdao.com/api',
+        type: 'post',
+        dataType: 'jsonp',
+        data: {
+            q: query,
+            appKey: appKey,
+            salt: salt,
+            from: from,
+            to: to,
+            sign: sign
+        },
+
+        success(res){
+          console.log('数据接受成功')
+          //获取到的数据好像是一个字符串，需要用json.js进行分析，使用JSON.parse(jsonstr)可以将JSON字符串反序列化成json对象
+          that.VerbDialog.showDialog(JSON.parse(res.data));
+        },
+
+        fail(){
+          console.log('数据请求失败');
+        }
+      });
+
+      //this.VerbDialog.showDialog(verbInfo);
     } else {
       console.log('不是单词嗷');
     }
