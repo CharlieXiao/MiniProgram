@@ -6,7 +6,7 @@
     <view class="Fav" hover-class="btn-tap-style" bind:tap="onFav">
       <block wx:if="{{isAddFav}}">
         <image wx:if="{{isAddFav}}" class="Fav-icon" src="../../image/AddFav.png"></image>
-        <text class="Fav-text" style="color:#e57373;">已收藏</text>
+        <text class="Fav-text" style="color:#e57373;">收藏</text>
       </block>
       <block wx:else>
         <image class="Fav" class="Fav-icon" src="../../image/NotFav.png"></image>
@@ -17,16 +17,17 @@
   <view class="verb-pron">
     <view class="pron-us" bind:tap="VerbPron" data-id="us">
       <image class="pron-icon" src="../../image/speaker.png"></image>
-      <text class="pron-phonetic">美 [{{ us_phonetic }}]</text>
+      <text class="pron-phonetic" space="nbsp" >美 [{{ us_phonetic }}]</text>
     </view>
     <view class="pron-uk" bind:tap="VerbPron" data-id="uk">
       <image class="pron-icon" src="../../image/speaker.png"></image>
-      <text class="pron-phonetic">英 [{{ uk_phonetic }}]</text>
+      <text class="pron-phonetic" space="nbsp">英 [{{ uk_phonetic }}]</text>
     </view>
   </view>
-  <view class="verb-trans">
-    <block wx:for="{{explains}}">
-      <text class="verb-explains" selectable="false" space="false" decode="false">{{item}}</text>
-    </block>
-  </view>
+  <scroll-view class="verb-trans" scroll-y="true" >
+    <view class="trans-holder" wx:for="{{explains}}" key="pos">
+      <text class="verb-pos" selectable="false" space="false" decode="false">{{item.pos}}</text>
+      <text class="verb-explains" selectable="false" space="false" decode="false">{{item.explain}}</text>
+    </view>
+  </scroll-view>
 </view>

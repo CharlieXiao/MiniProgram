@@ -3,7 +3,8 @@
 let usSpeech = undefined;
 let ukSpeech = undefined;
 
-let verb_pattern = /\w{1,4}\./g 
+//提取词性正则表达式
+let verb_pattern = /(\w{1,4}\.)\s(.*)/ 
 
 Component({
   /**
@@ -19,6 +20,17 @@ Component({
   data: {
     ShouldShow: true,
     isAddFav: false,
+    explains:[
+      {pos:"n.",explain:"花；精华；开花植物"},
+      {pos: "vi.", explain: "成熟，发育；开花；繁荣；旺盛；三生三世十里桃花"},
+      {pos: "vt.", explain: "使开花；用花装饰"},
+      {pos: "n.", explain: "(Flower)人名；(英)弗劳尔"}
+    ],
+    uk_phonetic: "'flaʊə",
+    uk_speech: "http://openapi.youdao.com/ttsapi?q=flower&langType=en&sign=66264F0B8941FA81A714C596E2432521&salt=1566197801227&voice=5&format=mp3&appKey=4f938f684c09931e",
+    us_phonetic: "'flaʊɚ",
+    us_speech: "http://openapi.youdao.com/ttsapi?q=flower&langType=en&sign=66264F0B8941FA81A714C596E2432521&salt=1566197801227&voice=6&format=mp3&appKey=4f938f684c09931e",
+    verb: "flower"
   },
 
   /**
@@ -40,9 +52,34 @@ Component({
     },
     //显示弹框
     showDialog(data)  {
-      console.log('显示单词弹框')
 
-      console.log(data)
+      console.log('显示单词弹框') 
+
+      console.log(data);
+
+      var explains = [];
+
+      var raw_explains = data.basic.explains;
+
+      var e;
+
+      for(var i=0;i<raw_explains.length;i++){
+        //拆分解释和词性，使用词性作为key，
+        e = raw_explains[i].match(verb_pattern)
+        if(e!=null){
+          explains.push({
+            pos:e[1],
+            explain:e[2]
+          })
+        }else{
+          //未匹配时
+          explains.push({
+            pos:"",
+            explain:raw_explains[i]
+          })
+        }
+        
+      }
 
       this.setData({
         ShouldShow: true,
@@ -51,7 +88,7 @@ Component({
         us_phonetic:data.basic["us-phonetic"],
         uk_speech:data.basic["uk-speech"],
         us_speech:data.basic["us-speech"],
-        explains:data.basic.explains
+        explains:explains
       })
 
       ukSpeech = wx.createInnerAudioContext();
@@ -65,7 +102,7 @@ Component({
         isAddFav:!this.data.isAddFav
       });
       var DealFavDetail = {
-        isFav:this.data.isAddFav,verb:this.data.verbInfo.verb
+        isFav:this.data.isAddFav,verb:this.data.verb
       }
       this.triggerEvent('DealFav',DealFavDetail)
     },

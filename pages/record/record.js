@@ -341,6 +341,9 @@ Page({
       var sign = md5(str1);
 
       //发起request请求
+
+      //考虑搭建数据库后先从数据库中获取单词解释，数据库中不存在时再从有道云中获取
+
       wx.request({
         url: 'https://openapi.youdao.com/api',
         type: 'post',
@@ -357,12 +360,20 @@ Page({
         success(res){
           console.log('数据接受成功')
           //获取到的数据好像是一个字符串，需要用json.js进行分析，使用JSON.parse(jsonstr)可以将JSON字符串反序列化成json对象
-          that.VerbDialog.showDialog(JSON.parse(res.data));
+          var verbInfo = JSON.parse(res.data);
+          if(verbInfo.errorCode == "0"){
+            //错误码为0时为请求成功
+            that.VerbDialog.showDialog(verbInfo);
+          }else{
+            //因其他原因请求失败时
+            console.log("ERROR : "+verbInfo.errCode)
+          }
         },
 
         fail(){
           console.log('数据请求失败');
         }
+
       });
 
       //this.VerbDialog.showDialog(verbInfo);

@@ -10,28 +10,21 @@
     background-color: rgba(0,0,0,0.6);
 }
 
-@keyframes dia-ani{
-    from{height: 0;}
-    to{height: 500rpx;}
-}
-
 .VerbDialogContainer{
     box-sizing: border-box;
-    height: 500rpx;
     width: 690rpx;
     position: absolute;
-    bottom: 30rpx;
+    top: 27%;
     left: 30rpx;
     background-color: white;
     z-index: 3;
     color: black;
     opacity: 1;
-    padding: 30rpx 30rpx 60rpx 30rpx;
+    padding: 20rpx 30rpx 20rpx 30rpx;
     display: flex;
     flex-direction: column;
     border-radius: 30rpx;
     align-items: center;
-    animation: dia-ani 100ms ease;
 }
 
 .verb-title{
@@ -42,8 +35,9 @@
 }
 
 .verb{
-    font-weight: bold;
-    font-size: 50rpx;
+    height: 70rpx;
+    font-size: 60rpx;
+    line-height: 70rpx;
 }
 
 .Fav{
@@ -74,42 +68,58 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    margin: 20rpx 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 15rpx 0;
 }
 
 .pron-us , .pron-uk{
     display: flex;
     flex-direction: row;
     justify-items: flex-start;
-    height: 50rpx;
-    width: 50%;
+    height: 60rpx;
 }
 
 .pron-icon{
     height: 40rpx;
     width: 40rpx;
-    margin:auto 20rpx auto 0;
+    margin:auto 10rpx auto 0;
 }
 
 .pron-phonetic{
-    font-size: 32rpx;
+    font-size: 40rpx;
+    line-height: 50rpx;
     margin: auto 0;
     color: rgb(150,150,150);
 }
 
 .verb-trans{
-    height: 240rpx;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: space-between;
     margin: auto 0;
 }
 
+.trans-holder{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10rpx
+}
+
+.verb-pos{
+    height: 50rpx;
+    font-size:36rpx;
+    line-height: 50rpx;
+    margin: 0 20rpx auto 0;
+    color: rgb(117,117,117);
+}
+
 .verb-explains{
+    line-height: 50rpx;
     box-sizing: border-box;
-    font-size: 36rpx;
-    padding: 10rpx 0;
+    font-size:40rpx;
+    margin-bottom: auto;
 }
 
 .btn-tap-style{

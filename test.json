@@ -1,0 +1,73 @@
+{
+    "tSpeakUrl": "http://openapi.youdao.com/ttsapi?q=%E9%82%A3&langType=zh-CHS&sign=0A2E9E3F7695FF487FD934EC3F4F229C&salt=1566090559045&voice=4&format=mp3&appKey=4f938f684c09931e",
+    "returnPhrase": [
+        "that"
+    ],
+    "web": [
+        {
+            "value": [
+                "那个",
+                "那种",
+                "指出"
+            ],
+            "key": "that"
+        },
+        {
+            "value": [
+                "也就是说",
+                "就是说",
+                "那就是说",
+                "即"
+            ],
+            "key": "that is"
+        },
+        {
+            "value": [
+                "以便",
+                "结果是",
+                "所以",
+                "为使"
+            ],
+            "key": "so that"
+        }
+    ],
+    "query": "that",
+    "translation": [
+        "那"
+    ],
+    "errorCode": "0",
+    "dict": {
+        "url": "yddict://m.youdao.com/dict?le=eng&q=that"
+    },
+    "webdict": {
+        "url": "http://m.youdao.com/dict?le=eng&q=that"
+    },
+    "basic": {
+        "exam_type": [
+            "高中",
+            "初中"
+        ],
+        "us-phonetic": "ðæt",
+        "phonetic": "ðæt; ðət",
+        "uk-phonetic": "ðæt; ðət",
+        "wfs": [
+            {
+                "wf": {
+                    "name": "复数",
+                    "value": "those"
+                }
+            }
+        ],
+        "uk-speech": "http://openapi.youdao.com/ttsapi?q=that&langType=en&sign=6283CEBBC696018B008ED33C4358AB5F&salt=1566090559045&voice=5&format=mp3&appKey=4f938f684c09931e",
+        "explains": [
+            "det. 那，那个；那种",
+            "pron. 那， 那个；那，那种；（非正式）就那样",
+            "conj. ……可能是；由于；以至于；（表示目的）为了；（诗、文）真希望",
+            "adv. 那样，那么；（非正式）很，非常",
+            "n. (That) （越）塔特（人名）"
+        ],
+        "us-speech": "http://openapi.youdao.com/ttsapi?q=that&langType=en&sign=6283CEBBC696018B008ED33C4358AB5F&salt=1566090559045&voice=6&format=mp3&appKey=4f938f684c09931e"
+    },
+    "l": "en2zh-CHS",
+    "speakUrl": "http://openapi.youdao.com/ttsapi?q=that&langType=en&sign=6283CEBBC696018B008ED33C4358AB5F&salt=1566090559045&voice=4&format=mp3&appKey=4f938f684c09931e"
+}
