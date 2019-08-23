@@ -15,13 +15,17 @@
     </view>
   </view>
   <view class="verb-pron">
-    <view class="pron-us" bind:tap="VerbPron" data-id="us">
-      <image class="pron-icon" src="../../image/speaker.png"></image>
-      <text class="pron-phonetic" space="nbsp" >美 [{{ us_phonetic }}]</text>
+    <view class="pron-us" bind:tap="VerbPron" data-id="us" hover-class="btn-tap-style">
+      <block  wx:if="{{us_speech != ''}}">
+        <image class="pron-icon" src="../../image/speaker.png"></image>
+      </block>
+      <text class="pron-phonetic" space="nbsp" >美 {{ us_phonetic }}</text>
     </view>
-    <view class="pron-uk" bind:tap="VerbPron" data-id="uk">
-      <image class="pron-icon" src="../../image/speaker.png"></image>
-      <text class="pron-phonetic" space="nbsp">英 [{{ uk_phonetic }}]</text>
+    <view class="pron-uk" bind:tap="VerbPron" data-id="uk" hover-class="btn-tap-style">
+      <block  wx:if="{{uk_speech != ''}}">
+        <image class="pron-icon" src="../../image/speaker.png"></image>
+      </block>
+      <text class="pron-phonetic" space="nbsp">英 {{ uk_phonetic }}</text>
     </view>
   </view>
   <scroll-view class="verb-trans" scroll-y="true" >

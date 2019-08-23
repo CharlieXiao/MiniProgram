@@ -72,7 +72,7 @@ Component({
             explain:e[2]
           })
         }else{
-          //未匹配时
+          //未匹配时，即翻译结果未包含词性时
           explains.push({
             pos:"",
             explain:raw_explains[i]
@@ -84,12 +84,50 @@ Component({
       this.setData({
         ShouldShow: true,
         verb:data.query,
-        uk_phonetic:data.basic["uk-phonetic"],
-        us_phonetic:data.basic["us-phonetic"],
-        uk_speech:data.basic["uk-speech"],
-        us_speech:data.basic["us-speech"],
         explains:explains
       })
+
+      console.log(data.basic)
+
+      if(data.basic["uk-phonetic"] != undefined && data.basic["uk-phonetic"] != "" ){
+        this.setData({
+          uk_phonetic: '['+data.basic["uk-phonetic"]+']',
+        })
+      }else{
+        this.setData({
+          uk_phonetic:""
+        })
+      }
+
+      if (data.basic["us-phonetic"] != undefined && data.basic["us-phonetic"] != "" ) {
+        this.setData({
+          us_phonetic: '['+data.basic["us-phonetic"]+']',
+        })
+      } else {
+        this.setData({
+          us_phonetic:""
+        })
+      }
+
+      if (data.basic["uk-speech"] != undefined) {
+        this.setData({
+          uk_speech: data.basic["uk-speech"],
+        })
+      } else {
+        this.setData({
+          us_speech:""
+        })
+      }
+
+      if (data.basic["us-speech"] != undefined) {
+        this.setData({
+          us_speech: data.basic["us-speech"],
+        })
+      } else {
+        this.setData({
+          us_speech:""
+        })
+      }
 
       ukSpeech = wx.createInnerAudioContext();
       usSpeech = wx.createInnerAudioContext();

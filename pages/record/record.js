@@ -325,6 +325,10 @@ Page({
   },
 
   getTrans: function (event) {
+    wx.showLoading({
+      title:'查询释义中',
+      mask:true
+    })
     let verbInfo = event.currentTarget.dataset.verb;
     const verbPattern = /\w+'\w+|\w+-\w+|\w+/g;
     if (verbInfo.match(verbPattern)) {
@@ -372,6 +376,10 @@ Page({
 
         fail(){
           console.log('数据请求失败');
+        },
+
+        complete(){
+          wx.hideLoading()
         }
 
       });

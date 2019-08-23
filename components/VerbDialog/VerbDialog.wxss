@@ -77,6 +77,9 @@
     display: flex;
     flex-direction: row;
     justify-items: flex-start;
+    box-sizing: border-box;
+    padding: 0 10rpx;
+    border-radius: 15rpx;
     height: 60rpx;
 }
 
