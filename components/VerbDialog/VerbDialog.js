@@ -18,7 +18,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    ShouldShow: true,
+    ShouldShow: false,
     isAddFav: false,
     explains:[
       {pos:"n.",explain:"花；精华；开花植物"},

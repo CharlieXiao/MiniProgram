@@ -2,19 +2,17 @@
 
 Page({
   data: {
-		motto: 'Even the darkest night will end and the sun will rise.',
-    author: 'Les Misérables',
     month:'',
     week:'',
     day:'',
-    study:'start',
+    learn_days:0,
   },
   //事件处理函数
 
   //点击开始按钮跳转到学习页面
   bindViewTap: function() {
     wx.navigateTo({
-		url: '../courseDetail/courseDetail'
+		url: '../courseDetail/courseDetail?course_id=6'
 		})
   },
 
@@ -99,6 +97,31 @@ Page({
 		day:currDate.getDate()
 	});
 
+  var that = this;
+
+  wx.request({
+    url: "http://127.0.0.1:8000/index",
+    method:"GET",
+    data:"hello world",
+
+    success(res) {
+      //请求成功
+      if(res.statusCode == "200"){
+        var data = res.data
+        console.log(data)
+
+        that.setData({
+          motto:data.motto,
+          author:data.author,
+          poster:data.poster
+        })
+      }else{
+        console.log('网络连接失败，请检查网络')
+      }
+
+    }
+   })
+
   },
 
   onReady: function(){
@@ -106,9 +129,9 @@ Page({
     // wx.switchTab({
     //   url: '../userinfo/userinfo',
     // })
-    wx.navigateTo({
-      url: '../record/record',
-    });
+    // wx.navigateTo({
+    //   url: '../record/record',
+    // });
   }
 
 })

@@ -19,6 +19,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var course_id = options.course_id;
+    console.log(course_id)
     //设置顶栏颜色
     // wx.setNavigationBarColor({
     //   frontColor: '#ffffff',
@@ -26,6 +28,29 @@ Page({
     // });
     //计算滚动条高度
     let that = this;
+
+    var request_url = 'http://127.0.0.1:8000'
+
+    wx.request({
+      url: request_url+"/SectionInfo",
+      method:'GET',
+      data:{course_id:course_id},
+      success(res){
+        if(res.statusCode == "200"){
+          var data = res.data;
+          data.courseInfo.img = request_url+data.courseInfo.img;
+          console.log(data);
+          that.setData({
+            courseInfo:data.courseInfo,
+            courseSec:data.courseSec
+          })
+        }else{
+
+        }
+        
+      }
+    })
+
     wx.getSystemInfo({
       success: function(res) {
         let cxClient = res.windowHeight;

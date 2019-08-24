@@ -3,7 +3,7 @@
   <view class='header'>
     <text class='Date' space='nbsp'>{{week}} , {{month}} {{day}}</text>
     <view class="header-title">
-      <text class='Day'>day 0</text>
+      <text class='Day'>day {{ learn_days }}</text>
       <view class="content-source">
         <image src="../../image/from.png" class="from-icon"></image>
         <text class="course-name">每日一句</text>
@@ -11,7 +11,7 @@
     </view>
   </view>
   <view class='content'>
-    <image class='home-recommend' src='../../image/banner.jpg' mode='aspectFill'></image>
+    <image class='home-recommend' src='{{ poster }}' mode='aspectFill'></image>
     <view class="title-wrap">
       <text class='content-title'> {{ author }}</text>
     </view>

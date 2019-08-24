@@ -37,6 +37,7 @@ Page({
           height:cyClient-headerHeight,
         })
       },
+      //连接后台服务器获取课程列表信息
     })
   },
 

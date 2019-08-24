@@ -25,7 +25,7 @@ Page({
     isRecord: false,
     isJudged: false,
     result: 90,
-    footer_height: '260rpx',
+    footer_height: '400rpx',
     cxClient: 0,
     cyClient: 0,
   },
