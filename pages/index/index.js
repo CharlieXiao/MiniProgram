@@ -1,5 +1,7 @@
 //index.js
 
+const app = getApp()
+
 Page({
   data: {
     month:'',
@@ -100,7 +102,7 @@ Page({
   var that = this;
 
   wx.request({
-    url: "http://127.0.0.1:8000/index",
+    url: app.globalData.request_url+"/index",
     method:"GET",
     data:"hello world",
 

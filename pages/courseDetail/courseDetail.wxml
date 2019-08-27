@@ -16,7 +16,7 @@
         <view class="curr-section" wx:if="{{item.id == courseInfo.curr_section}}" style="background-color:rgb(18, 150, 219)"></view>
         <view class="curr-section" wx:else></view>
         <view class="section-general">
-          <text class="sec-title">{{ item.id }}. {{ item.title }}</text>
+          <text class="sec-title">{{ index + 1 }}. {{ item.title }}</text>
           <text class="sec-subtitle">{{ item.subtitle }}</text>
         </view>
         <image class="sec-icon" src="../../image/arrow-right.png" ></image>
@@ -25,7 +25,7 @@
         <view class="curr-section" wx:if="{{item.id == courseInfo.curr_section}}" style="background-color:rgb(18, 150, 219)"></view>
         <view class="curr-section" wx:else></view>
         <view class="section-general">
-          <text class="sec-title">{{ item.id }}. {{ item.title }}</text>
+          <text class="sec-title">{{ index + 1 }}. {{ item.title }}</text>
           <text class="sec-subtitle">{{ item.subtitle }}</text>
         </view>
         <image class="sec-icon" src="../../image/lock.png" ></image>

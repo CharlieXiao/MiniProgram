@@ -1,4 +1,7 @@
 // pages/courseDetail/courseDetail.js
+
+const app = getApp()
+
 Page({
 
   /**
@@ -29,14 +32,14 @@ Page({
     //计算滚动条高度
     let that = this;
 
-    var request_url = 'http://127.0.0.1:8000'
+    var request_url = app.globalData.request_url
 
     wx.request({
       url: request_url+"/SectionInfo",
       method:'GET',
       data:{course_id:course_id},
       success(res){
-        if(res.statusCode == "200"){
+        if(res.statusCode == "200" && res.data.error == 0){
           var data = res.data;
           data.courseInfo.img = request_url+data.courseInfo.img;
           console.log(data);
@@ -45,9 +48,8 @@ Page({
             courseSec:data.courseSec
           })
         }else{
-
+          console.log('课程不存在')
         }
-        
       }
     })
 
@@ -79,7 +81,7 @@ Page({
     if(section <= this.data.courseInfo.curr_section )
     {
       wx.navigateTo({
-        url: '../record/record',
+        url: '../record/record?section_id='+section,
       });
     }
   }

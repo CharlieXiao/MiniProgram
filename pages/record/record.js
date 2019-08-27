@@ -1,7 +1,7 @@
 // pages/record/record.js
 
 //导入util外部文件
-const md5 = require('../../utils/md5.js') 
+const md5 = require('../../utils/md5.js')
 const pattern = /\w+'\w+|\w+-\w+|[.,;?!-:()'"]+|\w+/g;
 const app = getApp();
 const recorderManager = wx.getRecorderManager();
@@ -18,7 +18,7 @@ Page({
   data: {
     isAuthRecord: true,
     MSG: '开始录音',
-    courseInfo: { id: 1, name: '用英语聊聊垃圾分类', intro: '全国人民都在里聊垃圾分类，快戳get相关的英文表达！', curr_section: 2, sections: 4, img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318469&di=c1d4a055f340e69d91f09e6641a48146&imgtype=0&src=http%3A%2F%2Fwww.tsf.edu.pl%2Fwp-content%2Fuploads%2F2015%2F03%2Fpokaz1-1420x5001-1420x500.jpg' },
+    courseImage: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318469&di=c1d4a055f340e69d91f09e6641a48146&imgtype=0&src=http%3A%2F%2Fwww.tsf.edu.pl%2Fwp-content%2Fuploads%2F2015%2F03%2Fpokaz1-1420x5001-1420x500.jpg',
     sectionInfo: { id: 1, title: '自我评价', subtitle: 'about yourself', num_sentences: 6, curr_sentence: 4 },
     sentences: [],
     isPlay: false,
@@ -31,6 +31,35 @@ Page({
   },
 
   onLoad: function (options) {
+
+    var section_id = options.section_id
+
+    console.log('curr section: ' + section_id)
+
+    // 从后台获取信息
+
+    var request_url = app.globalData.request_url
+
+    var that = this
+
+    wx.request({
+      url: request_url + "/SentenceInfo",
+      method: 'GET',
+      data: { section_id: section_id },
+      success(res) {
+        if (res.statusCode == '200' && res.data.error == '0') {
+          console.log(res.data)
+          var data = res.data
+          // 由于小程序从后台获取图片链接是需要一定时间的，因此在渲染时会有一段时间图片链接为空，需要指定一张默认图片
+          that.setData({
+            courseImage:request_url + data.courseImage
+          })
+        } else {
+          console.log('数据请求失败')
+        }
+      }
+    })
+
     //设置标题名称
     wx.setNavigationBarTitle({
       title: this.data.sectionInfo.title,
@@ -73,7 +102,7 @@ Page({
 
     this.VerbDialog = this.selectComponent('#VerbTrans');
 
-    let that = this;
+    var that = this;
 
     wx.getSetting({
       success: function (res) {
@@ -326,8 +355,8 @@ Page({
 
   getTrans: function (event) {
     wx.showLoading({
-      title:'查询释义中',
-      mask:true
+      title: '查询释义中',
+      mask: true
     })
     let verbInfo = event.currentTarget.dataset.verb;
     const verbPattern = /\w+'\w+|\w+-\w+|\w+/g;
@@ -341,7 +370,7 @@ Page({
       // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
       var from = 'en';
       var to = 'zh-CHS';
-      var str1 = appKey + query + salt +key;
+      var str1 = appKey + query + salt + key;
       var sign = md5(str1);
 
       //发起request请求
@@ -353,32 +382,32 @@ Page({
         type: 'post',
         dataType: 'jsonp',
         data: {
-            q: query,
-            appKey: appKey,
-            salt: salt,
-            from: from,
-            to: to,
-            sign: sign
+          q: query,
+          appKey: appKey,
+          salt: salt,
+          from: from,
+          to: to,
+          sign: sign
         },
 
-        success(res){
+        success(res) {
           console.log('数据接受成功')
           //获取到的数据好像是一个字符串，需要用json.js进行分析，使用JSON.parse(jsonstr)可以将JSON字符串反序列化成json对象
           var verbInfo = JSON.parse(res.data);
-          if(verbInfo.errorCode == "0"){
+          if (verbInfo.errorCode == "0") {
             //错误码为0时为请求成功
             that.VerbDialog.showDialog(verbInfo);
-          }else{
+          } else {
             //因其他原因请求失败时
-            console.log("ERROR : "+verbInfo.errCode)
+            console.log("ERROR : " + verbInfo.errCode)
           }
         },
 
-        fail(){
+        fail() {
           console.log('数据请求失败');
         },
 
-        complete(){
+        complete() {
           wx.hideLoading()
         }
 
@@ -390,7 +419,7 @@ Page({
     }
   },
 
-  VerbEvent: function(event){
+  VerbEvent: function (event) {
     console.log(event.detail.isFav);
     console.log(event.detail.verb);
   }

@@ -2,7 +2,7 @@
 <scroll-view class="body" scroll-y scroll-into-view="{{ toIndex }}">
   <block wx:for="{{sentences}}" wx:key="id">
     <view wx:if="{{ item.id == sectionInfo.curr_sentence }}" class="curr-sentence" id="sentence-{{item.id}}">
-      <image class="course-image" src="{{ courseInfo.img }}" mode="aspectFill"></image>
+      <image class="course-image" src="{{ courseImage }}" mode="aspectFill"></image>
       <view class="sentence-verb">
         <block wx:for="{{ item.en_sep }}" wx:for-item="verb">
           <view class="verb" bindtap="getTrans" hover-class="verb-tap-style" data-verb="{{verb}}">{{ verb }}</view>
