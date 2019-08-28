@@ -378,6 +378,16 @@ Page({
     let verbInfo = event.currentTarget.dataset.verb;
     const verbPattern = /\w+'\w+|\w+-\w+|\w+/g;
     if (verbInfo.match(verbPattern)) {
+
+      wx.request({
+        url:request_url + '/getVerbTrans',
+        method:'GET',
+        data:{verb:verbInfo},
+        success:(res)=>{
+          console.log(res)
+        }
+      })
+
       let that = this;
 
       var appKey = '4f938f684c09931e';
