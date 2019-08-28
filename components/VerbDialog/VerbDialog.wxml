@@ -2,7 +2,7 @@
 <view class="Mask" bind:tap="hideDialog" hidden="{{ !ShouldShow }}"></view>
 <view class="VerbDialogContainer" hidden="{{ !ShouldShow }}">
   <view class="verb-title">
-    <text class="verb">{{ verb }}</text>
+    <text class="verb">{{ verbInfo.verb }}</text>
     <view class="Fav" hover-class="btn-tap-style" bind:tap="onFav">
       <block wx:if="{{isAddFav}}">
         <image wx:if="{{isAddFav}}" class="Fav-icon" src="../../image/AddFav.png"></image>
@@ -16,20 +16,20 @@
   </view>
   <view class="verb-pron">
     <view class="pron-us" bind:tap="VerbPron" data-id="us" hover-class="btn-tap-style">
-      <block  wx:if="{{us_speech != ''}}">
+      <block  wx:if="{{verbInfo['us-speech'] != ''}}">
         <image class="pron-icon" src="../../image/speaker.png"></image>
       </block>
-      <text class="pron-phonetic" space="nbsp" >美 {{ us_phonetic }}</text>
+      <text class="pron-phonetic" space="nbsp" >美 {{ verbInfo['us-phonetic'] }}</text>
     </view>
     <view class="pron-uk" bind:tap="VerbPron" data-id="uk" hover-class="btn-tap-style">
-      <block  wx:if="{{uk_speech != ''}}">
+      <block  wx:if="{{verbInfo['uk-speech'] != ''}}">
         <image class="pron-icon" src="../../image/speaker.png"></image>
       </block>
-      <text class="pron-phonetic" space="nbsp">英 {{ uk_phonetic }}</text>
+      <text class="pron-phonetic" space="nbsp">英 {{ verbInfo['uk-phonetic'] }}</text>
     </view>
   </view>
   <scroll-view class="verb-trans" scroll-y="true" >
-    <view class="trans-holder" wx:for="{{explains}}" key="pos">
+    <view class="trans-holder" wx:for="{{verbInfo.explains}}" key="pos">
       <text class="verb-pos" selectable="false" space="false" decode="false">{{item.pos}}</text>
       <text class="verb-explains" selectable="false" space="false" decode="false">{{item.explain}}</text>
     </view>

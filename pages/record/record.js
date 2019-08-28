@@ -5,7 +5,7 @@ const md5 = require('../../utils/md5.js')
 //const pattern = /\w+'\w+|\w+-\w+|[.,;?!-:()'"]+|\w+/g;
 const app = getApp();
 const recorderManager = wx.getRecorderManager();
-const request_url = app.globalData.request_url
+const request_url = app.globalData.request_url;
 
 //分两个对象，一个播放教学语音，一个播放用户录音
 let TutorialAudio = wx.createInnerAudioContext();
@@ -73,23 +73,6 @@ Page({
         });
       },
     });
-
-    //从后端获取句子信息，将其拆分成单词数组，
-    // let sentence_en = ['You know - one loves the sunset,', 'when one is so sad.', 'The stars are beautiful,', 'because of a flower that cannot be seen.', 'It is the time you have wasted for your rose', 'that makes your rose so important.'];
-    // let sentence_ch = ['你知道的--当一个人情绪低落的时候，', '他会格外喜欢看日落，', '星星真美，', '因为有一朵看不见的花。', '你在你的玫瑰花身上耗费的时间', '使得你的玫瑰变得如此重要'];
-    // let Sentences = [];
-    // for (let i = 0; i < sentence_en.length; i++) {
-    //   Sentences.push({
-    //     en: sentence_en[i],
-    //     en_sep: sentence_en[i].match(pattern),
-    //     ch: sentence_ch[i],
-    //     id: i + 1
-    //   });
-    // }
-
-    // this.setData({
-    //   sentences: Sentences
-    // });
 
     //用户授权使用录音功能
     // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
@@ -371,76 +354,32 @@ Page({
   },
 
   getTrans: function (event) {
-    wx.showLoading({
-      title: '查询释义中',
-      mask: true
-    })
-    let verbInfo = event.currentTarget.dataset.verb;
+    let verb = event.currentTarget.dataset.verb;
     const verbPattern = /\w+'\w+|\w+-\w+|\w+/g;
-    if (verbInfo.match(verbPattern)) {
+    if (verb.match(verbPattern)) {
 
-      wx.request({
-        url:request_url + '/getVerbTrans',
-        method:'GET',
-        data:{verb:verbInfo},
-        success:(res)=>{
-          console.log(res)
-        }
+      wx.showLoading({
+        title: '查询释义中',
+        mask: true
       })
 
       let that = this;
 
-      var appKey = '4f938f684c09931e';
-      var key = 'dkzAd8YOi8pg77V7j7a3QTcJ0vOv6VWk';//注意：暴露appSecret，有被盗用造成损失的风险
-      var salt = (new Date).getTime();
-      var query = verbInfo;
-      // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
-      var from = 'en';
-      var to = 'zh-CHS';
-      var str1 = appKey + query + salt + key;
-      var sign = md5(str1);
-
-      //发起request请求
-
-      //考虑搭建数据库后先从数据库中获取单词解释，数据库中不存在时再从有道云中获取
-
       wx.request({
-        url: 'https://openapi.youdao.com/api',
-        type: 'post',
-        dataType: 'jsonp',
-        data: {
-          q: query,
-          appKey: appKey,
-          salt: salt,
-          from: from,
-          to: to,
-          sign: sign
-        },
-
-        success(res) {
-          console.log('数据接受成功')
-          //获取到的数据好像是一个字符串，需要用json.js进行分析，使用JSON.parse(jsonstr)可以将JSON字符串反序列化成json对象
-          var verbInfo = JSON.parse(res.data);
-          if (verbInfo.errorCode == "0") {
-            //错误码为0时为请求成功
-            that.VerbDialog.showDialog(verbInfo);
-          } else {
-            //因其他原因请求失败时
-            console.log("ERROR : " + verbInfo.errCode)
-          }
-        },
-
-        fail() {
-          console.log('数据请求失败');
+        url:request_url + '/getVerbTrans',
+        method:'GET',
+        data:{verb:verb},
+        success:(res)=>{
+          let verbInfo = res.data;
+          console.log(verbInfo);
+          that.VerbDialog.showDialog(verbInfo);
         },
 
         complete() {
           wx.hideLoading()
-        }
+        },
+      })
 
-      });
-
-      //this.VerbDialog.showDialog(verbInfo);
     } else {
       console.log('不是单词嗷');
     }

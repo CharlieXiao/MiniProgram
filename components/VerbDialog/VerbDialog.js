@@ -3,6 +3,9 @@
 let usSpeech = undefined;
 let ukSpeech = undefined;
 
+const app = getApp();
+const request_url = app.globalData.request_url;
+
 //提取词性正则表达式
 let verb_pattern = /(\w{1,4}\.)\s(.*)/ 
 
@@ -20,17 +23,20 @@ Component({
   data: {
     ShouldShow: false,
     isAddFav: false,
-    explains:[
-      {pos:"n.",explain:"花；精华；开花植物"},
-      {pos: "vi.", explain: "成熟，发育；开花；繁荣；旺盛；三生三世十里桃花"},
-      {pos: "vt.", explain: "使开花；用花装饰"},
-      {pos: "n.", explain: "(Flower)人名；(英)弗劳尔"}
-    ],
-    uk_phonetic: "'flaʊə",
-    uk_speech: "http://openapi.youdao.com/ttsapi?q=flower&langType=en&sign=66264F0B8941FA81A714C596E2432521&salt=1566197801227&voice=5&format=mp3&appKey=4f938f684c09931e",
-    us_phonetic: "'flaʊɚ",
-    us_speech: "http://openapi.youdao.com/ttsapi?q=flower&langType=en&sign=66264F0B8941FA81A714C596E2432521&salt=1566197801227&voice=6&format=mp3&appKey=4f938f684c09931e",
-    verb: "flower"
+    verbInfo:{
+      explains:[
+        {pos:"n.",explain:"花；精华；开花植物"},
+        {pos: "vi.", explain: "成熟，发育；开花；繁荣；旺盛；三生三世十里桃花"},
+        {pos: "vt.", explain: "使开花；用花装饰"},
+        {pos: "n.", explain: "(Flower)人名；(英)弗劳尔"}
+      ],
+      uk_phonetic: "'flaʊə",
+      uk_speech: "http://openapi.youdao.com/ttsapi?q=flower&langType=en&sign=66264F0B8941FA81A714C596E2432521&salt=1566197801227&voice=5&format=mp3&appKey=4f938f684c09931e",
+      us_phonetic: "'flaʊɚ",
+      us_speech: "http://openapi.youdao.com/ttsapi?q=flower&langType=en&sign=66264F0B8941FA81A714C596E2432521&salt=1566197801227&voice=6&format=mp3&appKey=4f938f684c09931e",
+      verb: "flower"
+    },
+    ContainerHeight:0,
   },
 
   /**
@@ -55,91 +61,35 @@ Component({
 
       console.log('显示单词弹框') 
 
-      console.log(data);
+      data['uk-speech'] = request_url + data['uk-speech']
+      data['us-speech'] = request_url + data['us-speech']
 
-      var explains = [];
-
-      var raw_explains = data.basic.explains;
-
-      var e;
-
-      for(var i=0;i<raw_explains.length;i++){
-        //拆分解释和词性，使用词性作为key，
-        e = raw_explains[i].match(verb_pattern)
-        if(e!=null){
-          explains.push({
-            pos:e[1],
-            explain:e[2]
-          })
-        }else{
-          //未匹配时，即翻译结果未包含词性时
-          explains.push({
-            pos:"",
-            explain:raw_explains[i]
-          })
-        }
-        
+      if(data['uk-phonetic'] != ''){
+        data['uk-phonetic'] = '[' + data['uk-phonetic'] + ']';
       }
+
+      if(data['us-phonetic'] != ''){
+        data['us-phonetic'] = '[' + data['us-phonetic'] + ']';
+      }
+
+      console.log(data)
 
       this.setData({
-        ShouldShow: true,
-        verb:data.query,
-        explains:explains
-      })
-
-      console.log(data.basic)
-
-      if(data.basic["uk-phonetic"] != undefined && data.basic["uk-phonetic"] != "" ){
-        this.setData({
-          uk_phonetic: '['+data.basic["uk-phonetic"]+']',
-        })
-      }else{
-        this.setData({
-          uk_phonetic:""
-        })
-      }
-
-      if (data.basic["us-phonetic"] != undefined && data.basic["us-phonetic"] != "" ) {
-        this.setData({
-          us_phonetic: '['+data.basic["us-phonetic"]+']',
-        })
-      } else {
-        this.setData({
-          us_phonetic:""
-        })
-      }
-
-      if (data.basic["uk-speech"] != undefined) {
-        this.setData({
-          uk_speech: data.basic["uk-speech"],
-        })
-      } else {
-        this.setData({
-          us_speech:""
-        })
-      }
-
-      if (data.basic["us-speech"] != undefined) {
-        this.setData({
-          us_speech: data.basic["us-speech"],
-        })
-      } else {
-        this.setData({
-          us_speech:""
-        })
-      }
+        verbInfo:data,
+        ShouldShow:true,
+      });
 
       ukSpeech = wx.createInnerAudioContext();
       usSpeech = wx.createInnerAudioContext();
-      ukSpeech.src = this.data.uk_speech;
-      usSpeech.src = this.data.us_speech;
+      ukSpeech.src = this.data.verbInfo['uk-speech'];
+      usSpeech.src = this.data.verbInfo['us-speech'];
     },
 
     onFav() {
       this.setData({
         isAddFav:!this.data.isAddFav
       });
-      var DealFavDetail = {
+      let DealFavDetail = {
         isFav:this.data.isAddFav,verb:this.data.verb
       }
       this.triggerEvent('DealFav',DealFavDetail)
@@ -156,7 +106,7 @@ Component({
         console.log(ukSpeech.src);
         ukSpeech.play();
       }
-    }
+    },
 
   },
 
