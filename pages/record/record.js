@@ -2,9 +2,10 @@
 
 //导入util外部文件
 const md5 = require('../../utils/md5.js')
-const pattern = /\w+'\w+|\w+-\w+|[.,;?!-:()'"]+|\w+/g;
+//const pattern = /\w+'\w+|\w+-\w+|[.,;?!-:()'"]+|\w+/g;
 const app = getApp();
 const recorderManager = wx.getRecorderManager();
+const request_url = app.globalData.request_url
 
 //分两个对象，一个播放教学语音，一个播放用户录音
 let TutorialAudio = wx.createInnerAudioContext();
@@ -19,8 +20,8 @@ Page({
     isAuthRecord: true,
     MSG: '开始录音',
     courseImage: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318469&di=c1d4a055f340e69d91f09e6641a48146&imgtype=0&src=http%3A%2F%2Fwww.tsf.edu.pl%2Fwp-content%2Fuploads%2F2015%2F03%2Fpokaz1-1420x5001-1420x500.jpg',
-    sectionInfo: { id: 1, title: '自我评价', subtitle: 'about yourself', num_sentences: 6, curr_sentence: 4 },
-    sentences: [],
+    //sectionInfo: { id: 1, title: '自我评价', subtitle: 'about yourself', num_sentences: 6, curr_sentence: 4 },
+    //sentences: [],
     isPlay: false,
     isRecord: false,
     isJudged: false,
@@ -32,15 +33,13 @@ Page({
 
   onLoad: function (options) {
 
-    var section_id = options.section_id
+    let section_id = options.section_id
 
     console.log('curr section: ' + section_id)
 
     // 从后台获取信息
 
-    var request_url = app.globalData.request_url
-
-    var that = this
+    let that = this
 
     wx.request({
       url: request_url + "/SentenceInfo",
@@ -52,18 +51,15 @@ Page({
           var data = res.data
           // 由于小程序从后台获取图片链接是需要一定时间的，因此在渲染时会有一段时间图片链接为空，需要指定一张默认图片
           that.setData({
-            courseImage:request_url + data.courseImage
+            courseImage:request_url + data.courseInfo.img,
+            sectionInfo:data.sectionInfo,
+            sentences:data.sentenceInfo
           })
         } else {
           console.log('数据请求失败')
         }
       }
     })
-
-    //设置标题名称
-    wx.setNavigationBarTitle({
-      title: this.data.sectionInfo.title,
-    });
 
     //获取当前显示区域高度
     wx.getSystemInfo({
@@ -79,21 +75,21 @@ Page({
     });
 
     //从后端获取句子信息，将其拆分成单词数组，
-    let sentence_en = ['You know - one loves the sunset,', 'when one is so sad.', 'The stars are beautiful,', 'because of a flower that cannot be seen.', 'It is the time you have wasted for your rose', 'that makes your rose so important.'];
-    let sentence_ch = ['你知道的--当一个人情绪低落的时候，', '他会格外喜欢看日落，', '星星真美，', '因为有一朵看不见的花。', '你在你的玫瑰花身上耗费的时间', '使得你的玫瑰变得如此重要'];
-    let Sentences = [];
-    for (var i = 0; i < sentence_en.length; i++) {
-      Sentences.push({
-        en: sentence_en[i],
-        en_sep: sentence_en[i].match(pattern),
-        ch: sentence_ch[i],
-        id: i + 1
-      });
-    }
+    // let sentence_en = ['You know - one loves the sunset,', 'when one is so sad.', 'The stars are beautiful,', 'because of a flower that cannot be seen.', 'It is the time you have wasted for your rose', 'that makes your rose so important.'];
+    // let sentence_ch = ['你知道的--当一个人情绪低落的时候，', '他会格外喜欢看日落，', '星星真美，', '因为有一朵看不见的花。', '你在你的玫瑰花身上耗费的时间', '使得你的玫瑰变得如此重要'];
+    // let Sentences = [];
+    // for (let i = 0; i < sentence_en.length; i++) {
+    //   Sentences.push({
+    //     en: sentence_en[i],
+    //     en_sep: sentence_en[i].match(pattern),
+    //     ch: sentence_ch[i],
+    //     id: i + 1
+    //   });
+    // }
 
-    this.setData({
-      sentences: Sentences
-    });
+    // this.setData({
+    //   sentences: Sentences
+    // });
 
     //用户授权使用录音功能
     // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
@@ -101,8 +97,6 @@ Page({
     this.AuthDialog = this.selectComponent('#AuthRecord');
 
     this.VerbDialog = this.selectComponent('#VerbTrans');
-
-    var that = this;
 
     wx.getSetting({
       success: function (res) {
@@ -132,8 +126,11 @@ Page({
   },
 
   onReady: function () {
+    let start_index = this.data.sentences[0].id
     TutorialAudio.autoplay = true
-    TutorialAudio.src = 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E061FF02C31F716658E5C81F5594D561F2E88B854E81CAAB7806D5E4F103E55D33C16F3FAC506D1AB172DE8600B37E43FAD&fromtag=46';
+    TutorialAudio.src = request_url + this.data.sentences[this.data.sectionInfo.curr_sentence-start_index].src;
+
+    console.log(TutorialAudio.src)
 
     //播放结束的回调函数
     TutorialAudio.onEnded(() => {
@@ -146,6 +143,11 @@ Page({
     this.setData({
       toIndex: 'sentence-' + this.data.sectionInfo.curr_sentence,
       isPlay: true,
+    });
+
+    //设置标题名称
+    wx.setNavigationBarTitle({
+      title: this.data.sectionInfo.subtitle,
     });
   },
 
@@ -266,6 +268,7 @@ Page({
     }
 
     new_sectionInfo.curr_sentence = sentence_id;
+
     this.setData({
       sectionInfo: new_sectionInfo,
       toIndex: 'sentence-' + sentence_id,
@@ -275,11 +278,15 @@ Page({
 
     //进入页面就开始播放
 
+    let start_index = this.data.sentences[0].id
+
     //更换地址需要销毁上一个对象
     TutorialAudio.destroy();
     TutorialAudio = wx.createInnerAudioContext();
     TutorialAudio.autoplay = true;
-    TutorialAudio.src = this.tempFilePath;
+    TutorialAudio.src = request_url + this.data.sentences[sentence_id-start_index].src;
+
+    console.log(TutorialAudio.src)
 
     //播放结束的回调函数
     TutorialAudio.onEnded(() => {
@@ -291,7 +298,17 @@ Page({
   },
 
   //返回课程信息页，必须是navigateBack,返回上一个页面
-  backToCourse: function () {
+  backToCourse: function (event) {
+    //连接服务器，更新用户学习信息
+    console.log(this.data.sectionInfo.curr_sentence)
+    wx.request({
+      url: request_url + '/updateStudyStatus',
+      method: 'GET',
+      data: { curr_sentence: this.data.sectionInfo.curr_sentence },
+      success:(res)=>{
+        console.log(res)
+      }
+    })
     wx.navigateBack({
       url: '../courseDetail/courseDetail',
     });

@@ -19,7 +19,7 @@
         <view wx:else class="result">{{result}}</view>
       </view>
       <view class="progress">
-        <text class="curr-sentence-num">{{ item.id }}</text>
+        <text class="curr-sentence-num">{{ index + 1 }}</text>
         <text class="total-sentence-num">/{{sectionInfo.num_sentences}}</text>
       </view>
     </view>
