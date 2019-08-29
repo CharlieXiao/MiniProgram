@@ -6,6 +6,7 @@ const md5 = require('../../utils/md5.js')
 const app = getApp();
 const recorderManager = wx.getRecorderManager();
 const request_url = app.globalData.request_url;
+const query = wx.createSelectorQuery();
 
 //分两个对象，一个播放教学语音，一个播放用户录音
 let TutorialAudio = wx.createInnerAudioContext();
@@ -26,12 +27,16 @@ Page({
     isRecord: false,
     isJudged: false,
     result: 90,
-    footer_height: '400rpx',
+    footer_height: '260rpx',
     cxClient: 0,
     cyClient: 0,
   },
 
   onLoad: function (options) {
+
+    wx.showLoading({
+      title:'下载语音文件中...'
+    });
 
     let section_id = options.section_id
 
@@ -55,6 +60,32 @@ Page({
             sectionInfo:data.sectionInfo,
             sentences:data.sentenceInfo
           })
+
+          TutorialAudio.autoplay = true
+          TutorialAudio.src = request_url + that.data.sentences[that.data.sectionInfo.curr_sentence].src;
+
+          console.log(TutorialAudio.src)
+
+          //播放结束的回调函数
+          TutorialAudio.onEnded(() => {
+            console.log('播放结束');
+            that.setData({
+              isPlay: false,
+            });
+          });
+
+          that.setData({
+            toIndex: 'sentence-' + that.data.sectionInfo.curr_sentence,
+            isPlay: true,
+          });
+
+          //设置标题名称
+          wx.setNavigationBarTitle({
+            title: that.data.sectionInfo.subtitle,
+          });
+
+          wx.hideLoading();
+
         } else {
           console.log('数据请求失败')
         }
@@ -108,30 +139,9 @@ Page({
     });
   },
 
+  // 由于wx.request函数是异步函数，因此onReady优先于wx.request的回调函数触发，因此将设置发音部分代码调整至回调函数中
   onReady: function () {
-    let start_index = this.data.sentences[0].id
-    TutorialAudio.autoplay = true
-    TutorialAudio.src = request_url + this.data.sentences[this.data.sectionInfo.curr_sentence-start_index].src;
 
-    console.log(TutorialAudio.src)
-
-    //播放结束的回调函数
-    TutorialAudio.onEnded(() => {
-      console.log('播放结束');
-      this.setData({
-        isPlay: false,
-      });
-    });
-
-    this.setData({
-      toIndex: 'sentence-' + this.data.sectionInfo.curr_sentence,
-      isPlay: true,
-    });
-
-    //设置标题名称
-    wx.setNavigationBarTitle({
-      title: this.data.sectionInfo.subtitle,
-    });
   },
 
   onUnload: () => {
@@ -221,53 +231,80 @@ Page({
 
   //跳转下一句
   gotoSentence: function (event) {
+
+    let that = this;
+
     let sentence_id = event.currentTarget.dataset.sentenceid;
+
     let new_sectionInfo = this.data.sectionInfo;
-
-    //此时单位为rpx
-    let num_others = this.data.sectionInfo.num_sentences - sentence_id;
-
-    //最好不要使用rpx计算，直接计算px值，减小误差
-
-    //计算px与rpx的转换关系
-    //1rpx = cxClient/750 px
-
-    //当前录音栏的实际高度
-
-    let new_footer_height = '260rpx';
-    //判断是否需要修改底部按钮栏的高度
-
-    let rpx2px = this.data.cxClient / 750;
-
-    let currSentenceHeight = parseInt(650 * rpx2px);
-
-    let otherSentenceHeight = parseInt(260 * rpx2px);
-
-    //直接取整计算px值
-    let actualHeight = num_others * otherSentenceHeight + currSentenceHeight;
-
-    if (actualHeight + otherSentenceHeight < this.data.cyClient) {
-      new_footer_height = this.data.cyClient - actualHeight + 'px';
-    }
 
     new_sectionInfo.curr_sentence = sentence_id;
 
     this.setData({
       sectionInfo: new_sectionInfo,
       toIndex: 'sentence-' + sentence_id,
-      footer_height: new_footer_height,
       isPlay: true,
     });
 
-    //进入页面就开始播放
+    let currSentenceHeight = 0;
 
-    let start_index = this.data.sentences[0].id
+    //动态获取组件高度
+    wx.createSelectorQuery().select('.curr-sentence').fields({
+      size: true,
+    }, function (res) {
+      // 回调函数有一定延迟，应该在此函数里进行操作
+      currSentenceHeight = res.height;
+      //console.log('当前句子高度为： '+currSentenceHeight);
+       //此时单位为rpx
+
+      //console.log(sentence_id);
+
+      //console.log(start_index);
+
+      //console.log(that.data.sectionInfo.num_sentences);
+      
+      let num_others = that.data.sectionInfo.num_sentences - that.data.sentences[sentence_id].index;
+
+      //console.log('剩余句子数： '+num_others);
+
+      //最好不要使用rpx计算，直接计算px值，减小误差
+
+      //计算px与rpx的转换关系
+      //1rpx = cxClient/750 px
+
+      //当前录音栏的实际高度
+
+      let new_footer_height = '260rpx';
+      //判断是否需要修改底部按钮栏的高度
+
+      let rpx2px = that.data.cxClient / 750;
+
+      let otherSentenceHeight = parseInt(260 * rpx2px);
+
+      //直接取整计算px值
+      let actualHeight = num_others * otherSentenceHeight + currSentenceHeight;
+
+      //console.log('实际高度为： '+actualHeight);
+
+      if (actualHeight + otherSentenceHeight < that.data.cyClient) {
+        new_footer_height = that.data.cyClient - actualHeight + 'px';
+      }
+
+      //console.log('计算后底部高度为： '+new_footer_height);
+
+      // 获取顶部高度后再进行计算
+      that.setData({
+        footer_height: new_footer_height,
+      });
+    }).exec()
+
+    //进入页面就开始播放
 
     //更换地址需要销毁上一个对象
     TutorialAudio.destroy();
     TutorialAudio = wx.createInnerAudioContext();
     TutorialAudio.autoplay = true;
-    TutorialAudio.src = request_url + this.data.sentences[sentence_id-start_index].src;
+    TutorialAudio.src = request_url + this.data.sentences[sentence_id].src;
 
     console.log(TutorialAudio.src)
 

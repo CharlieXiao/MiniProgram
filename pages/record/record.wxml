@@ -1,7 +1,7 @@
 <!--pages/record/record.wxml-->
 <scroll-view class="body" scroll-y scroll-into-view="{{ toIndex }}">
   <block wx:for="{{sentences}}" wx:key="id">
-    <view wx:if="{{ item.id == sectionInfo.curr_sentence }}" class="curr-sentence" id="sentence-{{item.id}}">
+    <view wx:if="{{ index == sectionInfo.curr_sentence }}" class="curr-sentence" id="sentence-{{index}}">
       <image class="course-image" src="{{ courseImage }}" mode="aspectFill"></image>
       <view class="sentence-verb">
         <block wx:for="{{ item.en_sep }}" wx:for-item="verb">
@@ -19,11 +19,11 @@
         <view wx:else class="result">{{result}}</view>
       </view>
       <view class="progress">
-        <text class="curr-sentence-num">{{ index + 1 }}</text>
+        <text class="curr-sentence-num">{{ item.index }}</text>
         <text class="total-sentence-num">/{{sectionInfo.num_sentences}}</text>
       </view>
     </view>
-    <view wx:else class="other-sentence" bindtap="gotoSentence" data-sentenceid="{{ item.id }}" hover-class="tap-style">
+    <view wx:else class="other-sentence" bindtap="gotoSentence" data-sentenceid="{{ index }}" hover-class="tap-style">
       <view class="text-holder">
         <text class="other-text-en">{{ item.en }}</text>
         <text class="other-text-ch">{{ item.ch }}</text>

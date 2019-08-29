@@ -9,7 +9,6 @@
 
 
 .curr-sentence{
-  height: 650rpx;
   box-sizing: border-box;
   background-color: white;
   width: 100%;
@@ -34,7 +33,6 @@
   flex-wrap: wrap;
   justify-content: center;
   margin: 20rpx 0;
-  height: 140rpx;
 }
 
 .verb{

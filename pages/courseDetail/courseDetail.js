@@ -78,8 +78,7 @@ Page({
   gotoTargetRecord:function(event){
     let section = event.currentTarget.dataset.section;
     console.log('section_id:'+section);
-    if(section <= this.data.courseInfo.curr_section )
-    {
+    if(section <= this.data.courseInfo.curr_section ){
       wx.navigateTo({
         url: '../record/record?section_id='+section,
       });
