@@ -1,7 +1,7 @@
 /* pages/myCourse/myCourse.wxss */
 .page-header{
-  height: 180rpx;
-  margin: 0 30rpx 30rpx 20rpx;
+  height: 150rpx;
+  margin: 0 30rpx 30rpx 30rpx;
   display: flex;
   flex-direction: column;
 }
@@ -10,7 +10,7 @@
   height: 60rpx;
   display: flex;
   flex-direction: row;
-  margin-bottom: 20rpx;
+  margin-bottom: 30rpx;
 }
 
 .title-set{
@@ -53,11 +53,13 @@
 
 .options{
   display: inline-block;
-  line-height: 2em;
-  padding: 0 36rpx;
-  border-radius: 40rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  /* line-height: 1.5em; */
+  padding: 0 30rpx;
+  border-radius: 30rpx;
   background-color: white;
-  font-size: 36rpx;
+  font-size: 32rpx;
   margin-right: 30rpx;
   color: rgb(179,179,179);
 }

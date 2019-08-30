@@ -31,7 +31,7 @@ Page({
         let cxClient = res.windowWidth;
         //顶部高度,计算时还需要减去下导航栏高度
 
-        let headerHeight = parseInt(210*cxClient/750);
+        let headerHeight = parseInt(180*cxClient/750);
 
         that.setData({
           height:cyClient-headerHeight,

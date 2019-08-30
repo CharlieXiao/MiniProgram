@@ -1,7 +1,7 @@
 /* pages/study/study.wxss */
 
 .page-header{
-  height: 180rpx;
+  height: 150rpx;
   margin: 0 30rpx 30rpx 30rpx;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
   height: 60rpx;
   display: flex;
   flex-direction: row;
-  margin-bottom: 20rpx;
+  margin-bottom: 30rpx;
 }
 
 .title-set{
@@ -54,18 +54,20 @@
 
 .options{
   display: inline-block;
-  line-height: 2em;
-  padding: 0 36rpx;
-  border-radius: 40rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  /* line-height: 1.5em; */
+  padding: 0 30rpx;
+  border-radius: 30rpx;
   background-color: white;
-  font-size: 36rpx;
+  font-size: 32rpx;
   margin-right: 30rpx;
   color: rgb(179,179,179);
 }
 
 .course-block{
   width: 330rpx;
-  height: 350rpx;
+  height: 300rpx;
   margin: 0 0 30rpx 30rpx;
   display: flex;
   flex-direction: column;
@@ -77,31 +79,33 @@
 .course-image{
   border-radius: 15rpx;
   width: 100%;
-  height: 230rpx;
+  height: 220rpx;
 }
 
 .course-general{
   box-sizing: border-box;
   width: 100%;
-  height: 120rpx;
-  padding: 15rpx;
+  height: 80rpx;
+  padding: 8rpx 15rpx;
 }
 
 .course-name{
-  height: 50%;
+  height: 30rpx;
   display: block;
   font-size: 28rpx;
+  line-height: 30rpx;
+  margin-bottom: 4rpx;
 }
 
 .course-time{
-  height: 50%;
+  height: 30rpx;
   display: flex;
   flex-direction: row;
 }
 
 .time-icon{
-  height: 32rpx;
-  width: 32rpx;
+  height: 24rpx;
+  width: 24rpx;
   margin: auto 0;
 }
 

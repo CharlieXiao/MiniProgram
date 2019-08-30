@@ -29,7 +29,7 @@
     </view>
   </view>
   <scroll-view class="verb-trans" scroll-y="true" >
-    <view class="trans-holder" wx:for="{{verbInfo.explains}}" wx:key="pos">
+    <view class="trans-holder" wx:for="{{verbInfo.explains}}" wx:key="index">
       <text wx:if="{{ item.pos != '' }}" class="verb-pos" selectable="false" space="false" decode="false">{{item.pos}}</text>
       <text class="verb-explains" selectable="false" space="false" decode="false">{{item.explain}}</text>
     </view>
