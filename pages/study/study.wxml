@@ -11,20 +11,20 @@
         <text class="nav-title">我的课程</text>
       </view>
     </view>
-    <view class="options-set" wx:if="{{ choice == 1 }}">
-      <view class="options" bindtap="changeChoice" data-choice="1" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;" >全部</view>
-      <view class="options" bindtap="changeChoice" data-choice="2" hover-class="tap-style" >热门</view>
-      <view class="options" bindtap="changeChoice" data-choice="3" hover-class="tap-style" >最新</view>
+    <view class="options-set" wx:if="{{ choice == 'default' }}">
+      <view class="options" bindtap="changeChoice" data-choice="default" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;" >全部</view>
+      <view class="options" bindtap="changeChoice" data-choice="heat" hover-class="tap-style" >热门</view>
+      <view class="options" bindtap="changeChoice" data-choice="new" hover-class="tap-style" >最新</view>
     </view>
-    <view class="options-set" wx:elif="{{ choice == 2 }}">
-      <view class="options" bindtap="changeChoice" data-choice="1" hover-class="tap-style" >全部</view>
-      <view class="options" bindtap="changeChoice" data-choice="2" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;">热门</view>
-      <view class="options" bindtap="changeChoice" data-choice="3" hover-class="tap-style">最新</view>
+    <view class="options-set" wx:elif="{{ choice == 'heat' }}">
+      <view class="options" bindtap="changeChoice" data-choice="default" hover-class="tap-style" >全部</view>
+      <view class="options" bindtap="changeChoice" data-choice="heat" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;">热门</view>
+      <view class="options" bindtap="changeChoice" data-choice="new" hover-class="tap-style">最新</view>
     </view>
     <view class="options-set" wx:else>
-      <view class="options" bindtap="changeChoice" data-choice="1" hover-class="tap-style">全部</view>
-      <view class="options" bindtap="changeChoice" data-choice="2" hover-class="tap-style">热门</view>
-      <view class="options" bindtap="changeChoice" data-choice="3" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;">最新</view>
+      <view class="options" bindtap="changeChoice" data-choice="default" hover-class="tap-style">全部</view>
+      <view class="options" bindtap="changeChoice" data-choice="heat" hover-class="tap-style">热门</view>
+      <view class="options" bindtap="changeChoice" data-choice="new" hover-class="tap-style" style="background-color:rgb(240,240,240);color:black;">最新</view>
     </view>
   </view>
   <scroll-view class="courseList" style="height:{{ height }}px" scroll-y >
@@ -34,7 +34,7 @@
         <text class="course-name">{{ item.name }}</text>
         <view class="course-time">
           <image src="../../image/time.png" class="time-icon"></image>
-          <text class="course-length">{{ item.length }} sections </text>
+          <text class="course-length">{{ item.num_sections }} sections </text>
         </view>
       </view>
     </view>

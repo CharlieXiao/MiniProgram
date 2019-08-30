@@ -1,5 +1,7 @@
 // pages/study/study.js
 
+const request_url = getApp().globalData.request_url;
+
 Page({
 
   /**
@@ -7,7 +9,7 @@ Page({
    */
   data: {
     height:0,
-    choice:1,
+    choice:'default',
     courseArray:[
       { name: '用英语聊垃圾分类', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318470&di=4746451e773f9d579c00014ee0031e4f&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F0f9b37ceab6be262a7bfdb7107935dc5b7b31471170f3-sckldc_fw658', length:18 ,id:1},
       { name: '和同桌的日常', img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318469&di=5e2808f1688bea9ac79f7b2d740bb2aa&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F6c9c4f15a369521f682394632f7e246ae004187e80847-uOtIza_fw658', length:12,id:2},
@@ -24,6 +26,7 @@ Page({
 
   onLoad: function (options) {
     let that = this;
+
     wx.getSystemInfo({
       success: function(res) {
         let cyClient = res.windowHeight;
@@ -37,14 +40,30 @@ Page({
           height:cyClient-headerHeight,
         })
       },
-      //连接后台服务器获取课程列表信息
+    })
+
+    //连接后台服务器获取课程列表信息
+    // 默认排序方式为1，按照添加顺序排序
+    wx.request({
+      url:request_url+'/CourseInfo',
+      method:'GET',
+      data:{
+        order:this.data.choice
+      },
+      success:(res)=>{
+        //console.log(res.data)
+        that.setData({
+          courseArray:res.data
+        })
+      },
     })
   },
 
   gotoCourseDetail: function(event){
-    console.log(event.currentTarget.dataset.courseid);
+    let course_id = event.currentTarget.dataset.courseid
+    console.log(course_id);
     wx.navigateTo({
-      url: '../courseDetail/courseDetail',
+      url: '../courseDetail/courseDetail?course_id='+course_id,
     });
   },
 
@@ -55,13 +74,27 @@ Page({
   },
 
   changeChoice: function (event) {
-    var choice = event.currentTarget.dataset.choice;
+    let that = this;
+    let choice = event.currentTarget.dataset.choice;
     if (this.data.choice != choice) {
       //切换菜单显示
       this.setData({
         choice: choice
       });
-      //发送request请求到服务器获取相映数据
+      //发送request请求到服务器获取相应数据
+      wx.request({
+        url:request_url+'/CourseInfo',
+        method:'GET',
+        data:{
+          order:choice
+        },
+        success:(res)=>{
+          //console.log(res.data)
+          that.setData({
+            courseArray:res.data
+          })
+        },
+      })
     }
   },
 

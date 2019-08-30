@@ -84,11 +84,13 @@ Page({
             title: that.data.sectionInfo.subtitle,
           });
 
-          wx.hideLoading();
-
         } else {
-          console.log('数据请求失败')
+          console.log('数据请求失败');
+          console.log('ERROR: '+res.data.error);
         }
+      },
+      complete:()=>{
+        wx.hideLoading();
       }
     })
 
@@ -320,6 +322,9 @@ Page({
   //返回课程信息页，必须是navigateBack,返回上一个页面
   backToCourse: function (event) {
     //连接服务器，更新用户学习信息
+    wx.navigateBack({
+      url: '../courseDetail/courseDetail',
+    });
     console.log(this.data.sectionInfo.curr_sentence)
     wx.request({
       url: request_url + '/updateStudyStatus',
@@ -329,9 +334,6 @@ Page({
         console.log(res)
       }
     })
-    wx.navigateBack({
-      url: '../courseDetail/courseDetail',
-    });
   },
 
   //开始播放音频
@@ -403,7 +405,7 @@ Page({
       let that = this;
 
       wx.request({
-        url:request_url + '/getVerbTrans',
+        url:request_url + '/VerbTrans',
         method:'GET',
         data:{verb:verb},
         success:(res)=>{

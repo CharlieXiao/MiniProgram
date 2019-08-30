@@ -4,7 +4,7 @@
     <view wx:if="{{ index == sectionInfo.curr_sentence }}" class="curr-sentence" id="sentence-{{index}}">
       <image class="course-image" src="{{ courseImage }}" mode="aspectFill"></image>
       <view class="sentence-verb">
-        <block wx:for="{{ item.en_sep }}" wx:for-item="verb">
+        <block wx:for="{{ item.en_sep }}" wx:for-item="verb" wx:key="index">
           <view class="verb" bindtap="getTrans" hover-class="verb-tap-style" data-verb="{{verb}}">{{ verb }}</view>
         </block>
       </view>
