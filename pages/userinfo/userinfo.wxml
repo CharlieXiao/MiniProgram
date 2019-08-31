@@ -1,17 +1,10 @@
 <!--pages/userinfo/userinfo.wxml-->
 <view class='infoPage'>
-	<view class='userinfo'  >
-		<view wx:if='{{!hasUserInfo && canIUse}}' class='noLogin'>
-			<image class='defaultPic' src='../../image/default.png'></image>
-			<button  open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='loginButton'></button>
-			<text class='textLogin'>点击头像登录</text>
-		</view>
-		<view wx:else class='isLogin'>
-			<image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
-			<view class='studyInfo'>
-				<text class='nickName'>{{userInfo.nickName}}</text>
-				<text class='learnDays'>累计学习 0 天</text>
-			</view>
+	<view class='userinfo' >
+		<image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
+		<view class='studyInfo'>
+			<text class='nickName'>{{userInfo.nickName}}</text>
+			<text class='learnDays'>累计学习 0 天</text>
 		</view>
 	</view>
   <view class='Help'>

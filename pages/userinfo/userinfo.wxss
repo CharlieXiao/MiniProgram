@@ -14,55 +14,15 @@ page{
 .userinfo{
 	background-color: white;
 	padding: 5vh 40rpx 5vh 40rpx;
-}
-
-.noLogin{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-}
-
-.defaultPic{
-	height: 120rpx;
-	width: 120rpx;
-}
-
-.loginButton{
-	height: 120rpx;
-	width: 120rpx;
-	border-radius: 50%;
-	display: inline-block;
-	background-color: rgba(0, 0, 0, 0);
-	position: absolute;
-	top: 5vh;
-	left: 40rpx;
-	z-index: 1;
-}
-
-.loginButton::after{
-	border: none;
-}
-
-.loginButton.button-hover{
-	background-color: rgba(0, 0, 0, 0.1);
-}
-
-.textLogin{
-	color: #373632;
-	font-size:32rpx;
-	margin-left: 20rpx;
 }
 
 .userinfo-avatar{
 	height: 120rpx;
 	width: 120rpx;
 	border-radius: 15rpx;
-}
-
-.isLogin{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
 }
 
 .studyInfo{

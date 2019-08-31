@@ -1,16 +1,27 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-    //获取当前高度
-    
+    //在app.json文件中，pages数组设置在第一个的页面就是默认打开页面
+    //在用户第一次点开小程序时，需要用户授权登录
+    //优先跳转到login页面，用户授权登录后会进入首页，开始学习
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if(res.code){
+          wx.request({
+            url: this.globalData.request_url + '/UserLogin',
+            data: {
+              code: res.code
+            },
+            method:'GET',
+            success: res =>{
+              console.log(res);
+            }
+          });
+        } else {
+          console.log('登录失败: '+res.errMsg);
+        }
       }
     })
     // 获取用户信息
@@ -22,7 +33,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {

@@ -1,0 +1,9 @@
+<!--pages/login/login.wxml-->
+<view class="loginPage">
+  <image class="back-image" src="../../image/background.jpg" mode='widthFix'></image>
+  <view class="app-info">
+    <image class="app-logo" src='../../image/logo.png'></image>
+    <text class="app-name">KALDI 英语评分</text>
+  </view>
+  <button  open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='loginButton'>立即进入</button>
+</view>

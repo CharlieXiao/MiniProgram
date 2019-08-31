@@ -10,8 +10,6 @@ Page({
    */
   data: {
 		userInfo: {},
-		hasUserInfo: false,
-		canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
 	//canIUse用于判断小程序API是否在当前版本可用
@@ -24,7 +22,6 @@ Page({
 		if (app.globalData.userInfo) {
 			this.setData({
 				userInfo: app.globalData.userInfo,
-				hasUserInfo: true
 			})
 		} else if (this.data.canIUse) {
 			// 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -34,7 +31,6 @@ Page({
 				if(res.userInfo != undefined ){
 					this.setData({
 						userInfo: res.userInfo,
-						hasUserInfo: true
 					})
 				}
 			}
@@ -45,23 +41,11 @@ Page({
 					app.globalData.userInfo = res.userInfo
 					this.setData({
 						userInfo: res.userInfo,
-						hasUserInfo: true
 					})
 				}
 			})
 		}
   },
-
-	getUserInfo: function (e) {
-		if(e.detail.userInfo != undefined){
-			console.log(e);
-			app.globalData.userInfo = e.detail.userInfo
-			this.setData({
-				userInfo: e.detail.userInfo,
-				hasUserInfo: true
-			});
-		}
-	},
 
 	verbList: function(){
 		wx.navigateTo({
