@@ -12,7 +12,7 @@
       <text class="sec-num" space="nbsp"> {{ courseInfo.sections }}</text>
     </view>
     <block wx:for="{{ courseSec }}" wx:key="id">
-      <view class="section" wx:if="{{item.id <= courseInfo.curr_section}}" hover-class="tap-style" bindtap="gotoTargetRecord" data-section="{{ item.id }}" >
+      <view class="section" hover-class="tap-style" bindtap="gotoRecord" data-section="{{ item.id }}" >
         <view class="curr-section" wx:if="{{item.id == courseInfo.curr_section}}" style="background-color:rgb(18, 150, 219)"></view>
         <view class="curr-section" wx:else></view>
         <view class="section-general">
@@ -21,7 +21,7 @@
         </view>
         <image class="sec-icon" src="../../image/arrow-right.png" ></image>
       </view>
-      <view class="section" wx:else >
+      <!-- <view class="section" wx:else >
         <view class="curr-section" wx:if="{{item.id == courseInfo.curr_section}}" style="background-color:rgb(18, 150, 219)"></view>
         <view class="curr-section" wx:else></view>
         <view class="section-general">
@@ -29,11 +29,11 @@
           <text class="sec-subtitle">{{ item.subtitle }}</text>
         </view>
         <image class="sec-icon" src="../../image/lock.png" ></image>
-      </view>
+      </view> -->
     </block>
   </view> 
 </scroll-view>
 <view class="page-footer">
-  <button class="btn-learn" bindtap="gotoRecord" >开始学习</button>
+  <button class="btn-learn" bindtap="gotoRecord" data-section="{{ courseInfo.curr_section }}" >开始学习</button>
 </view>
 

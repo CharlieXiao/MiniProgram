@@ -4,26 +4,6 @@ App({
     //在app.json文件中，pages数组设置在第一个的页面就是默认打开页面
     //在用户第一次点开小程序时，需要用户授权登录
     //优先跳转到login页面，用户授权登录后会进入首页，开始学习
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        if(res.code){
-          wx.request({
-            url: this.globalData.request_url + '/UserLogin',
-            data: {
-              code: res.code
-            },
-            method:'GET',
-            success: res =>{
-              console.log(res);
-            }
-          });
-        } else {
-          console.log('登录失败: '+res.errMsg);
-        }
-      }
-    })
     // 获取用户信息
     wx.getSetting({
       success: res => {

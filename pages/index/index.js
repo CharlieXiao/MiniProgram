@@ -99,12 +99,14 @@ Page({
 		day:currDate.getDate()
 	});
 
-  var that = this;
+  let that = this;
 
   wx.request({
     url: app.globalData.request_url+"/index",
     method:"GET",
-    data:"hello world",
+    data:{
+		'open_id':app.globalData.open_id
+	},
 
     success(res) {
       //请求成功
@@ -115,15 +117,14 @@ Page({
         that.setData({
           motto:data.motto,
           author:data.author,
-          poster:data.poster
+		      poster:data.poster,
+		      learn_days:data.learn_days,
         })
       }else{
         console.log('网络连接失败，请检查网络')
       }
-
     }
    })
-
   },
 
   onReady: function(){
@@ -131,9 +132,9 @@ Page({
     // wx.switchTab({
     //   url: '../userinfo/userinfo',
     // })
-    // wx.navigateTo({
-    //   url: '../record/record',
-    // });
+    wx.navigateTo({
+      url: '../verbList/verbList',
+    });
   }
 
 })

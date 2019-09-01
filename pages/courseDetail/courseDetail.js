@@ -2,6 +2,8 @@
 
 const app = getApp()
 
+const request_url = app.globalData.request_url
+
 Page({
 
   /**
@@ -32,14 +34,15 @@ Page({
     //计算滚动条高度
     let that = this;
 
-    let request_url = app.globalData.request_url
-
     wx.request({
       url: request_url+"/SectionInfo",
       method:'GET',
-      data:{course_id:course_id},
+      data:{
+        course_id:course_id,
+        open_id:app.globalData.open_id,
+      },
       success(res){
-        if(res.statusCode == "200" && res.data.error == 0){
+        if(res.statusCode == "200"){
           let data = res.data;
           data.courseInfo.img = request_url+data.courseInfo.img;
           console.log(data);
@@ -67,21 +70,11 @@ Page({
     })
   },
 
-  gotoRecord:function(){
-    console.log('course_id:'+this.data.courseInfo.id);
-    console.log('section_id:'+this.data.courseInfo.curr_section);
-    wx.navigateTo({
-      url: '../record/record',
-    });
-  },
-
-  gotoTargetRecord:function(event){
+  gotoRecord:function(event){
     let section = event.currentTarget.dataset.section;
     console.log('section_id:'+section);
-    if(section <= this.data.courseInfo.curr_section ){
-      wx.navigateTo({
-        url: '../record/record?section_id='+section,
-      });
-    }
+    wx.navigateTo({
+      url: '../record/record?section_id='+section,
+    });
   }
 })

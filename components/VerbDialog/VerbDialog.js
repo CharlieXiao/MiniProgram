@@ -77,6 +77,7 @@ Component({
       this.setData({
         verbInfo:data,
         ShouldShow:true,
+        isAddFav:data['isFav']
       });
 
       ukSpeech = wx.createInnerAudioContext();
@@ -86,12 +87,16 @@ Component({
     },
 
     onFav() {
+      let DealFavDetail = {
+        isFav:this.data.isAddFav,verb:this.data.verbInfo.verb
+      }
+
+      // 直接修改，然后异步与服务器同步
       this.setData({
         isAddFav:!this.data.isAddFav
       });
-      let DealFavDetail = {
-        isFav:this.data.isAddFav,verb:this.data.verb
-      }
+
+      //用户触发 onFav函数，再由自定义组件触发DealFav让父元素响应，父元素中指定函数响应DealFav函数
       this.triggerEvent('DealFav',DealFavDetail)
     },
 

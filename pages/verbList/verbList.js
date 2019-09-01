@@ -1,11 +1,21 @@
 // pages/verbList/verbList.js
+
+const app = getApp();
+const requset_url = app.globalData.requset_url;
+
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
+
 	data: {
-    hasVerb:false,
+	  hasVerb:true,
+    verbList: [
+      {verb: 'and',phonetic: '[ənd, ən, ænd]',explain: { pos: 'conj.', explain: '和，与；就；而且；但是；然后' },speech: 'xxxxxx'},
+      {verb: 'or',phonetic: '[ɔr]',explain: { pos: 'conj.', explain: '或，或者；还是；要不然' },speech: 'xxxxxx'},
+      {verb: 'not',phonetic: '[nɑt]',explain: { pos: 'adv.', explain: '表示否定，不' },speech: 'xxxxxx'},
+    ],
 	},
 
 	/**

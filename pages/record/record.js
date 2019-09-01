@@ -35,10 +35,10 @@ Page({
   onLoad: function (options) {
 
     wx.showLoading({
-      title:'下载语音文件中...'
+      title:'加载语音文件中...'
     });
 
-    let section_id = options.section_id
+    let section_id = options.section_id;
 
     console.log('curr section: ' + section_id)
 
@@ -49,7 +49,10 @@ Page({
     wx.request({
       url: request_url + "/SentenceInfo",
       method: 'GET',
-      data: { section_id: section_id },
+      data: { 
+        section_id: section_id,
+        open_id:app.globalData.open_id,
+      },
       success(res) {
         if (res.statusCode == '200' && res.data.error == '0') {
           console.log(res.data)
@@ -142,13 +145,27 @@ Page({
   },
 
   // 由于wx.request函数是异步函数，因此onReady优先于wx.request的回调函数触发，因此将设置发音部分代码调整至回调函数中
-  onReady: function () {
-
+  onShow: function () {
+    // 用户从返回上一级页面后再次进入页面，并不会重新播放
   },
 
-  onUnload: () => {
+  onUnload: function() {
     //退出页面的同时要销毁发音对象，防止在后台继续播放
     TutorialAudio.destroy();
+    //销毁后应该再重新创建一个，以便下一次进入时能直接播放
+    TutorialAudio = wx.createInnerAudioContext();
+
+    //在用户离开界面是更新学习状况
+    console.log(this.data.sectionInfo.curr_sentence)
+    wx.request({
+      url: request_url + '/updateStudyStatus',
+      method: 'GET',
+      data: {
+        type:1, 
+        curr_sentence: this.data.sectionInfo.curr_sentence,
+        open_id:app.globalData.open_id
+      },
+    })
   },
 
   StartRecord: function (e) {
@@ -320,20 +337,11 @@ Page({
   },
 
   //返回课程信息页，必须是navigateBack,返回上一个页面
-  backToCourse: function (event) {
+  backToCourse: function () {
     //连接服务器，更新用户学习信息
     wx.navigateBack({
       url: '../courseDetail/courseDetail',
     });
-    console.log(this.data.sectionInfo.curr_sentence)
-    wx.request({
-      url: request_url + '/updateStudyStatus',
-      method: 'GET',
-      data: { curr_sentence: this.data.sectionInfo.curr_sentence },
-      success:(res)=>{
-        console.log(res)
-      }
-    })
   },
 
   //开始播放音频
@@ -407,7 +415,10 @@ Page({
       wx.request({
         url:request_url + '/VerbTrans',
         method:'GET',
-        data:{verb:verb},
+        data:{
+          verb:verb,
+          open_id:app.globalData.open_id
+        },
         success:(res)=>{
           let verbInfo = res.data;
           console.log(verbInfo);
@@ -427,6 +438,25 @@ Page({
   VerbEvent: function (event) {
     console.log(event.detail.isFav);
     console.log(event.detail.verb);
+
+    let isFav = event.detail.isFav;
+    let verb = event.detail.verb;
+
+    wx.request({
+      url:request_url+'/addVerbFav',
+      method:'GET',
+      data:{
+        open_id:app.globalData.open_id,
+        isFav:isFav,
+        verb:verb
+      },
+
+      success: function(res){
+        console.log(res);
+      }
+
+    })
+
   }
 
 })

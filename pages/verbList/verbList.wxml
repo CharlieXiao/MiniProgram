@@ -1,8 +1,18 @@
 <!--pages/verbList/verbList.wxml-->
 <view class="verbPage">
-  <view wx:if="{{ hasVerb }}" class="VerbList">
-    <text>这是你的单词</text>
-  </view>
+  <scroll-view wx:if="{{ hasVerb }}" class="VerbList" scroll-y="true" >
+    <block wx:for="{{verbList}}" wx:key="verb" >
+      <view class="verbBlock" >
+        <text class="verb">{{ item.verb }}</text>
+        <view class="verb-pron" bind:tap="VerbPron" data-src="item.src">
+          <image class="pron-icon" src="../../image/speaker.png" />
+          <text class="verb-phonetic">{{ item.phonetic }}</text>
+        </view>
+        <text class="verb-pos">{{ item.explain.pos }}</text>
+        <text class="verb-explain">{{ item.explain.explain }}</text>
+      </view>
+    </block>
+  </scroll-view>
   <view wx:else class="NoVerb">
     <image src="../../image/NoVerb.png" class="NoVerb_Image"></image>
     <text class="NoVerb_Text">还没有添加单词哦~</text>

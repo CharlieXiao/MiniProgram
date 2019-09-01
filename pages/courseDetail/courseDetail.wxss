@@ -102,8 +102,8 @@
 }
 
 .sec-icon{
-  height: 48rpx;
-  width: 48rpx;
+  height: 36rpx;
+  width: 36rpx;
   margin: auto 30rpx auto auto;
 }
 

@@ -1,5 +1,5 @@
 <!--pages/record/record.wxml-->
-<scroll-view class="body" scroll-y scroll-into-view="{{ toIndex }}">
+<scroll-view class="body" scroll-y scroll-into-view="{{ toIndex }}" enable-flex="true" >
   <block wx:for="{{sentences}}" wx:key="id">
     <view wx:if="{{ index == sectionInfo.curr_sentence }}" class="curr-sentence" id="sentence-{{index}}">
       <image class="course-image" src="{{ courseImage }}" mode="aspectFill"></image>
