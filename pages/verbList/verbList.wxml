@@ -2,14 +2,21 @@
 <view class="verbPage">
   <scroll-view wx:if="{{ hasVerb }}" class="VerbList" scroll-y="true" >
     <block wx:for="{{verbList}}" wx:key="verb" >
-      <view class="verbBlock" >
-        <text class="verb">{{ item.verb }}</text>
-        <view class="verb-pron" bind:tap="VerbPron" data-src="item.src">
-          <image class="pron-icon" src="../../image/speaker.png" />
-          <text class="verb-phonetic">{{ item.phonetic }}</text>
+      <view class="verbBlock" wx:if="{{ item.notRemove }}" >
+        <view class="verb-holder">
+          <text class="verb">{{ item.verb }}</text>
+          <view class="verb-pron" bind:tap="verbPron" data-src="{{ item.speech }}" hover-class="pron-tap" >
+            <text class="verb-phonetic" wx:if="{{ item.phonetic !='' }}" >[ {{ item.phonetic }} ]</text>
+            <image class="pron-icon" src="../../image/speaker.png" />
+          </view>
         </view>
-        <text class="verb-pos">{{ item.explain.pos }}</text>
-        <text class="verb-explain">{{ item.explain.explain }}</text>
+        <view class="verb-trans">
+          <view class="trans-holder">
+            <text class="verb-pos">{{ item.trans.pos }}</text>
+            <text class="verb-explain">{{ item.trans.explain }}</text>
+          </view>
+          <button class="verb-remove" bind:tap="removeVerb" data-verbid="{{ item.id }}" data-verbindex="{{ index }}" >移出</button>
+        </view>
       </view>
     </block>
   </scroll-view>

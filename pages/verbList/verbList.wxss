@@ -7,19 +7,95 @@ page{
   height: 100vh;
   width: 100vw;
   box-sizing: border-box;
-  padding: 20rpx;
-  background: rgb(237,237,237);
+  padding: 20rpx 30rpx;
+  background: rgb(247,247,247);
 }
 
 .verbBlock{
   background: white;
-  border-radius: 20rpx;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx 30rpx;
+}
+
+.verb-holder{
+  display: flex;
+  flex-direction: row;
+  height: 50rpx;
   margin-bottom: 20rpx;
 }
 
+.verb{
+  font-size: 40rpx;
+  line-height: 50rpx;
+}
+
+.verb-pron{
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  margin-left: 20rpx;
+  padding: 0 10rpx;
+  border-radius: 10rpx;
+}
+
 .pron-icon{
-  height: 36rpx;
-  width: 36rpx;
+  height: 34rpx;
+  width: 34rpx;
+  margin: auto 10rpx;
+}
+
+.verb-phonetic{
+  line-height: 36rpx;
+  margin: auto 0;
+  color: rgb(77,77,77);
+}
+
+.pron-tap{
+  background: rgb(240,240,240);
+}
+
+.verb-trans{
+  display: flex;
+  flex-direction: row;
+}
+
+.trans-holder{
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+}
+
+.verb-pos{
+  font-size: 36rpx;
+  margin-right: 20rpx;
+  line-height: 50rpx;
+}
+
+.verb-explain{
+  font-size: 32rpx;
+  line-height: 50rpx;
+}
+
+.verb-remove{
+  height: 50rpx;
+  width: 100rpx;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  margin: auto 0 0 auto;
+  padding: 0;
+  border-radius: 30rpx;
+  background-color: rgb(255,221,0);
+  color: rgb(60,60,60);
+}
+
+.verb-remove::after{
+  border: none;
+}
+
+.verb-remove.button-hover{
+  background-color: rgba(255,221,0,0.6);
+  color: rgb(120,120,120);
 }
 
 .NoVerb{

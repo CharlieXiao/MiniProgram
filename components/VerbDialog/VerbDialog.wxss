@@ -81,11 +81,12 @@
     /* padding: 0 10rpx; */
     border-radius: 15rpx;
     height: 40rpx;
+    margin-right: 20rpx;
 }
 
 .pron-icon{
-    height: 40rpx;
-    width: 40rpx;
+    height: 36rpx;
+    width: 36rpx;
     margin:auto 10rpx auto 0;
 }
 
