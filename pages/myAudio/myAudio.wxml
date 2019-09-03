@@ -1,8 +1,31 @@
-<!--pages/myAudio/myAudio.wxml-->
+<!-- pages/myAudio/myAudio.wxml -->
 <view class="AudioPage">
-  <view wx:if="{{ hasAudio }}" class="AudioList">
-    <text>这是你的音频</text>
-  </view>
+  <scroll-view wx:if="{{ hasAudio }}" class="AudioList">
+    <block wx:for="{{ AudioList }}" wx:key="{{ index }}">
+      <view class="audio-block" wx:if="{{ item.notRemove }}">
+        <view class="audio-holder">
+          <text class="audio-sentence">{{ item.sentence_en }}</text>
+          <view class="audio-detail">
+            <view class="audio-speech" bind:tap="userAudio" data-src="{{ item.src }}" hover-class="tap-style">
+              <text class="speech-dis">我的录音</text>
+              <image class="audio-icon" src="../../image/speaker.png" />
+            </view>
+            <view class="audio-score">
+              <text class="score-dis">得分:</text>
+              <text class="score">{{ item.score }}</text>
+            </view>
+          </view>
+        </view>
+        <view class="sep"></view>
+        <view class="audio-course">
+          <text class="audio-source">来自: {{ item.course }}</text>
+          <button class="audio-remove" data-index="{{ index }}" data-id="{{ item.id }}" bind:tap="removeAudio">
+            移出
+          </button>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
   <view wx:else class="NoAudio">
     <image src="../../image/NoAudio.png" class="NoAudio_Image"></image>
     <text class="NoAudio_Text">还没有音频哦~</text>

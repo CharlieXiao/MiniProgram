@@ -47,7 +47,7 @@ Page({
 
   onUnload: function(){
     // 在页面退出时与服务器同步，删除所选单词，避免多次连接同步，尽量只同步一次
-    console.log(this.data.removeVerbList)
+    // console.log(this.data.removeVerbList)
 
     wx.request({
       url: request_url+'/removeVerbList',

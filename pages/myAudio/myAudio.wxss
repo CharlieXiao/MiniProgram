@@ -1,7 +1,126 @@
 /* pages/myAudio/myAudio.wxss */
 
-page{
+.AudioPage{
+  height: 100vh;
+  width: 100vw;
+}
+
+.AudioList{
   height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx 30rpx;
+  background-color: rgb(247,247,247);
+}
+
+.audio-block{
+  background-color: white;
+  box-sizing: border-box;
+  padding: 20rpx 30rpx;
+  margin-bottom: 20rpx;
+  border-radius: 10rpx;
+}
+
+.audio-holder{
+  display: flex;
+  flex-direction: column;
+}
+
+.audio-sentence{
+  line-height: 50rpx;
+  font-size: 36rpx;
+  margin-bottom: 10rpx;
+}
+
+/* 使用伪类选择器让句子第一个字母大写 */
+
+.audio-sentence::first-letter{
+  text-transform: capitalize;
+}
+
+.audio-detail{
+  display: flex;
+  flex-direction: row;
+}
+
+.audio-speech{
+  padding: 0 10rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.speech-dis{
+  line-height: 50rpx;
+  font-size: 28rpx;
+}
+
+.audio-icon{
+  height: 36rpx;
+  width: 30rpx;
+  margin: auto 0 auto 10rpx;
+}
+
+.audio-score{
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  margin: 0 30rpx 0 auto;
+}
+
+.score-dis{
+  line-height: 50rpx;
+  font-size: 28rpx;
+  margin-right: 20rpx;
+}
+
+.score{
+  line-height: 50rpx;
+  font-size: 40rpx;
+  color: coral;
+}
+
+.sep{
+  height: 2px;
+  width: 100%;
+  background-color: rgb(220,220,220);
+  margin: 10rpx 0 20rpx 0;
+}
+
+.audio-course{
+  display: flex;
+  flex-direction: row;
+}
+
+.audio-source{
+  line-height: 50rpx;
+  font-size: 30rpx;
+  color: rgb(120,120,120);
+}
+
+.audio-remove{
+  height: 50rpx;
+  width: 100rpx;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  margin: auto 0 0 auto;
+  padding: 0;
+  border-radius: 30rpx;
+  background-color: rgb(255,221,0);
+  color: rgb(60,60,60);
+}
+
+.audio-remove::after{
+  border: none;
+}
+
+.audio-remove.button-hover{
+  background-color: rgba(255,221,0,0.6);
+  color: rgb(120,120,120);
+}
+
+.tap-style{
+  background-color: rgb(240,240,240);
+  border-radius: 10rpx;
 }
 
 .NoAudio{

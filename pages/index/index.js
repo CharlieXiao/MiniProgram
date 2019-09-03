@@ -133,7 +133,7 @@ Page({
     //   url: '../userinfo/userinfo',
     // })
     wx.navigateTo({
-      url: '../verbList/verbList',
+      url: '../myAudio/myAudio',
     });
   }
 
