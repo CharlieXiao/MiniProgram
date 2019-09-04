@@ -24,6 +24,7 @@ Page({
     //sectionInfo: { id: 1, title: '自我评价', subtitle: 'about yourself', num_sentences: 6, curr_sentence: 4 },
     //sentences: [],
     isPlay: false,
+    hasRecord:true,
     isRecord: false,
     isJudged: false,
     result: 90,
@@ -169,6 +170,7 @@ Page({
   },
 
   StartRecord: function (e) {
+    let that = this;
     //检测录音时没有录音权限，提示用户开启权限
     if (!this.data.isAuthRecord) {
       wx.hideTabBar();
@@ -192,7 +194,13 @@ Page({
       //错误回调
       recorderManager.onError((res) => {
         console.log(res);
+        console.log('录音错误');
+        that.setData({
+          MSG: '开始录音',
+          isRecord: false,
+        })
       })
+
       this.setData({
         MSG: '结束录音',
         isRecord: true,
@@ -210,12 +218,13 @@ Page({
 
         this.tempFilePath = res.tempFilePath;
 
-        console.log('停止录音', res.tempFilePath)
+        console.log('停止录音, 文件路径：'+res.tempFilePath)
 
       })
       this.setData({
         MSG: '开始录音',
         isRecord: false,
+        hasRecord:true,
       });
     }
   },
@@ -381,23 +390,43 @@ Page({
 
   //上传服务器评分
   JudgeRecord: function () {
-    console.log('播放个人录音');
-    //还未实现，暂时仅播放个人录音
-    //由于需要更新地址，先暂停播放教学音频
-    TutorialAudio.pause();
-    //清除上一次的录音
-    if (UserAudio != undefined) {
-      UserAudio.destroy();
-    }
-    UserAudio = wx.createInnerAudioContext();
-    UserAudio.autoplay = true;
-    UserAudio.src = this.tempFilePath;
+    //在用户已经有录音的情况下，才
+    if(this.data.hasRecord){
+      console.log('上传评分中')
+      //上传用户音频到服务器进行评分
+      wx.uploadFile({
+        url: request_url+'/judgeAudio',
+        filePath: 'C:\\Users\\mayn\\Documents\\MiniProgram\\image\\logo.png',
+        name: 'file',
+        formData:{
+          'user':'test'
+        },
+        success(res){
+          console.log('上传结束');
+          console.log(res);
+        }
+      })
 
-    this.setData({
-      isJudged: true,
-      result: 99,
-      isPlay: false,
-    });
+      console.log('播放个人录音');
+      //还未实现，暂时仅播放个人录音
+      //由于需要更新地址，先暂停播放教学音频
+      TutorialAudio.pause();
+      //清除上一次的录音
+      if (UserAudio != undefined) {
+        UserAudio.destroy();
+      }
+      UserAudio = wx.createInnerAudioContext();
+      UserAudio.autoplay = true;
+      UserAudio.src = this.tempFilePath;
+
+      this.setData({
+        isJudged: true,
+        result: 99,
+        isPlay: false,
+      });
+    }else{
+      console.log('请录音后再进行评分')
+    }
   },
 
   getTrans: function (event) {
