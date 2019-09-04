@@ -391,15 +391,17 @@ Page({
   //上传服务器评分
   JudgeRecord: function () {
     //在用户已经有录音的情况下，才
+    console.log('current sentence: '+this.data.sectionInfo.curr_sentence);
     if(this.data.hasRecord){
       console.log('上传评分中')
       //上传用户音频到服务器进行评分
       wx.uploadFile({
-        url: request_url+'/judgeAudio',
-        filePath: 'C:\\Users\\mayn\\Documents\\MiniProgram\\image\\logo.png',
-        name: 'file',
+        url: request_url+'/judgeAudio/',
+        filePath: this.tempFilePath,
+        name: 'audio',
         formData:{
-          'user':'test'
+          'open_id':app.globalData.open_id,
+          'sentence_id':this.data.sectionInfo.curr_sentence
         },
         success(res){
           console.log('上传结束');
