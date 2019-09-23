@@ -24,7 +24,7 @@ Page({
     //sectionInfo: { id: 1, title: '自我评价', subtitle: 'about yourself', num_sentences: 6, curr_sentence: 4 },
     //sentences: [],
     isPlay: false,
-    hasRecord:true,
+    hasRecord:false,
     isRecord: false,
     isJudged: false,
     result: 90,

@@ -44,9 +44,27 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '历史音频',
-    })
+		let that = this;
+
+		wx.setNavigationBarTitle({
+			title: '历史音频',
+		}),
+		
+		// 获取音频列表
+		wx.request({
+			url:request_url+'/AudioList',
+			method:'GET',
+			data:{
+				'open_id':app.globalData.open_id,
+			},
+			success(res){
+				console.log(res);
+				that.setData({
+					hasAudio:res.data.hasAudio,
+					AudioList:res.data.AudioList,
+				})
+			},
+		})
 	},
 
 	onUnload: function(){
@@ -56,6 +74,20 @@ Page({
 		}
 		console.log('页面退出');
 		console.log(this.data.removeAudioList);
+
+		//连接服务器删除录音
+
+		wx.request({
+			url:request_url+'/removeAudioList',
+			method:'GET',
+			data:{
+				open_id:app.globalData.open_id,
+				removeList:this.data.removeAudioList,
+			},
+			success(res){
+				console.log(res);
+			}
+		})
 	},
 
 	removeAudio: function(event){
