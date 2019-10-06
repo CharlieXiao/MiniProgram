@@ -15,8 +15,10 @@
         <image wx:else class="btn-icon" src="../../image/pause.png" bindtap="EndPlay" hover-class="tap-style"></image>
         <image wx:if="{{ !isRecord }}" class="btn-icon-center" src="../../image/record.png" bindtap="StartRecord" hover-class="tap-style"></image>
         <image wx:else class="btn-icon-center" src="../../image/recording.png" bindtap="EndRecord" hover-class="tap-style"></image>
-        <image wx:if="{{ !isJudged }}" class="btn-icon" src="../../image/judge.png" bindtap="JudgeRecord" hover-class="tap-style"></image>
-        <view wx:else class="result">{{result}}</view>
+        <image wx:if="{{ JudgeStatus == 0 }}" class="btn-icon" src="../../image/not-judge.png" ></image>
+        <view wx:elif="{{ JudgeStatus == 1 }}" class="result" bindtap="PlayRecord" hover-class="result-tap-style">{{ item.score }}</view>
+        <image wx:elif="{{ JudgeStatus == 2 }}" class="btn-icon" src="../../image/user-pause.png" bindtap="StopPlayRecord" hover-class="tap-style" />
+          
       </view>
       <view class="progress">
         <text class="curr-sentence-num">{{ item.index }}</text>
@@ -38,4 +40,5 @@
 <AuthDialog id='AuthRecord' AuthTitle='检测到您未开启录音功能' AuthContent='是否去设置中打开？' bind:confirmEvent='confirmEvent' bind:cancelEvent='cancelEvent'>
 </AuthDialog>
 
-<VerbDialog id='VerbTrans' bind:DealFav="VerbEvent"></VerbDialog>
+<!-- 自定义组件和页面的通信需要确定函数对应关系 -->
+<VerbDialog id='VerbTrans' bind:DealFav="VerbEvent" bind:StartRecord="StartRecord" bind:EndRecord="EndRecord" ></VerbDialog>

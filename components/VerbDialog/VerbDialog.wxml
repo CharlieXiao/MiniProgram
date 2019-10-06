@@ -6,7 +6,7 @@
     <view class="Fav" hover-class="btn-tap-style" bind:tap="onFav">
       <block wx:if="{{isAddFav}}">
         <image wx:if="{{isAddFav}}" class="Fav-icon" src="../../image/AddFav.png"></image>
-        <text class="Fav-text" style="color:#e57373;">收藏</text>
+        <text class="Fav-text" style="color:#FF9600;">收藏</text>
       </block>
       <block wx:else>
         <image class="Fav" class="Fav-icon" src="../../image/NotFav.png"></image>
@@ -34,4 +34,14 @@
       <text class="verb-explains" selectable="false" space="false" decode="false">{{item.explain}}</text>
     </view>
   </scroll-view>
+  <!-- 添加单词跟读选项 -->
+  <view class="btn-set">
+    <image wx:if="{{ !isPlay }}" class="btn-icon" src="../../image/play.png" bindtap="StartPlay" hover-class="btn-tap-style"></image>
+    <image wx:else class="btn-icon" src="../../image/pause.png" bindtap="EndPlay" hover-class="btn-tap-style"></image>
+    <image wx:if="{{ !isRecord }}" class="btn-icon-center" src="../../image/record.png" bindtap="StartRecord" hover-class="btn-tap-style"></image>
+    <image wx:else class="btn-icon-center" src="../../image/recording.png" bindtap="EndRecord" hover-class="btn-tap-style"></image>
+    <image wx:if="{{ JudgeStatus == 0 }}" class="btn-icon" src="../../image/not-judge.png" ></image>
+    <view wx:elif="{{ JudgeStatus == 1 }}" class="result" bindtap="PlayRecord" hover-class="result-tap-style">{{ result }}</view>
+    <image wx:elif="{{ JudgeStatus == 2 }}" class="btn-icon" src="../../image/user-pause.png" bindtap="StopPlayRecord" hover-class="tap-style" />
+  </view>
 </view>

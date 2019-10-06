@@ -24,14 +24,18 @@ Page({
     //sectionInfo: { id: 1, title: '自我评价', subtitle: 'about yourself', num_sentences: 6, curr_sentence: 4 },
     //sentences: [],
     isPlay: false,
-    hasRecord:false,
     isRecord: false,
-    isJudged: false,
-    result: 90,
+    JudgeStatus:0,
     footer_height: '260rpx',
     cxClient: 0,
     cyClient: 0,
   },
+
+  /*  isJudged 有三个状态
+  *   0 未评分
+  *   1 已评分，未播放用户发音
+  *   2 已评分，播放用户发音
+  */
 
   onLoad: function (options) {
 
@@ -62,7 +66,8 @@ Page({
           that.setData({
             courseImage:request_url + data.courseInfo.img,
             sectionInfo:data.sectionInfo,
-            sentences:data.sentenceInfo
+            sentences:data.sentenceInfo,
+            JudgeStatus:res.data.sentenceInfo[data.sectionInfo.curr_sentence].hasJudge
           })
 
           TutorialAudio.autoplay = true
@@ -156,7 +161,12 @@ Page({
     //销毁后应该再重新创建一个，以便下一次进入时能直接播放
     TutorialAudio = wx.createInnerAudioContext();
 
+    UserAudio.destroy();
+
+    UserAudio = wx.createInnerAudioContext();
+
     //在用户离开界面是更新学习状况
+    // 
     console.log(this.data.sectionInfo.curr_sentence)
     wx.request({
       url: request_url + '/updateStudyStatus',
@@ -170,12 +180,22 @@ Page({
   },
 
   StartRecord: function (e) {
+    console.log(e);
     let that = this;
     //检测录音时没有录音权限，提示用户开启权限
     if (!this.data.isAuthRecord) {
       wx.hideTabBar();
+      this.VerbDialog.hideDialog();
       this.AuthDialog.showDialog();
     } else {
+      // 设置定时器，在一定时间段后自动返回结果为不成功
+      if(e.currentTarget.id=='VerbTrans'){
+        // 由于let仅在当前块中可用，这里使用var声明TimerID
+        var TimerID = setTimeout(()=>{
+          e.detail.CallBack({'status':0})
+        },100000);
+      }
+
       //录音之前先暂停
       TutorialAudio.stop();
       const options = {
@@ -190,6 +210,13 @@ Page({
       recorderManager.start(options);
       recorderManager.onStart(() => {
         console.log('开始录音');
+        // 判断是否需要调用回调函数
+        if(e.currentTarget.id=='VerbTrans'){
+          // 返回录音情况
+          // 清除计时器
+          clearTimeout(TimerID);
+          e.detail.CallBack({'status':1})
+        }
       });
       //错误回调
       recorderManager.onError((res) => {
@@ -205,12 +232,21 @@ Page({
         MSG: '结束录音',
         isRecord: true,
       });
+
     }
   },
 
   EndRecord: function (e) {
+    console.log(e);
     //只对有录音权限时做出反应
+
     if (this.data.isAuthRecord) {
+
+      if(e.currentTarget.id=='VerbTrans'){
+        var TimerID = setTimeout(()=>{
+          e.detail.CallBack({'status':0})
+        },10000)
+      }
 
       recorderManager.stop();
 
@@ -218,13 +254,65 @@ Page({
 
         this.tempFilePath = res.tempFilePath;
 
-        console.log('停止录音, 文件路径：'+res.tempFilePath)
+        console.log('停止录音, 文件路径：'+res.tempFilePath);
 
-      })
+        // 直接向服务器发送request请求
+
+        // 对于单词和句子的需要进行区分
+        if(e.currentTarget.id=='VerbTrans'){
+          clearTimeout(TimerID);
+          let that = this;
+          wx.uploadFile({
+            url: request_url+'/judgeAudio/',
+            filePath: this.tempFilePath,
+            name: 'audio',
+            formData:{
+              'open_id':app.globalData.open_id,
+              'type':'verb',
+              'verb_id':e.detail.verb_id
+            },
+            success(res){
+              console.log('上传结束');
+              console.log(res);
+              // 同时返回评价结果
+              let data = JSON.parse(res.data)
+              e.detail.CallBack({'status':1,'score':data['score'],'file-path':that.tempFilePath});
+            }
+          })
+        }else{
+          let that = this;
+          wx.uploadFile({
+            url: request_url+'/judgeAudio/',
+            filePath: this.tempFilePath,
+            name: 'audio',
+            formData:{
+              'open_id':app.globalData.open_id,
+              'type':'sentence',
+              'sentence_id':this.data.sectionInfo.curr_sentence
+            },
+            success(res){
+              //console.log(res);
+              console.log('上传结束');
+              let data = JSON.parse(res.data)
+              // 此处res中的data不知并不是json对象
+              //console.log(data)
+              let new_sentences = that.data.sentences;
+              let curr_sentence_id = that.data.sectionInfo.curr_sentence;
+              new_sentences[curr_sentence_id]['user-src'] = request_url+data['user-audio'];
+              new_sentences[curr_sentence_id]['score'] = data['score'];
+              console.log(new_sentences[curr_sentence_id]);
+              that.setData({
+                sentences:new_sentences,
+                JudgeStatus:1
+              });
+            }
+          })
+        }
+      });
+
       this.setData({
         MSG: '开始录音',
         isRecord: false,
-        hasRecord:true,
       });
     }
   },
@@ -272,6 +360,7 @@ Page({
       sectionInfo: new_sectionInfo,
       toIndex: 'sentence-' + sentence_id,
       isPlay: true,
+      JudgeStatus:this.data.sentences[sentence_id]['hasJudge']
     });
 
     let currSentenceHeight = 0;
@@ -388,47 +477,41 @@ Page({
     TutorialAudio.pause();
   },
 
-  //上传服务器评分
-  JudgeRecord: function () {
+  // 上传服务器评分
+  // 此处逻辑有问题，用户发音完成后不需要手动点击，直接发送到服务器进行评分，旁边的第三个按键用于播放用户音频
+  PlayRecord: function () {
     //在用户已经有录音的情况下，才
     console.log('current sentence: '+this.data.sectionInfo.curr_sentence);
-    if(this.data.hasRecord){
-      console.log('上传评分中')
-      //上传用户音频到服务器进行评分
-      wx.uploadFile({
-        url: request_url+'/judgeAudio/',
-        filePath: this.tempFilePath,
-        name: 'audio',
-        formData:{
-          'open_id':app.globalData.open_id,
-          'sentence_id':this.data.sectionInfo.curr_sentence
-        },
-        success(res){
-          console.log('上传结束');
-          console.log(res);
-        }
-      })
-
-      console.log('播放个人录音');
-      //还未实现，暂时仅播放个人录音
-      //由于需要更新地址，先暂停播放教学音频
-      TutorialAudio.pause();
-      //清除上一次的录音
-      if (UserAudio != undefined) {
-        UserAudio.destroy();
-      }
-      UserAudio = wx.createInnerAudioContext();
-      UserAudio.autoplay = true;
-      UserAudio.src = this.tempFilePath;
-
-      this.setData({
-        isJudged: true,
-        result: 99,
-        isPlay: false,
-      });
-    }else{
-      console.log('请录音后再进行评分')
+    console.log('播放个人录音');
+    //还未实现，暂时仅播放个人录音
+    //由于需要更新地址，先暂停播放教学音频
+    TutorialAudio.pause();
+    //清除上一次的录音
+    if (UserAudio != undefined) {
+      UserAudio.destroy();
     }
+    UserAudio = wx.createInnerAudioContext();
+    UserAudio.autoplay = true;
+    UserAudio.src = this.data.sentences[this.data.sectionInfo.curr_sentence]['user-src'];
+    console.log(UserAudio.src)
+    this.setData({
+      isPlay: false,
+      JudgeStatus:2,
+    });
+    UserAudio.onEnded(() => {
+      console.log('个人录音播放结束');
+      this.setData({
+        JudgeStatus: 1,
+      });
+    });
+  },
+
+  StopPlayRecord:function(){
+    console.log('停止播放个人录音');
+    UserAudio.pause();
+    this.setData({
+      JudgeStatus:1,
+    });
   },
 
   getTrans: function (event) {

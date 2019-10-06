@@ -2,9 +2,11 @@
 
 let usSpeech = undefined;
 let ukSpeech = undefined;
+let userSpeech = undefined;
 
 const app = getApp();
 const request_url = app.globalData.request_url;
+const recorderManager = wx.getRecorderManager();
 
 //提取词性正则表达式
 let verb_pattern = /(\w{1,4}\.)\s(.*)/ 
@@ -36,6 +38,10 @@ Component({
       us_speech: "http://openapi.youdao.com/ttsapi?q=flower&langType=en&sign=66264F0B8941FA81A714C596E2432521&salt=1566197801227&voice=6&format=mp3&appKey=4f938f684c09931e",
       verb: "flower"
     },
+    isPlay:false,
+    JudgeStatus:0,
+    isRecord:false,
+    result:80,
     ContainerHeight:0,
   },
 
@@ -52,8 +58,15 @@ Component({
       if(usSpeech!=undefined){
         usSpeech.destroy();
       }
+      if(userSpeech!=undefined){
+        userSpeech.destroy();
+      }
+      // 将所有的数据恢复原样
       this.setData({
-        ShouldShow: false
+        ShouldShow: false,
+        isRecord:false,
+        isPlay:false,
+        JudgeStatus:0,
       })
     },
     //显示弹框
@@ -111,6 +124,102 @@ Component({
         console.log(ukSpeech.src);
         ukSpeech.play();
       }
+    },
+
+    StartPlay(){
+      console.log('开始播放，默认美式音频');
+      usSpeech.play();
+      usSpeech.onEnded(() => {
+        console.log('播放结束');
+        this.setData({
+          isPlay: false,
+        });
+      });
+      this.setData({
+        isPlay:true
+      })
+    },
+
+    EndPlay(){
+      console.log('暂停播放');
+      this.setData({
+        isPlay:false
+      })
+      // 由于一个单词读音较短，直接停止
+      usSpeech.stop();
+    },
+
+    StartRecord(){
+      this.setData({
+        isRecord:true
+      });
+      let that = this;
+      let StartRecordCallBack = function(e){
+        // 父组件返回信息，开始成功
+        if(e.status == 1){
+          console.log('开始录音');
+        }else{
+          that.setData({
+            isRecord:false
+          });
+          console.log('开始录音失败，请检查录音设备');
+        }
+      }
+      this.triggerEvent('StartRecord',{CallBack:StartRecordCallBack});
+    },
+
+    EndRecord(){
+      this.setData({
+        isRecord:false
+      });
+      let that = this;
+      let EndRecordCallBack = function(e){
+        console.log(e)
+        if(e.status == 1){
+          console.log('结束录音');
+          that.setData({
+            isRecord:false,
+            result:e.score,
+            filepath:e['file-path'],
+            JudgeStatus:1,
+          });
+        }else{
+          console.log('录音失败，请重试');
+        }
+      }
+      this.triggerEvent('EndRecord',{CallBack:EndRecordCallBack,verb_id:this.data.verbInfo.verb_id});
+      
+      // 需要一个回调函数返回告知是否录音成功，同时还需要获取文件路径等信息，便于上传
+    },
+
+    PlayRecord: function () {
+      //还未实现，暂时仅播放个人录音
+      //清除上一次的录音
+      if (userSpeech != undefined) {
+        userSpeech.destroy();
+      }
+      userSpeech = wx.createInnerAudioContext();
+      userSpeech.autoplay = true;
+      userSpeech.src = this.data.filepath;
+      console.log(userSpeech.src)
+      this.setData({
+        isPlay: false,
+        JudgeStatus:2,
+      });
+      userSpeech.onEnded(() => {
+        console.log('个人录音播放结束');
+        this.setData({
+          JudgeStatus: 1,
+        });
+      });
+    },
+  
+    StopPlayRecord:function(){
+      console.log('停止播放个人录音');
+      userSpeech.pause();
+      this.setData({
+        JudgeStatus:1,
+      });
     },
 
   },

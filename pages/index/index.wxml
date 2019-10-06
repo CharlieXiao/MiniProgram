@@ -5,7 +5,7 @@
     <view class="header-title">
       <text class='Day'>day {{ learn_days }}</text>
       <view class="content-source">
-        <image src="../../image/from.png" class="from-icon"></image>
+        <image src="../../image/lamp.png" class="from-icon"></image>
         <text class="course-name">每日一句</text>
       </view>
     </view>

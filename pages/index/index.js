@@ -132,9 +132,9 @@ Page({
     // wx.switchTab({
     //   url: '../userinfo/userinfo',
     // })
-    // wx.navigateTo({
-    //   url: '../myAudio/myAudio',
-    // });
+    wx.navigateTo({
+      url: '../record/record?section_id=4',
+    });
   }
 
 })

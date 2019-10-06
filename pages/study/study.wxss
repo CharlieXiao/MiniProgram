@@ -28,19 +28,21 @@
 }
 
 .list-icon{
-  height: 40rpx;
-  width: 30rpx;
-  margin: auto 0;
+  height: 36rpx;
+  width: 36rpx;
+  margin: auto 10rpx auto 0;
 }
 
 .page-title{
   display: block;
   font-size: 32rpx;
+  line-height: 40rpx;
 }
 
 .nav-icon{
   height: 32rpx;
   width: 32rpx;
+  margin-right: 5rpx;
 }
 
 .nav-title{

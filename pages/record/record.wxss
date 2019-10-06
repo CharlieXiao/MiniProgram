@@ -72,6 +72,8 @@
   height: 90rpx;
   width: 90rpx;
   margin: auto 70rpx;
+  border-radius: 50%;
+  /* background: -webkit-linear-gradient(red,blue) */
 }
 
 .result{
@@ -115,6 +117,11 @@
   align-items: center;
   box-sizing: border-box;
   padding: 0 60rpx;
+}
+
+.result-tap-style{
+  /* background-color: rgba(18, 150, 219,0.8); */
+  opacity: 0.6;
 }
 
 .tap-style{

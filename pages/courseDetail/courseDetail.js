@@ -73,8 +73,20 @@ Page({
   gotoRecord:function(event){
     let section = event.currentTarget.dataset.section;
     console.log('section_id:'+section);
+    let new_courseInfo = this.data.courseInfo;
+    new_courseInfo.curr_section = section;
+    // 更新当前课程
+    this.setData({
+      courseInfo:new_courseInfo
+    });
     wx.navigateTo({
       url: '../record/record?section_id='+section,
     });
+  },
+
+  onShow:function(){
+    console.log('我出现了');
+    // 在这里更新当前课程信息
+    console.log('当前课程：'+this.data.courseInfo.curr_section)
   }
 })

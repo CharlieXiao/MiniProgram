@@ -22,6 +22,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+
     wx.getSystemInfo({
       success: function (res) {
         let cyClient = res.windowHeight;
@@ -32,6 +33,21 @@ Page({
         that.setData({
           height: cyClient - headerHeight,
         });
+      },
+    });
+
+    // 获取用户学习课程
+    wx.request({
+      url:request_url+'/CourseInfo',
+      method:'GET',
+      data:{
+        order:this.data.choice
+      },
+      success:(res)=>{
+        //console.log(res.data)
+        that.setData({
+          courseArray:res.data
+        })
       },
     })
   },

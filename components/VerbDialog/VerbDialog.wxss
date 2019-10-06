@@ -12,15 +12,15 @@
 
 .VerbDialogContainer{
     box-sizing: border-box;
-    width: 550rpx;
+    width: 690rpx;
     position: absolute;
-    top: 27%;
-    left: 100rpx;
+    bottom: 96rpx;
+    left: 30rpx;
     background-color: white;
     z-index: 3;
     color: black;
     opacity: 1;
-    padding: 20rpx 20rpx 20rpx 20rpx;
+    padding: 30rpx 30rpx 30rpx 30rpx;
     display: flex;
     flex-direction: column;
     border-radius: 20rpx;
@@ -44,7 +44,7 @@
     display: flex;
     flex-direction: row;
     margin: auto 0 auto auto;
-    height: 60rpx;
+    height: 100%;
     box-sizing: border-box;
     padding: 10rpx 15rpx;
     border-radius: 20rpx;
@@ -70,7 +70,7 @@
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: 10rpx 0;
+    margin: 30rpx 0;
 }
 
 .pron-us , .pron-uk{
@@ -78,15 +78,15 @@
     flex-direction: row;
     justify-items: flex-start;
     box-sizing: border-box;
-    /* padding: 0 10rpx; */
-    border-radius: 15rpx;
+    padding: 0 5rpx;
+    border-radius: 10rpx;
     height: 40rpx;
     margin-right: 20rpx;
 }
 
 .pron-icon{
-    height: 36rpx;
-    width: 36rpx;
+    height: 30rpx;
+    width: 30rpx;
     margin:auto 10rpx auto 0;
 }
 
@@ -108,7 +108,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    margin-bottom: 10rpx
+    margin-bottom: 15rpx
 }
 
 .verb-pos{
@@ -116,7 +116,7 @@
     font-size:36rpx;
     line-height: 40rpx;
     margin: 0 20rpx auto 0;
-    color: rgb(117,117,117);
+    color: rgb(255, 155, 0);
 }
 
 .verb-explains{
@@ -124,6 +124,36 @@
     box-sizing: border-box;
     font-size:30rpx;
     margin-bottom: auto;
+}
+  
+.btn-set{
+    height: 120rpx;
+    display: flex;
+    flex-direction: row;
+    margin: 30rpx 0 10rpx 0;
+}
+
+.btn-icon{
+    height: 90rpx;
+    width: 90rpx;
+    margin: auto 70rpx;
+}
+
+.result{
+    height: 90rpx;
+    width: 90rpx;
+    margin: auto 70rpx;
+    border-radius: 50%;
+    background-color: rgb(3,169,244);
+    color: white;
+    text-align: center;
+    line-height: 90rpx;
+    font-size: 50rpx;
+}
+
+.btn-icon-center{
+    height: 120rpx;
+    width: 120rpx;
 }
 
 .btn-tap-style{
