@@ -11,7 +11,7 @@
 
 .app-info{
   position: fixed;
-  top: 5%;
+  top: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,32 +19,61 @@
 }
 
 .app-logo{
-  height: 150rpx;
-  width: 150rpx;
+  height: 180rpx;
+  width: 180rpx;
   border-radius: 50%;
   box-shadow: 4px 4px 10px 0 rgb(180,180,180);
 }
 
-.app-name{
-  margin-top: 50rpx;
-  font-size: 48rpx;
-  font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 5px #000;
+.app-title{
+  /* perspective 元素定义3D元素到视图的距离 */
+  perspective: 1000px;
+  perspective-origin: 50% 0;
+  font-size: 8em;
+  display: inline-flex;
+  margin-top: 30rpx;
 }
 
-.back-image{
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  z-index: -1;
-  top: 30%;
-  opacity: 0.5;
+text{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  display: block;
+  color: white;
+  text-shadow: 0px 0px 20px rgba(120, 120, 120, 0.89);
+}
+
+.letter-1th {
+  transform-origin: 25% 200%;
+  font-size: 0.96em;
+  transform: scale(75.9, 1) rotatey(89.5deg);
+}
+
+.letter-2th {
+  transform-origin: 0% 200%;
+  font-size: 0.915em;
+  transform: scale(85.9, 1) rotatey(89.5deg);
+}
+
+.letter-3th {
+  transform-origin: 999% 200%;
+  font-size: 0.85em;
+  transform: scale(1, 1) translatey(0%);
+}
+
+.letter-4th {
+  transform-origin: 100% 200%;
+  font-size: 0.915em;
+  transform: scale(85.9, 1) rotatey(-89.5deg);
+}
+
+.letter-5th {
+  transform-origin: 75% 200%;
+  font-size: 0.96em;
+  transform: scale(75.9, 1) rotatey(-89.5deg);
 }
 
 .loginButton{
   position: fixed;
-  top: 68%;
+  top: 60%;
   height: 80rpx;
   width: 400rpx;
   background: -webkit-linear-gradient(left,rgba(18,150,219,0.7),rgb(18,150,219));

@@ -56,7 +56,9 @@
 
 .sec-num{
   font-size: larger;
+  font-weight: bold;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color:rgb(255, 150, 0);
 }
 
 .sec-text{

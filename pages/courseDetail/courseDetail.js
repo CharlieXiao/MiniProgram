@@ -25,7 +25,7 @@ Page({
    */
   onLoad: function (options) {
     let course_id = options.course_id;
-    console.log(course_id)
+    //console.log(course_id)
     //设置顶栏颜色
     // wx.setNavigationBarColor({
     //   frontColor: '#ffffff',
@@ -46,6 +46,15 @@ Page({
           let data = res.data;
           data.courseInfo.img = request_url+data.courseInfo.img;
           console.log(data);
+          // 获取curr-section所对应的index
+          let curr_section = data.courseInfo.curr_section;
+          for(let i=0;i<data.courseSec.length;i+=1){
+            if(curr_section == data.courseSec[i].id){
+              that.setData({
+                curr_section_index:i
+              });
+            }
+          }
           that.setData({
             courseInfo:data.courseInfo,
             courseSec:data.courseSec
@@ -62,7 +71,7 @@ Page({
         let cyClient = res.windowWidth;
         let ratio = cyClient/cxClient;
         let height = 750/ratio;
-        console.log(height);
+        //console.log(height);
         that.setData({
           scroll_height:height-120
         })
@@ -72,7 +81,7 @@ Page({
 
   gotoRecord:function(event){
     let section = event.currentTarget.dataset.section;
-    console.log('section_id:'+section);
+    //console.log('section_id:'+section);
     let new_courseInfo = this.data.courseInfo;
     new_courseInfo.curr_section = section;
     // 更新当前课程
@@ -85,8 +94,8 @@ Page({
   },
 
   onShow:function(){
-    console.log('我出现了');
+    //console.log('我出现了');
     // 在这里更新当前课程信息
-    console.log('当前课程：'+this.data.courseInfo.curr_section)
+    //console.log('当前课程：'+this.data.courseInfo.curr_section)
   }
 })

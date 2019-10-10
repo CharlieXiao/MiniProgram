@@ -33,7 +33,7 @@
     </view>
   </block>
   <view class="back-holder" style="height:{{ footer_height }}">
-    <button class="finish" bindtap="backToCourse" data-courseid="{{ courseInfo.id }}">返回</button>
+    <button class="finish" bindtap="backToCourse" >返回</button>
   </view>
 </scroll-view>
 

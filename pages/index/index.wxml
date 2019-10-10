@@ -19,7 +19,7 @@
       <text class='motto'>{{ motto }}</text>
     </view>
     <view class="tap-area">
-      <button class='learn' bindtap='bindViewTap'>开始学习</button>
+      <button class='learn' bindtap='gotoCurrCourse' data-currcourse="{{ curr_course }}">开始学习</button>
       <view class="course-list" bindtap="gotoCourselist" hover-class="tap-style">课程列表></view>
     </view>
   </view>

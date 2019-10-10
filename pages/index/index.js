@@ -12,10 +12,19 @@ Page({
   //事件处理函数
 
   //点击开始按钮跳转到学习页面
-  bindViewTap: function() {
-    wx.navigateTo({
-		url: '../courseDetail/courseDetail?course_id=6'
-		})
+  gotoCurrCourse: function(e) {
+    // 判断用户是否有当前学习课程
+    let curr_course = e.currentTarget.dataset.currcourse;
+    if(curr_course == -1){
+      wx.switchTab({
+        url: '../study/study',
+      });
+    }else{
+      wx.navigateTo({
+        url: '../courseDetail/courseDetail?course_id='+curr_course
+      });
+    }
+    
   },
 
   gotoCourselist: function(){
@@ -113,12 +122,12 @@ Page({
       if(res.statusCode == "200"){
         var data = res.data
         console.log(data)
-
         that.setData({
           motto:data.motto,
           author:data.author,
 		      poster:data.poster,
 		      learn_days:data.learn_days,
+          curr_course:data.curr_course,
         })
       }else{
         console.log('网络连接失败，请检查网络')
@@ -132,9 +141,9 @@ Page({
     // wx.switchTab({
     //   url: '../userinfo/userinfo',
     // })
-    wx.navigateTo({
-      url: '../record/record?section_id=4',
-    });
+    // wx.navigateTo({
+    //   url: '../record/record?section_id=4',
+    // });
   }
 
 })
