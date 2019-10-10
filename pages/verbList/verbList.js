@@ -10,12 +10,7 @@ Page({
 	 */
 
 	data: {
-	  hasVerb:true,
-    verbList: [
-      {verb: 'and', id:'1' ,phonetic: '[ənd, ən, ænd]',trans: { pos: 'conj.', explain: '和，与' },speech: 'xxxxxx',notRemove:true},
-      {verb: 'or', id:'2' ,phonetic: '[ɔr]',trans: { pos: 'conj.', explain: '或，或者' },speech: 'xxxxxx',notRemove:true},
-      {verb: 'not', id:'3' ,phonetic: '[nɑt]',trans: { pos: 'adv.', explain: '表示否定，不' },speech: 'xxxxxx',notRemove:true},
-    ],
+	  hasVerb:false,
     removeVerbList:[]
 	},
 

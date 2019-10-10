@@ -29,7 +29,7 @@
   </view>
   <view wx:if="{{ hasCourse }}" class="ExCourse">
     <scroll-view class="courseList" style="height:{{ height }}px" scroll-y >
-      <view class="course-block" wx:for="{{ courseArray }}" wx:key="id" bindtap="gotoCourseDetail" data-courseid="{{item.id}}" hover-class="tap-style" >
+      <view class="course-block" wx:for="{{ courseArray }}" wx:key="id" bindtap="gotoCourseDetail" data-courseid="{{ item.id }}" hover-class="tap-style" >
         <image class="course-image" src="{{ item.img }}" mode="aspectFill"></image>
         <view class="course-general">
           <text class="course-name">{{ item.name }}</text>

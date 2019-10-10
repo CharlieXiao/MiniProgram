@@ -5,19 +5,19 @@ const app = getApp()
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
 		userInfo: {},
-  },
+	},
 
 	//canIUse用于判断小程序API是否在当前版本可用
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function () {
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function () {
 		//如果app中已经保存了用户信息，直接将全局变量的userinfo赋值过来即可
 		if (app.globalData.userInfo) {
 			this.setData({
@@ -28,7 +28,7 @@ Page({
 			// 所以此处加入 callback 以防止这种情况
 			//箭头函数 函数名 = 参数名 => 返回值;代码多余一条就要用大括号括起来
 			app.userInfoReadyCallback = res => {
-				if(res.userInfo != undefined ){
+				if (res.userInfo != undefined) {
 					this.setData({
 						userInfo: res.userInfo,
 					})
@@ -45,9 +45,14 @@ Page({
 				}
 			})
 		}
-  },
 
-	verbList: function(){
+		this.setData({
+			learn_days:app.globalData.learn_days
+		});
+		  
+	},
+
+	verbList: function () {
 		wx.navigateTo({
 			url: '../verbList/verbList',
 		});
@@ -71,7 +76,7 @@ Page({
 		});
 	},
 
-	questions: function(){
+	questions: function () {
 		wx.navigateTo({
 			url: '../questions/questions',
 		});

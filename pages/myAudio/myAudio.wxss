@@ -6,8 +6,8 @@
 }
 
 .AudioList{
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   box-sizing: border-box;
   padding: 20rpx 30rpx;
   background-color: rgb(247,247,247);

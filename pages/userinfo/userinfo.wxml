@@ -4,7 +4,7 @@
 		<image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
 		<view class='studyInfo'>
 			<text class='nickName'>{{userInfo.nickName}}</text>
-			<text class='learnDays'>累计学习 0 天</text>
+			<text class='learnDays'>累计学习 {{ learn_days }} 天</text>
 		</view>
 	</view>
   <view class='Help'>

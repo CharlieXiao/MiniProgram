@@ -10,33 +10,7 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-	hasAudio:true,
-	AudioList:[
-		{
-			sentence_en:'when one is so sad',
-			id:'1',
-			src:'http://127.0.0.1:8000/media/default/default.wav',
-			course:'《小王子》经典台词',
-			score:'88',
-			notRemove: true,
-		},
-		{
-			sentence_en:'if you forget me',
-			id:'3',
-			src:'http://127.0.0.1:8000/media/default/default.wav',
-			course:'《如果你忘了我》',
-			score:'90',
-			notRemove: true,
-		},
-		{
-			sentence_en:'what makes the desert beautiful',
-			id:'2',
-			src:'http://127.0.0.1:8000/media/default/default.wav',
-			course:'《小王子》经典台词',
-			score:'65',
-			notRemove: true,
-		},
-	],
+	hasAudio:false,
 	removeAudioList:[]
 	},
 

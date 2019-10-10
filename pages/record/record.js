@@ -25,7 +25,7 @@ Page({
     //sentences: [],
     isPlay: false,
     isRecord: false,
-    JudgeStatus:0,
+    JudgeStatus: 0,
     footer_height: '260rpx',
     cxClient: 0,
     cyClient: 0,
@@ -40,7 +40,7 @@ Page({
   onLoad: function (options) {
 
     wx.showLoading({
-      title:'加载语音文件中...'
+      title: '加载语音文件中...'
     });
 
     let section_id = options.section_id;
@@ -54,9 +54,9 @@ Page({
     wx.request({
       url: request_url + "/SentenceInfo",
       method: 'GET',
-      data: { 
+      data: {
         section_id: section_id,
-        open_id:app.globalData.open_id,
+        open_id: app.globalData.open_id,
       },
       success(res) {
         if (res.statusCode == '200' && res.data.error == '0') {
@@ -64,10 +64,10 @@ Page({
           var data = res.data
           // 由于小程序从后台获取图片链接是需要一定时间的，因此在渲染时会有一段时间图片链接为空，需要指定一张默认图片
           that.setData({
-            courseImage:request_url + data.courseInfo.img,
-            sectionInfo:data.sectionInfo,
-            sentences:data.sentenceInfo,
-            JudgeStatus:res.data.sentenceInfo[data.sectionInfo.curr_sentence].hasJudge
+            courseImage: request_url + data.courseInfo.img,
+            sectionInfo: data.sectionInfo,
+            sentences: data.sentenceInfo,
+            JudgeStatus: res.data.sentenceInfo[data.sectionInfo.curr_sentence].hasJudge
           })
 
           TutorialAudio.autoplay = true
@@ -95,10 +95,10 @@ Page({
 
         } else {
           console.log('数据请求失败');
-          console.log('ERROR: '+res.data.error);
+          console.log('ERROR: ' + res.data.error);
         }
       },
-      complete:()=>{
+      complete: () => {
         wx.hideLoading();
       }
     })
@@ -155,7 +155,7 @@ Page({
     // 用户从返回上一级页面后再次进入页面，并不会重新播放
   },
 
-  onUnload: function() {
+  onUnload: function () {
     //退出页面的同时要销毁发音对象，防止在后台继续播放
     TutorialAudio.destroy();
     //销毁后应该再重新创建一个，以便下一次进入时能直接播放
@@ -168,14 +168,41 @@ Page({
     //在用户离开界面是更新学习状况
     // 
     console.log(this.data.sectionInfo.curr_sentence)
+
+    // 使用getCurrentPages()获得当前页面栈信息，获取上一个页面句柄，通过setData来达到传参的目的
+
     wx.request({
       url: request_url + '/updateStudyStatus',
       method: 'GET',
       data: {
-        type:1, 
+        type: 1,
         curr_sentence: this.data.sectionInfo.curr_sentence,
-        open_id:app.globalData.open_id
+        open_id: app.globalData.open_id
       },
+      success(res) {
+        console.log(res);
+        let section_finish = res.data
+        let pages = getCurrentPages();
+        // 由于此时页面已经退出，上一个页面即为页面栈的最后一个元素
+        let prev_page = pages[pages.length - 1];
+        let prev_finish = true;
+        let isLock = new Array(section_finish.length);
+        for (let i = 0; i < section_finish.length; i += 1) {
+          //console.log('prev_finish: '+prev_finish);
+          //console.log('isFinish: '+section_finish[i]);
+          if (prev_finish) {
+            isLock[i] = false;
+          } else {
+            isLock[i] = true;
+          }
+          prev_finish = section_finish[i];
+        }
+        //console.log(isLock);
+        // 最粗糙的页面间通信
+        prev_page.setData({
+          isLock: isLock
+        });
+      }
     })
   },
 
@@ -189,11 +216,11 @@ Page({
       this.AuthDialog.showDialog();
     } else {
       // 设置定时器，在一定时间段后自动返回结果为不成功
-      if(e.currentTarget.id=='VerbTrans'){
+      if (e.currentTarget.id == 'VerbTrans') {
         // 由于let仅在当前块中可用，这里使用var声明TimerID
-        var TimerID = setTimeout(()=>{
-          e.detail.CallBack({'status':0})
-        },100000);
+        var TimerID = setTimeout(() => {
+          e.detail.CallBack({ 'status': 0 })
+        }, 100000);
       }
 
       //录音之前先暂停
@@ -211,11 +238,11 @@ Page({
       recorderManager.onStart(() => {
         console.log('开始录音');
         // 判断是否需要调用回调函数
-        if(e.currentTarget.id=='VerbTrans'){
+        if (e.currentTarget.id == 'VerbTrans') {
           // 返回录音情况
           // 清除计时器
           clearTimeout(TimerID);
-          e.detail.CallBack({'status':1})
+          e.detail.CallBack({ 'status': 1 })
         }
       });
       //错误回调
@@ -242,10 +269,10 @@ Page({
 
     if (this.data.isAuthRecord) {
 
-      if(e.currentTarget.id=='VerbTrans'){
-        var TimerID = setTimeout(()=>{
-          e.detail.CallBack({'status':0})
-        },10000)
+      if (e.currentTarget.id == 'VerbTrans') {
+        var TimerID = setTimeout(() => {
+          e.detail.CallBack({ 'status': 0 })
+        }, 10000)
       }
 
       recorderManager.stop();
@@ -254,43 +281,43 @@ Page({
 
         this.tempFilePath = res.tempFilePath;
 
-        console.log('停止录音, 文件路径：'+res.tempFilePath);
+        console.log('停止录音, 文件路径：' + res.tempFilePath);
 
         // 直接向服务器发送request请求
 
         // 对于单词和句子的需要进行区分
-        if(e.currentTarget.id=='VerbTrans'){
+        if (e.currentTarget.id == 'VerbTrans') {
           clearTimeout(TimerID);
           let that = this;
           wx.uploadFile({
-            url: request_url+'/judgeAudio/',
+            url: request_url + '/judgeAudio/',
             filePath: this.tempFilePath,
             name: 'audio',
-            formData:{
-              'open_id':app.globalData.open_id,
-              'type':'verb',
-              'verb_id':e.detail.verb_id
+            formData: {
+              'open_id': app.globalData.open_id,
+              'type': 'verb',
+              'verb_id': e.detail.verb_id
             },
-            success(res){
+            success(res) {
               console.log('上传结束');
               console.log(res);
               // 同时返回评价结果
               let data = JSON.parse(res.data)
-              e.detail.CallBack({'status':1,'score':data['score'],'file-path':that.tempFilePath});
+              e.detail.CallBack({ 'status': 1, 'score': data['score'], 'file-path': that.tempFilePath });
             }
           })
-        }else{
+        } else {
           let that = this;
           wx.uploadFile({
-            url: request_url+'/judgeAudio/',
+            url: request_url + '/judgeAudio/',
             filePath: this.tempFilePath,
             name: 'audio',
-            formData:{
-              'open_id':app.globalData.open_id,
-              'type':'sentence',
-              'sentence_id':this.data.sectionInfo.curr_sentence
+            formData: {
+              'open_id': app.globalData.open_id,
+              'type': 'sentence',
+              'sentence_id': this.data.sectionInfo.curr_sentence
             },
-            success(res){
+            success(res) {
               //console.log(res);
               console.log('上传结束');
               let data = JSON.parse(res.data)
@@ -298,12 +325,12 @@ Page({
               //console.log(data)
               let new_sentences = that.data.sentences;
               let curr_sentence_id = that.data.sectionInfo.curr_sentence;
-              new_sentences[curr_sentence_id]['user-src'] = request_url+data['user-audio'];
+              new_sentences[curr_sentence_id]['user-src'] = request_url + data['user-audio'];
               new_sentences[curr_sentence_id]['score'] = data['score'];
               console.log(new_sentences[curr_sentence_id]);
               that.setData({
-                sentences:new_sentences,
-                JudgeStatus:1
+                sentences: new_sentences,
+                JudgeStatus: 1
               });
             }
           })
@@ -360,7 +387,7 @@ Page({
       sectionInfo: new_sectionInfo,
       toIndex: 'sentence-' + sentence_id,
       isPlay: true,
-      JudgeStatus:this.data.sentences[sentence_id]['hasJudge']
+      JudgeStatus: this.data.sentences[sentence_id]['hasJudge']
     });
 
     let currSentenceHeight = 0;
@@ -372,14 +399,14 @@ Page({
       // 回调函数有一定延迟，应该在此函数里进行操作
       currSentenceHeight = res.height;
       //console.log('当前句子高度为： '+currSentenceHeight);
-       //此时单位为rpx
+      //此时单位为rpx
 
       //console.log(sentence_id);
 
       //console.log(start_index);
 
       //console.log(that.data.sectionInfo.num_sentences);
-      
+
       let num_others = that.data.sectionInfo.num_sentences - that.data.sentences[sentence_id].index;
 
       //console.log('剩余句子数： '+num_others);
@@ -481,7 +508,7 @@ Page({
   // 此处逻辑有问题，用户发音完成后不需要手动点击，直接发送到服务器进行评分，旁边的第三个按键用于播放用户音频
   PlayRecord: function () {
     //在用户已经有录音的情况下，才
-    console.log('current sentence: '+this.data.sectionInfo.curr_sentence);
+    console.log('current sentence: ' + this.data.sectionInfo.curr_sentence);
     console.log('播放个人录音');
     //还未实现，暂时仅播放个人录音
     //由于需要更新地址，先暂停播放教学音频
@@ -492,11 +519,11 @@ Page({
     }
     UserAudio = wx.createInnerAudioContext();
     UserAudio.autoplay = true;
-    UserAudio.src = this.data.sentences[this.data.sectionInfo.curr_sentence]['user-src'];
+    UserAudio.src = request_url + this.data.sentences[this.data.sectionInfo.curr_sentence]['user-src'];
     console.log(UserAudio.src)
     this.setData({
       isPlay: false,
-      JudgeStatus:2,
+      JudgeStatus: 2,
     });
     UserAudio.onEnded(() => {
       console.log('个人录音播放结束');
@@ -506,11 +533,11 @@ Page({
     });
   },
 
-  StopPlayRecord:function(){
+  StopPlayRecord: function () {
     console.log('停止播放个人录音');
     UserAudio.pause();
     this.setData({
-      JudgeStatus:1,
+      JudgeStatus: 1,
     });
   },
 
@@ -527,13 +554,13 @@ Page({
       let that = this;
 
       wx.request({
-        url:request_url + '/VerbTrans',
-        method:'GET',
-        data:{
-          verb:verb,
-          open_id:app.globalData.open_id
+        url: request_url + '/VerbTrans',
+        method: 'GET',
+        data: {
+          verb: verb,
+          open_id: app.globalData.open_id
         },
-        success:(res)=>{
+        success: (res) => {
           let verbInfo = res.data;
           console.log(verbInfo);
           that.VerbDialog.showDialog(verbInfo);
@@ -557,15 +584,15 @@ Page({
     let verb = event.detail.verb;
 
     wx.request({
-      url:request_url+'/addVerbFav',
-      method:'GET',
-      data:{
-        open_id:app.globalData.open_id,
-        isFav:isFav,
-        verb:verb
+      url: request_url + '/addVerbFav',
+      method: 'GET',
+      data: {
+        open_id: app.globalData.open_id,
+        isFav: isFav,
+        verb: verb
       },
 
-      success: function(res){
+      success: function (res) {
         console.log(res);
       }
 

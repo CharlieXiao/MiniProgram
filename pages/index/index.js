@@ -128,7 +128,9 @@ Page({
 		      poster:data.poster,
 		      learn_days:data.learn_days,
           curr_course:data.curr_course,
-        })
+		});
+		// 设置全局变量
+		app.globalData.learn_days = data.learn_days;
       }else{
         console.log('网络连接失败，请检查网络')
       }
@@ -141,9 +143,9 @@ Page({
     // wx.switchTab({
     //   url: '../userinfo/userinfo',
     // })
-    // wx.navigateTo({
-    //   url: '../record/record?section_id=4',
-    // });
+    wx.navigateTo({
+      url: '../myCourse/myCourse',
+    });
   }
 
 })

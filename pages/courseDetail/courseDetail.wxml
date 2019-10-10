@@ -13,7 +13,7 @@
     </view>
     <block wx:for="{{ courseSec }}" wx:key="id">
       <!-- 所有index小于当前章节index的都算为可以学习 -->
-      <view wx:if="{{ index <= curr_section_index }}" class="section" hover-class="tap-style" 
+      <view wx:if="{{ !isLock[index] }}" class="section" hover-class="tap-style" 
       bindtap="gotoRecord" data-section="{{ item.id }}" >
         <view class="curr-section" wx:if="{{item.id == courseInfo.curr_section}}" style="background-color:rgb(18, 150, 219)"></view>
         <view class="curr-section" wx:else></view>

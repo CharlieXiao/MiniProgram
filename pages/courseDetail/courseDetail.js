@@ -10,14 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    courseInfo: { id: 1, name: '用英语聊聊垃圾分类', intro: '全国人民都在里聊垃圾分类，快戳get相关的英文表达！', curr_section:2 ,sections: 4, img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564137318469&di=c1d4a055f340e69d91f09e6641a48146&imgtype=0&src=http%3A%2F%2Fwww.tsf.edu.pl%2Fwp-content%2Fuploads%2F2015%2F03%2Fpokaz1-1420x5001-1420x500.jpg'},
-    courseSec:[
-      { id: 1, title: '自我评价', subtitle: 'about yourself' },
-      { id: 2, title: '教育背景', subtitle: 'education background' },
-      { id: 3, title: '工作经历', subtitle: 'work experience' },
-      { id: 4, title: '其他技能', subtitle: 'other skills' },
-    ],
-    scroll_height:0,
+    scroll_height: 0,
   },
 
   /**
@@ -35,67 +28,82 @@ Page({
     let that = this;
 
     wx.request({
-      url: request_url+"/SectionInfo",
-      method:'GET',
-      data:{
-        course_id:course_id,
-        open_id:app.globalData.open_id,
+      url: request_url + "/SectionInfo",
+      method: 'GET',
+      data: {
+        course_id: course_id,
+        open_id: app.globalData.open_id,
       },
-      success(res){
-        if(res.statusCode == "200"){
+      success(res) {
+        if (res.statusCode == "200") {
           let data = res.data;
-          data.courseInfo.img = request_url+data.courseInfo.img;
+          data.courseInfo.img = request_url + data.courseInfo.img;
           console.log(data);
-          // 获取curr-section所对应的index
-          let curr_section = data.courseInfo.curr_section;
-          for(let i=0;i<data.courseSec.length;i+=1){
-            if(curr_section == data.courseSec[i].id){
-              that.setData({
-                curr_section_index:i
-              });
+          let section_finish = data.section_finish;
+          let prev_finish = true;
+          let isLock = new Array(section_finish.length);
+          for (let i = 0; i < section_finish.length; i += 1) {
+            //console.log('prev_finish: '+prev_finish);
+            //console.log('isFinish: '+section_finish[i]);
+            if (prev_finish) {
+              isLock[i] = false;
+            } else {
+              isLock[i] = true;
             }
+            prev_finish = section_finish[i];
           }
+          console.log(isLock);
           that.setData({
-            courseInfo:data.courseInfo,
-            courseSec:data.courseSec
+            courseInfo: data.courseInfo,
+            courseSec: data.courseSec,
+            isLock: isLock,
+            course_id: course_id
           })
-        }else{
+        } else {
           console.log('课程不存在')
         }
       }
     })
 
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         let cxClient = res.windowHeight;
         let cyClient = res.windowWidth;
-        let ratio = cyClient/cxClient;
-        let height = 750/ratio;
+        let ratio = cyClient / cxClient;
+        let height = 750 / ratio;
         //console.log(height);
         that.setData({
-          scroll_height:height-120
+          scroll_height: height - 120
         })
       },
     })
   },
 
-  gotoRecord:function(event){
+  gotoRecord: function (event) {
     let section = event.currentTarget.dataset.section;
     //console.log('section_id:'+section);
     let new_courseInfo = this.data.courseInfo;
     new_courseInfo.curr_section = section;
     // 更新当前课程
     this.setData({
-      courseInfo:new_courseInfo
+      courseInfo: new_courseInfo
     });
     wx.navigateTo({
-      url: '../record/record?section_id='+section,
+      url: '../record/record?section_id=' + section,
     });
   },
 
-  onShow:function(){
+  onShow: function () {
+    // 这里需要更新课程上锁信息
     //console.log('我出现了');
     // 在这里更新当前课程信息
     //console.log('当前课程：'+this.data.courseInfo.curr_section)
+    // 由于此处的onShow和上一个页面的onUnload函数中的wx.request是一个异步的关系，有可能onShow中的wx.request函数会优先于后者的同名函数触发，因此获得的结果并不是更新后的结果
+    //console.log(this.data.isLock)
+    //let that = this
+    // 延迟一段时间后输出isLock
+    // setTimeout(function(){
+    //   console.log(that.data.isLock)
+    // },2000)
   }
 })
