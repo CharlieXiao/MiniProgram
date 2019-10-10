@@ -18,6 +18,9 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+    wx.showLoading({
+      title: '数据加载中',
+    })
     wx.setNavigationBarTitle({
       title: '生词笔记',
     });
@@ -36,6 +39,7 @@ Page({
           hasVerb:res.data.hasVerb,
           verbList:res.data.verbList,
         })
+        wx.hideLoading();
       }
     })
 	},

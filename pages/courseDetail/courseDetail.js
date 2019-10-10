@@ -17,6 +17,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '内容加载中',
+    })
     let course_id = options.course_id;
     //console.log(course_id)
     //设置顶栏颜色
@@ -62,6 +65,7 @@ Page({
         } else {
           console.log('课程不存在')
         }
+        wx.hideLoading();
       }
     })
 

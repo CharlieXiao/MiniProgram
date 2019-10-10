@@ -20,6 +20,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '数据加载中',
+    })
     let that = this;
 
     wx.request({
@@ -42,6 +45,7 @@ Page({
             courseArray:courseArray
           })
         }
+        wx.hideLoading();
       },
     });
 
@@ -75,8 +79,13 @@ Page({
         choice:choice
       });
 
+      wx.showLoading({
+        title: '数据加载中',
+      })
+
       let that = this;
       //发送request请求到服务器获取相映数据
+      
       wx.request({
         url: request_url+'/UserCourse',
         data: {'open_id':app.globalData.open_id,'order':choice},
@@ -86,9 +95,18 @@ Page({
         responseType: 'text',
         success: (res)=>{
           console.log(res);
-          that.setData({
-            courseArray:res.data
-          });
+          let courseArray = res.data;
+          if(courseArray.length == 0){
+            that.setData({
+              hasCourse:false
+            })
+          }else{
+            that.setData({
+              courseArray: res.data,
+              hasCourse:true
+            });
+          }
+          wx.hideLoading();
         },
       })
     }

@@ -27,6 +27,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    request_url: 'https://kaldispeech.cn'
+    request_url: 'https://kaldi-speech.cn'
   }
 })

@@ -325,7 +325,7 @@ Page({
               //console.log(data)
               let new_sentences = that.data.sentences;
               let curr_sentence_id = that.data.sectionInfo.curr_sentence;
-              new_sentences[curr_sentence_id]['user-src'] = request_url + data['user-audio'];
+              new_sentences[curr_sentence_id]['user-src'] = data['user-audio'];
               new_sentences[curr_sentence_id]['score'] = data['score'];
               console.log(new_sentences[curr_sentence_id]);
               that.setData({
@@ -514,17 +514,19 @@ Page({
     //由于需要更新地址，先暂停播放教学音频
     TutorialAudio.pause();
     //清除上一次的录音
-    if (UserAudio != undefined) {
-      UserAudio.destroy();
-    }
+    UserAudio.destroy();
     UserAudio = wx.createInnerAudioContext();
-    UserAudio.autoplay = true;
+    //UserAudio.autoplay = true;
     UserAudio.src = request_url + this.data.sentences[this.data.sectionInfo.curr_sentence]['user-src'];
     console.log(UserAudio.src)
+    UserAudio.play();
     this.setData({
       isPlay: false,
       JudgeStatus: 2,
     });
+    UserAudio.onError((res)=>{
+      console.log(res);
+    })
     UserAudio.onEnded(() => {
       console.log('个人录音播放结束');
       this.setData({
