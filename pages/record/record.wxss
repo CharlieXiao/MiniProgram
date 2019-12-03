@@ -39,12 +39,17 @@
   box-sizing: border-box;
   padding: 0 10rpx;
   height: 70rpx;
-  border-radius: 20rpx;
+  border-radius: 5rpx;
   line-height: 70rpx;
 }
 
 .verb-tap-style{
   background-color: rgb(240,240,240);
+}
+
+.pron-bad{
+  color: #dc3545;
+  border-bottom: 1px dashed #dc3545;
 }
 
 .text-ch{

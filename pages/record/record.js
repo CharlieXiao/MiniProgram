@@ -40,8 +40,9 @@ Page({
   onLoad: function (options) {
 
     wx.showLoading({
-      title: '加载语音文件中...'
-    });
+      title: '加载语音文件中',
+      mask: true
+    })
 
     let section_id = options.section_id;
 
@@ -284,10 +285,14 @@ Page({
         console.log('停止录音, 文件路径：' + res.tempFilePath);
 
         // 直接向服务器发送request请求
-
+        wx.showLoading({
+          title: '计算评分中...',
+          mask: true
+        })
         // 对于单词和句子的需要进行区分
         if (e.currentTarget.id == 'VerbTrans') {
           clearTimeout(TimerID);
+          // 显示评分加载框
           let that = this;
           wx.uploadFile({
             url: request_url + '/judgeAudio/',
@@ -299,8 +304,9 @@ Page({
               'verb_id': e.detail.verb_id
             },
             success(res) {
+              wx.hideLoading();
               console.log('上传结束');
-              console.log(res);
+              //console.log(res);
               // 同时返回评价结果
               let data = JSON.parse(res.data)
               e.detail.CallBack({ 'status': 1, 'score': data['score'], 'file-path': that.tempFilePath });
@@ -318,15 +324,17 @@ Page({
               'sentence_id': this.data.sectionInfo.curr_sentence
             },
             success(res) {
-              //console.log(res);
+              console.log(res);
               console.log('上传结束');
+              wx.hideLoading()
               let data = JSON.parse(res.data)
               // 此处res中的data不知并不是json对象
-              //console.log(data)
+              console.log(data)
               let new_sentences = that.data.sentences;
               let curr_sentence_id = that.data.sectionInfo.curr_sentence;
               new_sentences[curr_sentence_id]['user-src'] = data['user-audio'];
               new_sentences[curr_sentence_id]['score'] = data['score'];
+              new_sentences[curr_sentence_id]['en_sep'] = data['sentence']
               console.log(new_sentences[curr_sentence_id]);
               that.setData({
                 sentences: new_sentences,

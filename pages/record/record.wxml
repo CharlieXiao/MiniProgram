@@ -5,7 +5,13 @@
       <image class="course-image" src="{{ courseImage }}" mode="aspectFill"></image>
       <view class="sentence-verb">
         <block wx:for="{{ item.en_sep }}" wx:for-item="verb" wx:key="index">
-          <view class="verb" bindtap="getTrans" hover-class="verb-tap-style" data-verb="{{verb}}">{{ verb }}</view>
+          <block wx:if="{{ verb['isBad'] }}">
+            <view class="verb pron-bad" bindtap="getTrans" hover-class="verb-tap-style" data-verb="{{verb['verb']}}" >{{ verb['verb'] }}</view>
+          </block>
+          <block wx:else>
+            <view class="verb" bindtap="getTrans" hover-class="verb-tap-style" data-verb="{{verb['verb']}}" >{{ verb['verb'] }}</view>
+          </block>
+          
         </block>
       </view>
       <text class="text-ch">{{item.ch}}</text>

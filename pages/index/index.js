@@ -143,9 +143,12 @@ Page({
     // wx.switchTab({
     //   url: '../userinfo/userinfo',
     // })
+    // wx.switchTab({
+    //   url: '../study/study',
+    // });
     wx.navigateTo({
-      url: '../myCourse/myCourse',
-    });
+      url: '../record/record?section_id=4',
+    })
   }
 
 })
