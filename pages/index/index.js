@@ -1,6 +1,8 @@
 //index.js
 
-const app = getApp()
+const app = getApp();
+
+const request_url = app.globalData.request_url;
 
 Page({
   data: {
@@ -111,7 +113,7 @@ Page({
   let that = this;
 
   wx.request({
-    url: app.globalData.request_url+"/index",
+    url: request_url+"/index",
     method:"GET",
     data:{
 		'open_id':app.globalData.open_id
@@ -146,9 +148,9 @@ Page({
     // wx.switchTab({
     //   url: '../study/study',
     // });
-    wx.navigateTo({
-      url: '../record/record?section_id=4',
-    })
+    // wx.navigateTo({
+    //   url: '../record/record?section_id=4',
+    // })
   }
 
 })

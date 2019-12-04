@@ -326,20 +326,28 @@ Page({
             success(res) {
               console.log(res);
               console.log('上传结束');
-              wx.hideLoading()
-              let data = JSON.parse(res.data)
+              wx.hideLoading();
+              let data = JSON.parse(res.data);
               // 此处res中的data不知并不是json对象
-              console.log(data)
-              let new_sentences = that.data.sentences;
-              let curr_sentence_id = that.data.sectionInfo.curr_sentence;
-              new_sentences[curr_sentence_id]['user-src'] = data['user-audio'];
-              new_sentences[curr_sentence_id]['score'] = data['score'];
-              new_sentences[curr_sentence_id]['en_sep'] = data['sentence']
-              console.log(new_sentences[curr_sentence_id]);
-              that.setData({
-                sentences: new_sentences,
-                JudgeStatus: 1
-              });
+              console.log(data);
+              if(data['error_code'] == 0){
+                let new_sentences = that.data.sentences;
+                let curr_sentence_id = that.data.sectionInfo.curr_sentence;
+                new_sentences[curr_sentence_id]['user-src'] = data['user-audio'];
+                new_sentences[curr_sentence_id]['score'] = data['score'];
+                new_sentences[curr_sentence_id]['en_sep'] = data['sentence']
+                console.log(new_sentences[curr_sentence_id]);
+                that.setData({
+                    sentences: new_sentences,
+                    JudgeStatus: 1
+                });
+            }else{
+                wx.showModal({
+                    title:'提示',
+                    content:'请重新读一遍'
+                })
+            }
+
             }
           })
         }
