@@ -294,6 +294,7 @@ Page({
           clearTimeout(TimerID);
           // 显示评分加载框
           let that = this;
+          console.log(this.tempFilePath)
           wx.uploadFile({
             url: request_url + '/judgeAudio/',
             filePath: this.tempFilePath,
@@ -309,7 +310,15 @@ Page({
               //console.log(res);
               // 同时返回评价结果
               let data = JSON.parse(res.data)
-              e.detail.CallBack({ 'status': 1, 'score': data['score'], 'file-path': that.tempFilePath });
+              if(data['error_code'] != 0){
+                  wx.showModal({
+                      title: '提示',
+                      content: '请重新读一遍'
+                  })
+              }else{
+                  console.log(data)
+                  e.detail.CallBack({ 'status': 1, 'score': data['score'], 'file-path': that.tempFilePath,'phones':data['sentence'][0] });
+              }
             }
           })
         } else {
@@ -335,7 +344,16 @@ Page({
                 let curr_sentence_id = that.data.sectionInfo.curr_sentence;
                 new_sentences[curr_sentence_id]['user-src'] = data['user-audio'];
                 new_sentences[curr_sentence_id]['score'] = data['score'];
-                new_sentences[curr_sentence_id]['en_sep'] = data['sentence']
+                // 需要遍历new_sentences
+                let sentence_index = 0;
+                let en_sep = new_sentences[curr_sentence_id]['en_sep'];
+                for(let i = 0;i<en_sep.length;i=i+1){
+                    if(sentence_index < data['sentence'].length && en_sep[i]['verb'] == data['sentence'][sentence_index]['verb']){
+                        en_sep[i]['isBad'] = data['sentence'][sentence_index]['isBad']
+                        sentence_index = sentence_index + 1
+                    }
+                }
+                new_sentences[curr_sentence_id]['en_sep'] = en_sep
                 console.log(new_sentences[curr_sentence_id]);
                 that.setData({
                     sentences: new_sentences,

@@ -33,6 +33,15 @@
       <text wx:if="{{ item.pos != '' }}" class="verb-pos" selectable="false" space="false" decode="false">{{item.pos}}</text>
       <text class="verb-explains" selectable="false" space="false" decode="false">{{item.explain}}</text>
     </view>
+    <view class="phones-holder" wx:if="{{ JudgeStatus != 0 }}">
+        <text class="verb-pos" style="color:#6c757d">/</text>
+        <block  wx:for="{{ judgeInfo.phones }}" wx:key="index"> 
+            <text class="verb-phone" wx:if="{{ item.level == 1 }}" style="color:#6c757d" >{{ item.phone }}</text>
+            <text class="verb-phone" wx:elif="{{ item.level == 2 }}" style="color:rgb(255, 155, 0)">{{ item.phone }}</text>
+            <text class="verb-phone" wx:elif="{{ item.level == 3 }}" style="color:#dc3545">{{ item.phone }}</text>
+        </block>
+        <text class="verb-pos" style="color:#6c757d">/</text>
+    </view>
   </scroll-view>
   <!-- 添加单词跟读选项 -->
   <view class="btn-set">

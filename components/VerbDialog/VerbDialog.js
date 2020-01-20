@@ -27,22 +27,33 @@ Component({
     isAddFav: false,
     verbInfo:{
       explains:[
-        {pos:"n.",explain:"花；精华；开花植物"},
-        {pos: "vi.", explain: "成熟，发育；开花；繁荣；旺盛；三生三世十里桃花"},
-        {pos: "vt.", explain: "使开花；用花装饰"},
-        {pos: "n.", explain: "(Flower)人名；(英)弗劳尔"}
+          { pos: "n.", explain: "[语][计] 句子，命题；宣判，判决"},
+          { pos: "vi.", explain: "判决，宣判"},
       ],
-      uk_phonetic: "'flaʊə",
-      uk_speech: "http://openapi.youdao.com/ttsapi?q=flower&langType=en&sign=66264F0B8941FA81A714C596E2432521&salt=1566197801227&voice=5&format=mp3&appKey=4f938f684c09931e",
-      us_phonetic: "'flaʊɚ",
-      us_speech: "http://openapi.youdao.com/ttsapi?q=flower&langType=en&sign=66264F0B8941FA81A714C596E2432521&salt=1566197801227&voice=6&format=mp3&appKey=4f938f684c09931e",
-      verb: "flower"
+        'uk-phonetic': "ˈsentəns",
+        'uk-speech': "https://kaldi-speech.cn/media/verb/sentence_uk.mp3",
+        'us-phonetic': "ˈsentəns",
+        'us-speech': "https://kaldi-speech.cn/media/verb/sentence_us.mp3",
+      verb: "sentence",
     },
     isPlay:false,
-    JudgeStatus:0,
+    JudgeStatus:1,
     isRecord:false,
     result:80,
     ContainerHeight:0,
+    judgeInfo: {
+        BadPhoneList: [],
+        isBad: false,
+        phones: [
+            { phone: "S", level: 1 },
+            { phone: "EH", level: 1 },
+            { phone: "N", level: 2 },
+            { phone: "T", level: 2 },
+            { phone: "AH", level: 2 },
+            { phone: "N", level: 2 },
+            { phone: "S", level: 2 },
+        ]
+    }
   },
 
   /**
@@ -182,6 +193,7 @@ Component({
             result:e.score,
             filepath:e['file-path'],
             JudgeStatus:1,
+            judgeInfo:e['phones']
           });
         }else{
           console.log('录音失败，请重试');

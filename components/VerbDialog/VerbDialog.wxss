@@ -108,7 +108,23 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    margin-bottom: 15rpx
+    margin-bottom: 15rpx;
+}
+
+.phones-holder{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 40rpx 0 0 0;
+    justify-content: center;
+}
+
+.verb-phone{
+    line-height: 40rpx;
+    box-sizing: border-box;
+    font-size:30rpx;
+    margin-bottom: auto;
+    margin-right: 10rpx;
 }
 
 .verb-pos{
