@@ -14,6 +14,7 @@ Page({
     height:0,
     choice:1,
     hasCourse:false,
+    request_url:request_url
   },
 
   /**

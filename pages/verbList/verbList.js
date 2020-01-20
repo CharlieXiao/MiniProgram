@@ -63,7 +63,7 @@ Page({
   },
 
   verbPron: function(event){
-    let src = event.currentTarget.dataset.src
+    let src = request_url+event.currentTarget.dataset.src
     const innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.src = src
     innerAudioContext.autoplay = true

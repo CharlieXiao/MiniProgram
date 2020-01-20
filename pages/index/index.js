@@ -121,13 +121,13 @@ Page({
 
     success(res) {
       //请求成功
-      if(res.statusCode == "200"){
+      if(res.statusCode == "200" && res.data.error == undefined){
         var data = res.data
         console.log(data)
         that.setData({
           motto:data.motto,
           author:data.author,
-		      poster:data.poster,
+		      poster:request_url+data.poster,
 		      learn_days:data.learn_days,
           curr_course:data.curr_course,
 		});

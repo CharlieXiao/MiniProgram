@@ -10,6 +10,8 @@ Page({
   data: {
     height:0,
     choice:'default',
+    // 方便页面直接加载图片
+    request_url:request_url,
   },
 
   onLoad: function (options) {
