@@ -1,2 +1,79 @@
 <!--pages/questions/questions.wxml-->
-<text>pages/questions/questions.wxml</text>
+<!-- <text>pages/questions/questions.wxml</text> -->
+<view class="questionContainer">
+    <view class="appInfo">
+        <image class="appPic" src="../../image/logo.png" mode="aspectFit"></image>
+        <text class="appName">Kaldi 英语评分</text>
+        <text class="appVersion">Version 1.0.0(α)</text>
+    </view>
+    <view class="infoContainer">
+        <view class="seperate-line"></view>
+        <view class="special-thanks">
+            <view class="thanks-title">
+                <image class="thanks-icon" src="../../image/medal.png" mode="aspectFit"></image>
+                <text class="thanks-title-text">特别鸣谢</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">项目来源及资金支持</text>
+                <text class="org-name">重庆大学</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">基于GMM-HMM的发音评测（kaldi-gop）</text>
+                <text class="org-name">Junbo Zhang</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">单词释义及例句发音</text>
+                <text class="org-name">有道智云</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">例句来源及设计灵感</text>
+                <text class="org-name">英语流利说</text>
+            </view>
+        </view>
+        <view class="special-thanks">
+            <view class="thanks-title">
+                <image class="thanks-icon" src="../../image/open-source.png" mode="aspectFit"></image>
+                <text class="thanks-title-text">开源许可</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">Kaldi</text>
+                <text class="org-name">http://www.kaldi-asr.org</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">iconfont</text>
+                <text class="org-name">https://www.iconfont.cn</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">django</text>
+                <text class="org-name">https://www.djangoproject.com</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">ffmpeg</text>
+                <text class="org-name">http://ffmpeg.org</text>
+            </view>
+        </view>
+        <view class="special-thanks">
+            <view class="thanks-title">
+                <image class="thanks-icon" src="../../image/email.png" mode="aspectFit"></image>
+                <text class="thanks-title-text">问题反馈</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">Junjie Zhang</text>
+                <text class="org-name">justthewayyouarejie@foxmail.com</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">Junhua Long</text>
+                <text class="org-name">10000@qq.com</text>
+            </view>
+            <view class="thanks-detail">
+                <text class="thanks-reason">Yilong Xiao</text>
+                <text class="org-name">hhyedu@live.com</text>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view class="seperate-line"></view>
+        <text class="footer-text">Copyright 2019-2020 kaldi-speech.cn</text>
+        <text class="footer-text">All rights reserverd.</text>
+    </view>
+</view>

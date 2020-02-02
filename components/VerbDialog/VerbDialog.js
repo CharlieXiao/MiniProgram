@@ -37,7 +37,7 @@ Component({
       verb: "sentence",
     },
     isPlay:false,
-    JudgeStatus:1,
+    JudgeStatus:0,
     isRecord:false,
     result:80,
     ContainerHeight:0,

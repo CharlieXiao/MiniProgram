@@ -7,7 +7,7 @@
 			<text class='learnDays'>累计学习 {{ learn_days }} 天</text>
 		</view>
 	</view>
-  <view class='Help'>
+  <!-- <view class='Help'>
 		<view class='options' bindtap='studyAlarm' hover-class="options-hover">
 			<image class='icon' src='../../image/alarm.png'></image>
 			<view class='option-description'>
@@ -16,7 +16,7 @@
 			</view>
 			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
-	</view>
+	</view> -->
 	<view class='Mine'>
     <view class='options' bindtap='courseList' hover-class="options-hover">
 			<image class='icon' src='../../image/course.png'></image>
@@ -46,7 +46,7 @@
     <view class='options' bindtap='questions' hover-class="options-hover">
 			<image class='icon' src='../../image/problem.png'></image>
 			<view class='option-description'>
-				<text class='option-title'>常见问题</text>
+				<text class='option-title'>问题反馈</text>
 				<text class='option-more'>关于Kaldi</text>
 			</view>
 			<image class='arrow' src='../../image/arrow.png'></image>

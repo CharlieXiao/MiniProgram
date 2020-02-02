@@ -13,7 +13,7 @@ Page({
 	 */
 	onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '常见问题',
+      title: '关于',
     })
 	},
 
