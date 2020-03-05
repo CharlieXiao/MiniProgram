@@ -304,10 +304,9 @@ Page({
             filePath: this.tempFilePath,
             name: 'audio',
             formData: {
-              'open_id': app.globalData.open_id,
               'type': 'verb',
               'verb_id': e.detail.verb_id
-            },
+              }, header: { session: app.globalData.session },
             success(res) {
               wx.hideLoading();
               console.log('上传结束');
@@ -332,10 +331,9 @@ Page({
             filePath: this.tempFilePath,
             name: 'audio',
             formData: {
-              'open_id': app.globalData.open_id,
               'type': 'sentence',
               'sentence_id': this.data.sectionInfo.curr_sentence
-            },
+            },header:{session:app.globalData.session},
             success(res) {
               console.log(res);
               console.log('上传结束');
