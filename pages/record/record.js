@@ -57,10 +57,12 @@ Page({
       method: 'GET',
       data: {
         section_id: section_id,
-        open_id: app.globalData.open_id,
+      },
+      header:{
+          session:app.globalData.session
       },
       success(res) {
-        if (res.statusCode == '200' && res.data.error == '0') {
+        if (res.data.status == '200') {
           console.log(res.data)
           var data = res.data
           // 由于小程序从后台获取图片链接是需要一定时间的，因此在渲染时会有一段时间图片链接为空，需要指定一张默认图片
@@ -177,8 +179,10 @@ Page({
       method: 'GET',
       data: {
         type: 1,
-        curr_sentence: this.data.sectionInfo.curr_sentence,
-        open_id: app.globalData.open_id
+        curr_sentence: this.data.sectionInfo.curr_sentence
+      },
+      header:{
+          session:app.globalData.session
       },
       success(res) {
         console.log(res);
@@ -593,8 +597,10 @@ Page({
         url: request_url + '/VerbTrans',
         method: 'GET',
         data: {
-          verb: verb,
-          open_id: app.globalData.open_id
+          verb: verb
+        },
+        header:{
+            session:app.globalData.session
         },
         success: (res) => {
           let verbInfo = res.data;
@@ -623,11 +629,10 @@ Page({
       url: request_url + '/addVerbFav',
       method: 'GET',
       data: {
-        open_id: app.globalData.open_id,
         isFav: isFav,
         verb: verb
       },
-
+    header:{session:app.globalData.session},
       success: function (res) {
         console.log(res);
       }

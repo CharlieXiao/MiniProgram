@@ -1,7 +1,7 @@
 <!-- pages/myAudio/myAudio.wxml -->
 <view class="AudioPage">
   <scroll-view wx:if="{{ hasAudio }}" class="AudioList" scroll-y>
-    <block wx:for="{{ AudioList }}" wx:key="{{ index }}">
+    <block wx:for="{{ AudioList }}" wx:key="index">
       <view class="audio-block" wx:if="{{ item.notRemove }}">
         <view class="audio-holder">
           <text class="audio-sentence">{{ item.sentence_en }}</text>

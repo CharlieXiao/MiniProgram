@@ -29,9 +29,7 @@ Page({
 
     wx.request({
       url: request_url+'/VerbList',
-      data:{
-        open_id:app.globalData.open_id,
-      },
+        header: { session: app.globalData.session },
       method:'GET',
       success: function(res){
         console.log(res);

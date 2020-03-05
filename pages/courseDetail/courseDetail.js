@@ -34,9 +34,11 @@ Page({
       url: request_url + "/SectionInfo",
       method: 'GET',
       data: {
-        course_id: course_id,
-        open_id: app.globalData.open_id,
-      },
+        course_id: course_id
+        }, 
+        header: {
+            'session': app.globalData.session
+        },
       success(res) {
         if (res.statusCode == "200") {
           let data = res.data;
