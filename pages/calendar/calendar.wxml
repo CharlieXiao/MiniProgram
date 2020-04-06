@@ -1,0 +1,57 @@
+<view class="page-container">
+    <view class="calendar-title">打卡日历</view>
+    <view class="calendar-border">
+        <view class="calendar-header">
+            <view class="calendar-selector">
+                <image class="selector-icon" src="/image/arrow-left.png" bindtap="lastMonth" style="margin-right:50rpx;" hover-class="text-hover"></image>
+                <text class="curr-month">{{year}}年{{month}}月</text>
+                <image class="selector-icon" src="/image/arrow.png" bindtap="nextMonth" style="margin-left:50rpx;" hover-class="text-hover"></image>
+            </view>
+        </view>
+        <view class="calendar-body">
+            <view class="calendar-week-bar">
+                <view class="calendar-week-bar-item">
+                    <text class="calendar-text">一</text>
+                </view>
+                <view class="calendar-week-bar-item">
+                    <text class="calendar-text">二</text>
+                </view>
+                <view class="calendar-week-bar-item">
+                    <text class="calendar-text">三</text>
+                </view>
+                <view class="calendar-week-bar-item">
+                    <text class="calendar-text">四</text>
+                </view>
+                <view class="calendar-week-bar-item">
+                    <text class="calendar-text">五</text>
+                </view>
+                <view class="calendar-week-bar-item">
+                    <text class="calendar-text">六</text>
+                </view>
+                <view class="calendar-week-bar-item">
+                    <text class="calendar-text">日</text>
+                </view>
+            </view>
+            <view class="calendar-array">
+                <view wx:for="{{dateArray}}" wx:for-item="weekArray" class="calendar-week">
+                    <view wx:for="{{weekArray}}" wx:for-item="weekDate" 
+                    class="calendar-date {{weekDate.is_study?'studied':''}} {{weekDate.month==to_month&&weekDate.date==date?'today':''}} {{weekDate.month==month?'':'other-month'}}" hover-class="text-hover" 
+                    bindtap="{{weekDate.month>month?'nextMonth':(weekDate.month<month?'lastMonth':'')}}">
+                            <text class="calendar-text">{{weekDate.dateString}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="calendar-description">
+        <view class="calendar-title">分析简报</view>
+        <view>
+            <view>
+                <text>本月累计打卡天数：6 天</text>
+            </view>
+            <view>
+                <text>最长连续打卡天数：6，超过了 99% 的人</text>
+            </view>
+        </view>
+    </view>
+</view>

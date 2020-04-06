@@ -34,6 +34,13 @@ Page({
     },
     // 响应按钮点击事件，当用户点击登录时
     getUserInfo: function (e) {
+        console.log("订阅信息")
+        wx.requestSubscribeMessage({
+            tmplIds: ['PgnEXYQ78_7wPLYwpyLpct5slrba1hkwVQw7mF_KenM'],
+            success(res){
+                console.log(res);
+            }
+        })
         if (e.detail.userInfo != undefined) {
             console.log(e);
             app.globalData.userInfo = e.detail.userInfo;

@@ -1,55 +1,61 @@
 <!--pages/userinfo/userinfo.wxml-->
 <view class='infoPage'>
-	<view class='userinfo' >
-		<image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
-		<view class='studyInfo'>
-			<text class='nickName'>{{userInfo.nickName}}</text>
-			<text class='learnDays'>累计学习 {{ learn_days }} 天</text>
-		</view>
-	</view>
-  <!-- <view class='Help'>
-		<view class='options' bindtap='studyAlarm' hover-class="options-hover">
+    <view class='userinfo'>
+        <image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
+        <view class='studyInfo'>
+            <text class='nickName'>{{userInfo.nickName}}</text>
+            <text class='learnDays'>累计学习 {{ learn_days }} 天</text>
+        </view>
+    </view>
+    <view class='Help'>
+		<view class='options' bindtap='calendar' hover-class="options-hover">
 			<image class='icon' src='../../image/alarm.png'></image>
 			<view class='option-description'>
-				<text class='option-title'>学习提醒</text>
-				<text class='option-more'>每天7:00</text>
+				<text class='option-title'>打卡记录</text>
+				<!-- <text class='option-more'>每天7:00</text> -->
 			</view>
 			<image class='arrow' src='../../image/arrow.png'></image>
 		</view>
-	</view> -->
-	<view class='Mine'>
-    <view class='options' bindtap='courseList' hover-class="options-hover">
-			<image class='icon' src='../../image/course.png'></image>
-			<view class='option-description'>
-				<text class='option-title'>我的课程</text>
-			</view>
-			<image class='arrow' src='../../image/arrow.png'></image>
-		</view>
-    <view class="sep-line"></view>
-		<view class='options' bindtap='verbList' hover-class="options-hover">
-			<image class='icon' src='../../image/verb_list.png'></image>
-			<view class='option-description'>
-				<text class='option-title'>生词笔记</text>
-			</view>
-			<image class='arrow' src='../../image/arrow.png'></image>
-		</view>
-    <view class="sep-line"></view>
-		<view class='options' bindtap='AudioList' hover-class="options-hover">
-			<image class='icon' src='../../image/audio.png'></image>
-			<view class='option-description'>
-				<text class='option-title'>历史音频</text>
-			</view>
-			<image class='arrow' src='../../image/arrow.png'></image>
-		</view>
-	</view>		
-  <view class="About">
-    <view class='options' bindtap='questions' hover-class="options-hover">
-			<image class='icon' src='../../image/problem.png'></image>
-			<view class='option-description'>
-				<text class='option-title'>问题反馈</text>
-				<text class='option-more'>关于Kaldi</text>
-			</view>
-			<image class='arrow' src='../../image/arrow.png'></image>
-		</view>
-  </view>
+	</view>
+    <view class='Mine'>
+        <view class='options' bindtap='courseList' hover-class="options-hover">
+            <image class='icon' src='../../image/course.png'></image>
+            <view class='option-description'>
+                <text class='option-title'>我的课程</text>
+            </view>
+            <image class='arrow' src='../../image/arrow.png'></image>
+        </view>
+        <view class='options' bindtap='verbList' hover-class="options-hover">
+            <image class='icon' src='../../image/verb_list.png'></image>
+            <view class='option-description'>
+                <text class='option-title'>生词笔记</text>
+            </view>
+            <image class='arrow' src='../../image/arrow.png'></image>
+        </view>
+        <view class='options' bindtap='AudioList' hover-class="options-hover">
+            <image class='icon' src='../../image/audio.png'></image>
+            <view class='option-description'>
+                <text class='option-title'>历史音频</text>
+            </view>
+            <image class='arrow' src='../../image/arrow.png'></image>
+        </view>
+    </view>
+    <view class="About">
+        <view class='options' bindtap='feedback' hover-class="options-hover">
+            <image class='icon' src='../../image/feedback.png'></image>
+            <view class='option-description'>
+                <text class='option-title'>问题反馈</text>
+                <!-- <text class='option-more'>关于Kaldi</text> -->
+            </view>
+            <image class='arrow' src='../../image/arrow.png'></image>
+        </view>
+        <view class='options' bindtap='questions' hover-class="options-hover">
+            <image class='icon' src='../../image/problem.png'></image>
+            <view class='option-description'>
+                <text class='option-title'>关于</text>
+                <!-- <text class='option-more'>关于Kaldi</text> -->
+            </view>
+            <image class='arrow' src='../../image/arrow.png'></image>
+        </view>
+    </view>
 </view>

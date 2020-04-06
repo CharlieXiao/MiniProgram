@@ -92,7 +92,7 @@ page{
 }
 
 .sep-line{
-  margin-left: 125rpx;
+  /* margin-left: 125rpx; */
   border-bottom: 1rpx solid rgb(217,217,217);
 }
 

@@ -177,9 +177,8 @@ Page({
         // wx.navigateTo({
         //   url: '../record/record?section_id=4',
         // })
-        // wx.navigateTo({
-        //     url: '../questions/questions',
-        // })
+        wx.navigateTo({
+            url: '../calendar/calendar',
+        })
     }
-
 })

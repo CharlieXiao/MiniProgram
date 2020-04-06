@@ -81,4 +81,16 @@ Page({
 			url: '../questions/questions',
 		});
 	},
+
+    calendar: function(){
+        wx.navigateTo({
+            url: '../calendar/calendar',
+        })
+    },
+
+    feedback: function () {
+        wx.navigateTo({
+            url: '../feedback/feedback',
+        })
+    },
 })

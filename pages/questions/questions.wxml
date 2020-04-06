@@ -52,7 +52,7 @@
                 <text class="org-name">http://ffmpeg.org</text>
             </view>
         </view>
-        <view class="special-thanks">
+        <!-- <view class="special-thanks">
             <view class="thanks-title">
                 <image class="thanks-icon" src="../../image/email.png" mode="aspectFit"></image>
                 <text class="thanks-title-text">问题反馈</text>
@@ -69,7 +69,7 @@
                 <text class="thanks-reason">Yilong Xiao</text>
                 <text class="org-name">hhyedu@live.com</text>
             </view>
-        </view>
+        </view> -->
     </view>
     <view class="footer">
         <view class="seperate-line"></view>

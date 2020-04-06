@@ -1,0 +1,82 @@
+.page-container{
+    padding: 30rpx;
+    /* 采用苹果字体 */
+    font-family: -apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji;
+}
+
+.calendar-title{
+    font-size: 40rpx;
+    font-weight: bold;
+    margin-bottom: 30rpx;
+}
+
+.calendar-border{
+    border-radius: 10rpx;
+    border: 1px solid #f0f0f0;
+}
+
+.calendar-header{
+    padding: 30rpx;
+}
+
+.calendar-selector{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center; 
+}
+
+.selector-icon{
+    height: 40rpx;
+    width: 40rpx;
+}
+
+.calendar-body{
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction:column;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.calendar-week-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.calendar-week-bar-item,.calendar-date{
+    border: 1px solid white;
+    border-radius: 2px;
+    width: 50rpx;
+    height: 50rpx;
+    margin: 20rpx 0;
+}
+
+.calendar-week{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.studied{
+    background-color: #1890ff;
+    color: white !important;
+}
+
+.other-month{
+    color: rgba(0,0,0,.25);
+}
+
+.calendar-text{
+    display: block;
+    text-align: center;
+}
+
+.today{
+    border: 1px solid #1890ff;
+}
+
+.text-hover{
+    background-color: rgba(0,0,0,.1);
+    color: rgba(0,0,0,.65) !important;
+}

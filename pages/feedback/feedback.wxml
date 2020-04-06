@@ -1,0 +1,32 @@
+<view class="page" data-weui-theme="{{theme}}">
+	<form class="weui-form" bindsubmit="submit">
+		<view class="weui-form__text-area">
+			<h2 class="weui-form__title">反馈建议</h2>
+			<view class="weui-form__desc">您的反馈会促使我们更好的完善小程序</view>
+		</view>
+		<view class="weui-form__control-area">
+			<view class="weui-cells__group weui-cells__group_form">
+				<view class="weui-cells__title">问题描述</view>
+				<view class="weui-cells weui-cells_form">
+					<view class="weui-cell ">
+						<view class="weui-cell__bd">
+							<textarea class="weui-textarea" placeholder="简要描述您的问题和建议" rows="3" name="input_area"></textarea>
+							<view class="weui-textarea-counter"><text>0</text>/200</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="weui-form__opr-area">
+			<button class="weui-btn weui-btn_primary" form-type="submit">确定</button>
+		</view>
+	</form>
+
+    <view class="fadeIn {{hideToast ? 'fadeOut' : ''}}" wx:if="{{toast}}">
+		<view class="weui-mask_transparent"></view>
+		<view class="weui-toast">
+			<i class="weui-icon-success-no-circle weui-icon_toast"></i>
+			<view class="weui-toast__content">已完成</view>
+		</view>
+	</view>
+</view>
