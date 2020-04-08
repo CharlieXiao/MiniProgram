@@ -25,14 +25,14 @@ App({
       }
     })
   },
-//   globalData: {
-//     userInfo: null,
-//     request_url: 'https://kaldi-speech.cn',
-//   }
   globalData: {
     userInfo: null,
-    request_url: 'http://127.0.0.1:8000',
-  },
+    request_url: 'https://kaldi-speech.cn'
+  }
+//   globalData: {
+//     userInfo: null,
+//     request_url: 'http://127.0.0.1:8000',
+//   },
     // globalData: {
     //     userInfo: null,
     //     request_url: 'http://192.168.0.107:8000',

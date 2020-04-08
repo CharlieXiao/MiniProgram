@@ -5,10 +5,9 @@
 }
 
 .calendar-title{
+    font-size: 40rpx;
+    font-weight: bold;
     margin-bottom: 30rpx;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 }
 
 .calendar-border{
@@ -80,17 +79,4 @@
 .text-hover{
     background-color: rgba(0,0,0,.1);
     color: rgba(0,0,0,.65) !important;
-}
-
-.calendar-description{
-    margin-top: 20rpx;
-}
-
-.calendar-description-text{
-    margin: 10rpx 0;
-}
-
-.calendar-stat{
-    color: rgb(255,155,0);
-    font-size: large;
 }

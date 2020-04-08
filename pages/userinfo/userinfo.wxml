@@ -41,14 +41,14 @@
         </view>
     </view>
     <view class="About">
-        <!-- <view class='options' bindtap='feedback' hover-class="options-hover">
+        <view class='options' bindtap='feedback' hover-class="options-hover">
             <image class='icon' src='../../image/feedback.png'></image>
             <view class='option-description'>
                 <text class='option-title'>问题反馈</text>
-                <text class='option-more'>关于Kaldi</text>
+                <!-- <text class='option-more'>关于Kaldi</text> -->
             </view>
             <image class='arrow' src='../../image/arrow.png'></image>
-        </view> -->
+        </view>
         <view class='options' bindtap='questions' hover-class="options-hover">
             <image class='icon' src='../../image/problem.png'></image>
             <view class='option-description'>

@@ -4,7 +4,7 @@
     <view class="appInfo">
         <image class="appPic" src="../../image/logo.png" mode="aspectFit"></image>
         <text class="appName">Kaldi 英语评分</text>
-        <button class="feedback" open-type='feedback' >意见反馈</button>
+        <text class="appVersion">Version 1.0.0(α)</text>
     </view>
     <view class="infoContainer">
         <view class="seperate-line"></view>

@@ -8,7 +8,7 @@
 }
 
 .appName{
-    font-size: 36rpx;
+    font-size: 30rpx;
 }
 
 .appVersion{
@@ -91,18 +91,4 @@
     margin-top: 20rpx;
     font-size: 24rpx;
     color: rgb(180,180,180);
-}
-
-.feedback{
-    background-color: white;
-    border: 1px solid white;
-    color: rgb(255,155,0);
-}
-
-.feedback::after{
-    border: none;
-}
-
-.button-hover{
-    text-decoration: underline;
 }
