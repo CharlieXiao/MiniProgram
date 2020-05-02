@@ -121,49 +121,33 @@ Page({
         });
 
         let that = this;
-        // 进入首页时执行登录操作
-        wx.login({
+        wx.request({
+            url: app.globalData.request_url + '/index',
+            header: {
+                OPENID: app.globalData.open_id,
+            },
+            method: 'GET',
             success: res => {
-                // 发送 res.code 到后台换取 openId, sessionKey, unionId
-                if (res.code) {
-                    wx.request({
-                        url: app.globalData.request_url + '/index',
-                        header: {
-                            code: res.code,
-                            // 将本地的session也传输给服务器，如果session失效则更新，默认session只保存24小时
-                            session: app.globalData.session
-                        },
-                        method: 'GET',
-                        success: res => {
-                            //请求成功
-                            if (res.data != undefined && res.data.status == '200') {
-                                let data = res.data
-                                console.log(data)
-                                that.setData({
-                                    motto: data.motto,
-                                    author: data.author,
-                                    poster: request_url + data.poster,
-                                    learn_days: data.learn_days,
-                                    curr_course: data.curr_course,
-                                });
-                                // 设置全局变量
-                                app.globalData.learn_days = data.learn_days;
-                                console.log("Should change session ? "+data.changeSession);
-                                if(data.changeSession){
-                                    wx.setStorageSync('session',data.session);
-                                    // 从服务端获取open_id,存储在全局信息中
-                                    app.globalData.session = data.session;
-                                }
-                            } else {
-                                console.log('网络连接失败，请检查网络')
-                            }
-                        }
+                //请求成功
+                console.log(res);
+                if (res.data != undefined && res.data.status == '200') {
+                    let data = res.data
+                    console.log(data)
+                    that.setData({
+                        motto: data.motto,
+                        author: data.author,
+                        poster: request_url + data.poster,
+                        learn_days: data.learn_days,
+                        curr_course: data.curr_course,
                     });
+                    // 设置全局变量
+                    app.globalData.learn_days = data.learn_days;
                 } else {
-                    console.log('登录失败: ' + res.errMsg);
+                    console.log('网络连接失败，请检查网络')
                 }
             }
-        })
+        });
+        
     },
 
     onReady: function () {

@@ -31,7 +31,7 @@ Page({
 		wx.request({
 			url:request_url+'/AudioList',
 			method:'GET',
-			header: { session: app.globalData.session },
+            header: { OPENID: app.globalData.open_id, },
 			success(res){
 				console.log(res);
 				that.setData({
@@ -58,7 +58,7 @@ Page({
 			method:'GET',
 			data:{
 				removeList:this.data.removeAudioList,
-            }, header: { session: app.globalData.session },
+            }, header: { OPENID: app.globalData.open_id, },
 			success(res){
 				console.log(res);
 			}

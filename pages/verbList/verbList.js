@@ -30,7 +30,7 @@ Page({
         wx.request({
             url: request_url + '/VerbList',
             header: {
-                session: app.globalData.session
+                OPENID: app.globalData.open_id,
             },
             method: 'GET',
             success: function(res) {
@@ -52,8 +52,8 @@ Page({
             url: request_url + '/removeVerbList',
             data: {
                 removeList: this.data.removeVerbList,
-                open_id: app.globalData.open_id,
             },
+            header: { OPENID: app.globalData.open_id,},
             method: 'GET',
             success: function(res) {
                 console.log(res)

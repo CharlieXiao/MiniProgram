@@ -59,7 +59,7 @@ Page({
         section_id: section_id,
       },
       header:{
-          session:app.globalData.session
+          OPENID: app.globalData.open_id,
       },
       success(res) {
         if (res.data.status == '200') {
@@ -182,7 +182,7 @@ Page({
         curr_sentence: this.data.sectionInfo.curr_sentence
       },
       header:{
-          session:app.globalData.session
+          OPENID: app.globalData.open_id,
       },
       success(res) {
         console.log(res);
@@ -306,7 +306,7 @@ Page({
             formData: {
               'type': 'verb',
               'verb_id': e.detail.verb_id
-              }, header: { session: app.globalData.session },
+              }, header: { OPENID: app.globalData.open_id, },
             success(res) {
               wx.hideLoading();
               console.log('上传结束');
@@ -333,7 +333,7 @@ Page({
             formData: {
               'type': 'sentence',
               'sentence_id': this.data.sectionInfo.curr_sentence
-            },header:{session:app.globalData.session},
+              }, header: { OPENID: app.globalData.open_id,},
             success(res) {
               console.log(res);
               console.log('上传结束');
@@ -598,7 +598,7 @@ Page({
           verb: verb
         },
         header:{
-            session:app.globalData.session
+            OPENID: app.globalData.open_id,
         },
         success: (res) => {
           let verbInfo = res.data;
@@ -630,7 +630,7 @@ Page({
         isFav: isFav,
         verb: verb
       },
-    header:{session:app.globalData.session},
+        header: { OPENID: app.globalData.open_id,},
       success: function (res) {
         console.log(res);
       }

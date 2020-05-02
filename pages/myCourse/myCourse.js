@@ -29,7 +29,7 @@ Page({
         wx.request({
             url: request_url + '/UserCourse',
             data: { 'order': 1 }, 
-            header: { session: app.globalData.session },
+            header: { OPENID: app.globalData.open_id, },
             method: 'GET',
             dataType: 'json',
             responseType: 'text',
@@ -90,7 +90,7 @@ Page({
             wx.request({
                 url: request_url + '/UserCourse',
                 data: { 'order': choice }, 
-                header: { session: app.globalData.session },
+                header: { OPENID: app.globalData.open_id, },
                 method: 'GET',
                 dataType: 'json',
                 responseType: 'text',

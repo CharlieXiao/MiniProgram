@@ -93,7 +93,7 @@ Page({
                 date_to: month_last_day.format('yyyy-MM-dd'),
             },
             header: {
-                session: app.globalData.session
+                OPENID: app.globalData.open_id,
             },
             success: (res) => {
                 let hasInfo = false;
@@ -133,7 +133,7 @@ Page({
                     'dateArray': dateArray,
                     'learndays':data.learndays,
                     'attend_days':data.attend_days,
-                    'ratio':data.ratio
+                    'ratio':data.ratio*100
                 })
             }
         })

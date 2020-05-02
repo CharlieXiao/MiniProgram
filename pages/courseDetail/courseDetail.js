@@ -37,7 +37,7 @@ Page({
         course_id: course_id
         }, 
         header: {
-            'session': app.globalData.session
+            OPENID: app.globalData.open_id,
         },
       success(res) {
         if (res.statusCode == "200") {
