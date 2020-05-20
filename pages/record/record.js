@@ -342,21 +342,25 @@ Page({
               // 此处res中的data不知并不是json对象
               console.log(data);
               if(data['error_code'] == 0){
-                let new_sentences = that.data.sentences;
+                let new_sentences = JSON.parse(JSON.stringify(that.data.sentences));
+                console.log(new_sentences);
                 let curr_sentence_id = that.data.sectionInfo.curr_sentence;
+                console.log(curr_sentence_id);
                 new_sentences[curr_sentence_id]['user-src'] = data['user-audio'];
                 new_sentences[curr_sentence_id]['score'] = data['score'];
                 // 需要遍历new_sentences
                 let sentence_index = 0;
                 let en_sep = new_sentences[curr_sentence_id]['en_sep'];
                 for(let i = 0;i<en_sep.length;i=i+1){
-                    if(sentence_index < data['sentence'].length && en_sep[i]['verb'] == data['sentence'][sentence_index]['verb']){
+                    if (sentence_index < data['sentence'].length && en_sep[i]['verb'].toLowerCase() == data['sentence'][sentence_index]['verb']){
                         en_sep[i]['isBad'] = data['sentence'][sentence_index]['isBad']
                         sentence_index = sentence_index + 1
+                        console.log(en_sep)
                     }
                 }
                 new_sentences[curr_sentence_id]['en_sep'] = en_sep
                 console.log(new_sentences[curr_sentence_id]);
+                console.log(new_sentences);
                 that.setData({
                     sentences: new_sentences,
                     JudgeStatus: 1
